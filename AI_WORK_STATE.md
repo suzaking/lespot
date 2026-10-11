@@ -1,72 +1,50 @@
 # LeSpot 作業・検証状態
 
-更新日：2026-10-11。対象：Shota-Zaki/lespot / main。
+更新：2026-10-11。対象：Shota-Zaki/lespot / main。
 
-## 現在の状態
+## 現在の作業
 
-**今回の要件定義・基本設計・詳細設計・実装タスク設計は文書作成・GitHub反映・設計レビューまで完了。アプリ本体は未実装・未公開。**
+追加依頼：React＋Viteを基準とし、C4モデルのHTMLを出力する。アプリ本体の実装・クラウド資源作成・課金・公開は今回も行っていない。
 
-設計書の作成完了、ユーザーによる推奨案の承認、実装完了、実行試験、実データ確認、公開は別々の状態として管理する。技術構成・数値目標等の承認待ちは `docs/DECISIONS.md` に残している。
+## 成果
 
-## 成果物
+- C4 HTMLの説明用出力を作成。C1 System Context、C2 Container、C3 Webアプリ、C3 公開API、C4 検索ドメインの5図。C4は設計案で、既存実装の解析ではない。
+- ARCHITECTURE.mdをv1.1に更新。React/Vite/独立Worker、D1 Free、Static Assets画像ゲート、公開順序、無料枠を明記。
+- DECISIONS.mdにReact方針と無料条件を記録。SvelteKit一式案はSUPERSEDED。D1/静的画像ゲートの具体方式はPROPOSED_DEFAULTのまま。
+- NEXT_WORK.mdをReact基準のWU-01へ更新。旧SvelteKitの再質問・雛形作成を防止。
 
-正本16ファイル：README.md、AGENTS.md、docs/REQUIREMENTS.md、docs/ARCHITECTURE.md、docs/DETAILED_DESIGN.md、docs/DATA_MODEL.md、docs/API.md、docs/UI_UX.md、docs/DATA_OPERATIONS.md、docs/OPERATIONS.md、docs/RESEARCH_AND_COSTS.md、docs/TEST_PLAN.md、docs/DECISIONS.md、TASKS.md、NEXT_WORK.md、本ファイル。
+## HTMLの実施済み検証
 
-要件は6ユーザーストーリー・16機能要件・12非機能要件に整理。ER図、構成図、画面遷移図、PC/スマートフォンのテキストワイヤーフレーム、データ辞書、HTTP契約、時間・料金・距離・信頼性の判定、データ・権利・公開・復旧運用を記載した。各正本の責務とリンクはREADME。
+ローカルChromium（/usr/bin/chromium）にHTML文字列を読み込ませて検証した。通常のPlaywright付属ブラウザは未配置のためシステムChromiumを使用。環境側のfile URL制限により、file://直接起動試験ではなくpage.set_contentによる描画確認。
 
-実装タスクはT-001〜T-040の40件、すべてTODO。検証計画はTS-01〜TS-36の36件で、試験結果ではない。環境構築から公開・30日評価まで7マイルストーンを定義した。
-
-## 実施したRepository操作
-
-空Repository、private、default main、書き込み権限をGitHubで確認してからREADMEの初回Commitを作成した。その後、書き込み可能なGitHub接続で文書を追加・修正した。複数ファイルの反映はtree/commit作成と期待SHA付き・forceなしのmain更新で実施した。ブランチ変更、Repository公開化、アプリのデプロイはしていない。
-
-## 設計成果物の検証記録
-
-文書レビューの固定対象はCommit `5c7d49602f9f16a1c891cceeb8a46f58d49dc9d6`、tree `cfc3999fecccb984e4ad352722c44c276df2aa86`。本ファイルの今回更新は、その検証実績を記録するための状態記録のみの変更。
-
-| 検証 | 実施内容・結果 |
+| 項目 | 結果 |
 | --- | --- |
-| Repository初期状態 | GitHub metadata/contentsで空・main・private・書き込み権限を確認 |
-| ファイル構成 | recursive treeを再取得。16ファイルすべて非空のMarkdown。アプリコード・設定・実データ・画像ファイルなし |
-| 文書の再取得 | 初回READMEと、各正本の本文または主要関連範囲を固定Commitから再取得して照合。書込成功レスポンスだけで完了判定していない |
-| 追加差分 | 初回README Commitから設計一式Commitまで15文書の追加を確認。READMEの索引に対応する正本が存在することをtreeと照合 |
-| 最終レビュー差分 | 90a53be→5c7d496はAPI、DETAILED_DESIGN、REQUIREMENTS、DECISIONSの4文書のみ。38行追加・7行削除。新しいユーザーストーリー、HTTP状態・health例外、祝日鮮度、角度単位を再取得して確認 |
-| 文書間の整合性 | MVP/将来境界、17カテゴリ・13設備、unknown/条件付き/期限切れ、料金/時間判定、公開版/取り下げ、画面/DTO/試験/タスクの主要対応を手動レビュー。補正履歴はDECISIONS第7節 |
-| タスク依存関係 | 再取得したTASKSの依存列を転記してPython graphlibで検査。40ID、未定義依存0、循環0、トポロジカル順序を生成可能。Repositoryの自動CI実行ではない |
-| 費用試算の算術 | 1,000/10,000/100,000訪問の3シナリオについてrequests・日次平均・D1行読取・R2操作回数をPythonで再計算し表と一致。実測負荷・実請求の検証ではない |
-| 一次情報 | 地理院、Google、Cloudflare、Svelte、W3C、名古屋市、内閣府等の公式情報を確認し、URL・確認範囲・仮定をRESEARCH_AND_COSTSへ記録。契約時の再確認が必要 |
+| 1440px幅のデスクトップ表示 | 描画・スクリーンショット確認 |
+| 390px幅のスマートフォン相当表示 | ページ全体の横はみ出しなし。図は局所スクロール |
+| 5図のノード内文字 | bounding boxによる文字はみ出し0 |
+| JavaScriptエラー | 最終検査0 |
+| 外部リソース要求 | 0。HTML/SVG/CSS/JSを内包 |
+| 重複ID・存在しない内部リンク | 0 |
+| 図の拡大・全体表示 | 125%への変更とリセットを確認 |
+| 章ナビゲーション | #costへの移動を確認 |
+| 印刷用CSS | サイドバー非表示を確認。印刷・PDF生成は未実施 |
 
-Markdownの全行を自動lintした記録、GitHubブラウザでのMermaid描画・ワイヤーフレームの視覚確認、実アプリの試験記録ではない。文章・図の定義と主要仕様のレビューを実施した。
+HTMLの確認はLeSpot本体のbuild/testやクラウドの検証ではない。iOS/Android実機・アクセシビリティ適合全体・スクリーンリーダーは未検証。
 
-## 未実施・未承認
+## 正本への変更適用状況
 
-| 項目 | 状態・理由 |
-| --- | --- |
-| 推奨技術構成・数値目標のユーザー承認 | 未取得。PROPOSED_DEFAULT/OPENを維持 |
-| アプリ、DB migration、管理CLI、CIの実装 | 未着手。今回の対象外 |
-| build、型検査、単体・結合・E2E・セキュリティ実行試験 | NOT_RUN。対象となるアプリ実装が存在しない |
-| 性能、アクセシビリティ、実機、現地地図UX、利用者試験 | NOT_RUN。TEST_PLANとTASKSに実施条件を定義 |
-| 実施設の料金・営業時間・設備・座席・撮影許可 | 未確認。実データを作成・公開していない |
-| 初期60件・写真付き40件等の達成 | 未着手の暫定目標であり、収集済み件数ではない |
-| Cloudflare残り枠・契約・支払設定・staging/prod・監視通知 | 未確認・未設定。課金や公開は行っていない |
-| 正式ドメイン・運営連絡先・コード/独自DBライセンス | 未決。仮の連絡先や無断のOSSライセンスを作成していない |
+構成・境界・旧方式の置換規則の正本はARCHITECTURE v1.1。旧詳細設計、DATA_MODEL、API、DATA_OPERATIONS、OPERATIONS、TEST_PLAN、TASKSにはSvelteKit/R2由来の記述が残る。ARCHITECTURE第10節で対象と置換内容を明示した。全ファイルを逐語的に移行した扱いにはしない。
 
-## Commit履歴
+次の実装Work Unitでは、対象タスク行・詳細文書を第10節で展開・更新してからコード化する。40実装タスクは引き続き全てTODO。サービス要件と計算規則は維持し、移行を理由に省略しない。
 
-| Commit | 内容 |
-| --- | --- |
-| e7f1584ba4c2515ddce06fb11844274265239162 | main初期化・README |
-| 830bc1eb4a648ed512d37a679ac99c6cbb61532f | 要件・基本構成・意思決定・AGENTS |
-| 4fabf5d536b43f3b6586731c536471fee1029a98 | データ・API・詳細・UI/UX |
-| 90a53be93b0bb4cf7dd7a051712ad83c296a0ed7 | 公式調査・費用・運用・検証計画・40タスク・次WU・状態記録 |
-| 5c7d49602f9f16a1c891cceeb8a46f58d49dc9d6 | 設計レビュー補正・ユーザーストーリー対応付け |
+## 公式確認と未確認
 
-この状態記録自身を含む最新CommitはGitHubのmainまたは履歴から取得する。自己参照SHAを推測して本文へ記入しない。
+C4公式、React公式、CloudflareのReact/Vite・Workers・D1・Static Assets・R2契約、地理院タイル、Maps URLs等を確認。URLと適用条件はARCHITECTURE第12節、HTML出典欄。
 
-## 未決事項と次のWork Unit
+実アカウントのFree/既存使用量、画像直アクセスの防止、D1・Workerの性能、quota障害、preview URL無効化、公開・復旧、実施設情報・写真権利は未検証。R2契約や有料サービスを有効化していない。
 
-O-01：技術構成とGit管理方式。O-02：費用上限・契約。O-03：公開範囲・ドメイン・連絡先・更新担当。O-04：初期データと写真の確認工数・目標。O-05：コード・独自データのライセンス。推奨と判断が必要になる段階はDECISIONSを参照。
+## 履歴と次
 
-次は **WU-01（T-001→T-002）：採用バージョンの確認と、local起動・型検査・buildが再現できる最小基盤**。詳細はNEXT_WORK.md。今回の依頼は設計のみなので、ここから無断で実装を開始しない。新たな実装依頼後、費用・外部公開の承認を要しないlocal作業から進める。
+v1.0の設計一式と検証記録はCommit 8cb1759bbab2c01eb7f6c853d3dd9a35d899fd3fまで。今回はその状態から文書のみ更新。
 
-再開の入口は `/continue Shota-Zaki/lespot`。AGENTS → 本ファイル → NEXT_WORK → 対象タスクと必要な正本の順に確認し、確定済みのサービス要件を再質問しない。
+次はNEXT_WORK.mdのWU-01（T-001→T-002）。新しい実装依頼後に、React/Vite互換性と最小ローカル基盤から進める。再開は `/continue Shota-Zaki/lespot`。

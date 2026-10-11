@@ -1,48 +1,38 @@
-# 次の作業
+# 次の作業 — React＋Vite / C4 v1.1
 
-## 現在の到達点
+更新：2026-10-11。C4モデルのHTML出力依頼に対応。今回もアプリ本体は未実装・未公開。
 
-要件・設計・実装タスクを文書化した。アプリ本体、依存関係、DB、CLI、実スポットデータ、写真、インフラ、公開URLは未作成。設計者の技術推奨は承認済みではない。実際のGitHub反映検証は `AI_WORK_STATE.md` を確認する。
+## 最初に読む正本
 
-## WU-01：実装基盤の確立（次回の実装依頼後）
+AGENTS.md → AI_WORK_STATE.md → 本書 → docs/DECISIONS.mdの最新追記 → docs/ARCHITECTURE.md v1.1の第1・8・9・10節 → TASKS.mdの対象タスク。
 
-対象タスク：T-001 → T-002。成果は「fresh cloneからlocal起動・型検査・buildできる最小プロジェクト」。検索・地図・施設登録を同時に実装しない。
+SvelteKit採用案はReact＋Vite方針に置換された。R2はMVP必須から外し、D1 Free＋Static Assets画像ゲートを推奨する。旧詳細文書のSvelteKit/R2の文言をそのままコード化しない。適用範囲の正本はARCHITECTURE第10節。
 
-### 入力
+## WU-01：実装基盤（次の実装依頼後）
 
-`AGENTS.md`、`AI_WORK_STATE.md`、`TASKS.md` のT-001/002、`docs/ARCHITECTURE.md` 第1〜3節、`docs/OPERATIONS.md` 第1〜3節、`docs/DECISIONS.md`。必要になるまで全設計書を読み込まない。
+対象：T-001 → T-002。今回の「C4モデルでHTML出力」はアプリ実装開始の許可ではない。
 
-### 手順
-
-1. Repository・mainの先頭SHA・既存ファイル・作業ツリーを確認する。別チャットの作業を上書きしない。ユーザーが新たにブランチを指定した場合は従う。
-2. O-01の採用方針と後続指示を確認。未承認は暫定のまま、公式安定版とCloudflare adapterの互換性・binding型生成手順を調べ、実装で使用するversionを固定する。
-3. SvelteKit/TypeScript strictの最小構成、local環境、lockfile、secret除外を作る。Cloudflare bindingはserverモジュールに隔離する。
-4. package scriptsでformat/lint/check/test/buildの責務を定義する。CI本体はT-003へ分け、まずlocalのtypecheck/buildと最小smokeを実行する。
-5. READMEに実行済みの起動手順、必要ツールversion、未実装範囲を追記する。Windowsでの手順も確認し、未確認なら明示する。
-6. 差分をレビューしてCommitし、GitHubから再取得。T-001/T-002と検証状態を更新し、次はT-003/T-004を準備する。
-
-### 変更予定範囲
-
-package manifest/lockfile、SvelteKit/Vite/TypeScript/Cloudflare設定、最小src、secret除外・sample設定、README、決定・検証・状態記録。確定パスは採用版の公式雛形に合わせる。
+1. mainの先頭、作業ツリー、他エージェントの変更を確認する。指定がなければmainの既存運用を維持する。
+2. ARCHITECTURE第10節に基づき、T-001/T-002、AGENTSのフレームワーク注意、対象の詳細設計・運用記述をReact/Viteへ展開してCommitする。画像実装時は対応するR2記述をStatic Assetsへ展開する。全40タスクを完了扱いにしない。
+3. React、Vite、TypeScript、ルーター、Cloudflareツールの公式安定版と互換性を確認し、lockする。最近使ったからという理由で別構成へ変更しない。
+4. 最小SPA、独立Worker、共有型、secret除外、local設定を作る。本番の秘密・アカウントIDをブラウザへ渡さない。
+5. ローカル起動、型検査、build、簡単なルーティング・Worker smokeを実行。Windows手順を確認し、未検証の端末をPASSにしない。
+6. READMEに実在するコマンドだけを追記し、差分・CommitをGitHubから再取得。実装完了と検証状態を更新する。
 
 ### 完了条件
 
-再現可能なlocal起動、型検査・buildの実結果、SSR時のブラウザAPI参照なし、秘密・本番IDの混入なし、アプリ未実装範囲の明記、GitHub read-back。動作していない雛形を「実装基盤完成」としない。
+fresh cloneからlocal起動・型検査・buildが再現可能。UIとAPIの境界が明確。SvelteKit固有設定なし。秘密のクライアント配信なし。GitHub read-back済み。次はT-003/T-004。
 
 ### このWUで行わないこと
 
-有料契約、R2有効化・支払設定、本番リソース作成、外部公開、実施設情報の収集・転載、Google Places呼出、投稿/認証機能、ブランドデザインの確定。
+R2契約、Paidへの移行、新規有料ドメイン購入、有料監視、production公開、実施設データの転載、投稿・認証機能。本番配置は実アカウントがFreeであることと既存使用量を確認してから。既存Paidアカウントを勝手にダウングレードしない。
 
-## 停止・継続条件
+## 後続の重点検証
 
-重大な依存互換性問題は代替版・公式対応策を検証し、理由を記録する。費用・公開・実データ権利が未確定でも、fixture・schema・純粋関数など独立したlocalタスクまで停止しない。承認が必要な操作だけを保留する。
+画像ゲートの直接URL・パス正規化・HEAD・D1不通・Free quota超過、preview URL無効化、静的資産先行配備、active版との画像整合、取り下げ後のrollback。CSRだけで非JavaScript代替を消さず、公開版に対応する静的fallbackを同じゲートから配信する。実装はARCHITECTURE第8節に従う。
 
-今回の依頼は設計のみなので、この文書があることを実装開始の許可とは解釈しない。再開指示で実装が求められた場合に上記WUを実行する。
+## 再開
 
-## 再開の入口
+`/continue Shota-Zaki/lespot`
 
-```text
-/continue Shota-Zaki/lespot
-```
-
-Repositoryの正本から現状を復元し、今回の依頼範囲と新しい指示を照合する。確定済みのサービス方針を再質問せず、提案の承認状態や実行していない試験を推測しない。
+React＋Viteの進行指示を再質問しない。ただし課金・契約・公開・運営連絡先・実データ目標の承認まで取得済みとは解釈しない。
