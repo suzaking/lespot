@@ -1,3 +1,15 @@
+# AI_WORK_STATE — 2026-10-11 最新方針
+
+**写真の運用をしないこと、無料優先、外部Googleマップ詳細の許容をユーザーが指定。** React/Viteを維持し、Cloudflare Pages Free/静的JSON/Maps URLsを現在の初期案とした。新C4アーキテクチャはdocs/ARCHITECTURE.md、スコープはdocs/FREE_MVP_STRATEGY.md、タスクはTASKS.md先頭のF-001〜F-010。
+
+旧写真・D1・Worker APIの詳細書は初期版に適用しないと明示した。外部Maps URLsのAPIキー不要性、Cloudflare Pages静的配信の無料条件、自治体CC BY/OSM ODbLを公式情報で調査。アプリ実装・実施設登録・実機でのリンク先照合・クラウド契約/配信・build/testはNOT_RUN。C4の新HTMLはチャットで別成果物として生成し、ブラウザの表示・リンク・ズームの技術検査を実施したが、HTMLをGitHubにCommitしたわけではない。
+
+次WUはNEXT_WORK.mdのF-001→F-002。課金/外部公開の承認は取得していない。
+
+---
+
+## 以前の設計作業履歴
+
 # LeSpot 作業・検証状態
 
 更新：2026-10-11。対象：Shota-Zaki/lespot / main。

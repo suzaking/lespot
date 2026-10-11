@@ -1,3 +1,5 @@
+> **2026-10-11の方針更新：** この文書には写真・D1・Worker APIを含む旧MVPの内容が残る。**現在のMVP0では写真運用、D1/R2、公開API、LeSpot内地図を必須にしない。** 現行の初期公開仕様は[FREE_MVP_STRATEGY.md](FREE_MVP_STRATEGY.md)、C4構成は[ARCHITECTURE.md](ARCHITECTURE.md)が優先。以下は拡張時の履歴資料であり、写真を後から実装する許可ではない。
+
 # テスト・検証計画 v1.0
 
 **本書は試験仕様。現在、アプリのテスト・build・実機・現地検証は全て未実施。** 設計文書の確認結果は `AI_WORK_STATE.md` に別記する。expected resultの記載はPASSの記録ではない。

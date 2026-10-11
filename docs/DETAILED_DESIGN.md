@@ -1,3 +1,5 @@
+> **2026-10-11の方針更新：** この文書には写真・D1・Worker APIを含む旧MVPの内容が残る。**現在のMVP0では写真運用、D1/R2、公開API、LeSpot内地図を必須にしない。** 現行の初期公開仕様は[FREE_MVP_STRATEGY.md](FREE_MVP_STRATEGY.md)、C4構成は[ARCHITECTURE.md](ARCHITECTURE.md)が優先。以下は拡張時の履歴資料であり、写真を後から実装する許可ではない。
+
 # 詳細設計 v1.0
 
 この文書は計算・状態・モジュール境界の正本。列・型は `DATA_MODEL.md`、HTTPは `API.md`、画面表現は `UI_UX.md`。

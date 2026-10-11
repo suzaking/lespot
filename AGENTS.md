@@ -1,3 +1,9 @@
+# 2026-10-11 現行設計（写真なし・無料優先）
+
+[docs/FREE_MVP_STRATEGY.md](docs/FREE_MVP_STRATEGY.md)、[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)のMVP0を実装基準にする。旧設計中の写真/R2/D1/Worker APIは今回のスコープ外、SvelteKitはReact/Viteに変更。独自の写真の保管やGoogleデータのスクレイピング禁止。旧TASKSのT-001..040より現行F-001..010が優先。ユーザーの有料契約・公開承認は別に必要。
+
+---
+
 # LeSpot Agent Rules
 
 ## 1. 作業範囲と開始手順

@@ -1,3 +1,15 @@
+# 2026-10-11 最新のユーザー指示と現行判断
+
+- **USER_CONFIRMED（C-11）：写真をLeSpot側で運用しない。** 外部Googleマップの写真・Street Viewをユーザーが見ることは可。LeSpotによる画像取得、R2、画像API、撮影・アップロード・許可管理は除外。
+- **USER_CONFIRMED（C-12）：無料優先。** 新規の課金契約を必須にしない。各サービスの無料枠に上限があり得ることは明示。
+- **USER_CONFIRMED（C-13）：初期は一覧・場所だけでもよく、詳細はGoogleマップ外部リンクでもよい。** 地図内蔵・写真・全設備フィルターの旧MVP完了条件はMVP0へ適用しない。
+- **PROPOSED_DEFAULT（D-13）：** React＋Vite＋Cloudflare Pages Free静的資産＋Git JSON、Google Maps URLs＋Apple Map Linksで初期構成を小さくする。Leaflet＋地理院、D1/Workersは必要時に評価。
+- **SUPERSEDED：** 旧D-01/09/11中のD1/R2/Worker必須・写真40件・SvelteKit案、旧C-04中の写真MVP必須部分。古い本文は決定履歴であり、現行設計の根拠にはしない。
+
+現行正本は[FREE_MVP_STRATEGY.md](FREE_MVP_STRATEGY.md)と[ARCHITECTURE.md](ARCHITECTURE.md)。外部サービスの個別契約・実アカウント無料残量、公開URL、運営連絡先、実施設の利用条件は未確認。
+
+---
+
 # 決定・推奨・未決事項
 
 更新日：2026-10-11。React＋Viteへの変更指示と、無料運用を条件とする指示を反映。クラウド契約・本番公開の許可までは得ていない。

@@ -1,3 +1,5 @@
+> **2026-10-11の方針更新：** この文書には写真・D1・Worker APIを含む旧MVPの内容が残る。**現在のMVP0では写真運用、D1/R2、公開API、LeSpot内地図を必須にしない。** 現行の初期公開仕様は[FREE_MVP_STRATEGY.md](FREE_MVP_STRATEGY.md)、C4構成は[ARCHITECTURE.md](ARCHITECTURE.md)が優先。以下は拡張時の履歴資料であり、写真を後から実装する許可ではない。
+
 # 公開HTTP API・DTO契約 v1.0
 
 この文書がHTTP契約の正本。初期API prefixは `/api/v1`、schema_version=1。列挙値・原データ型は `DATA_MODEL.md`。すべて設計であり、エンドポイントはまだ実装されていない。
