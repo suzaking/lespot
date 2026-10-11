@@ -8,7 +8,7 @@ HTTPS、同一オリジン、認証なし、GET/HEADのみ。本文UTF-8 JSON。
 
 IDは定義されたUUID/slug形式で検証。未知のqueryパラメーター、重複したrevision、非整数、負のrevisionは400。URL最大2048 bytes。POST/PUT/PATCH/DELETEは405、Allow: GET, HEAD。OPTIONSが必要になる同一オリジン外の呼出機能はMVPに設けない。
 
-全JSON成功応答に `schema_version`、`release_id`、`generated_at` を含める。generated_atは公開データ生成時刻で、施設情報確認時刻ではない。現在公開ポインターの `revision` は `X-Data-Revision` レスポンスヘッダーに整数文字列で返す。クライアントはrelease_idとrevisionの両方を照合する。
+公開データのJSON成功応答（regions、地域spots、spot詳細）に `schema_version`、`release_id`、`generated_at` を含める。generated_atは公開データ生成時刻で、施設情報確認時刻ではない。現在公開ポインターの `revision` は `X-Data-Revision` レスポンスヘッダーに整数文字列で返す。クライアントはrelease_idとrevisionの両方を照合する。healthはこの共通envelopeの例外で、第9節の最小形式のみとする。
 
 ## 2. エンドポイント
 
@@ -135,7 +135,9 @@ picture URLはサーバーがphoto IDとvariantから生成し、外部URLやR2�
 }
 ```
 
-operatingのみ通常詳細。temporarily_closedは200でも休業を最優先表示し、通常の経路誘導CTAは無効化する。draft/suspended・存在しないIDは404（存在の推測を避ける）、retired/permanently_closedは410で最小の取り下げメッセージ。取り下げ済みの写真・設備本文は返さない。
+状態判定は、存在しないID・draft・suspendedの404を最優先にする。その後、retiredまたはpermanently_closedは410で最小の取り下げメッセージ、operation_state=unknownは404とする。いずれも設備本文・写真を返さない。publishedかつoperatingのみ通常詳細とする。
+
+publishedかつtemporarily_closedは200でも休業を最優先表示し、通常の経路誘導CTAを無効化する。休業中は第8節の画像配信を停止するため、詳細DTOも `photos=[]`、`thumbnail=null`、`photo_count=0` とし、表示できない画像URLを含めない。
 
 同じspot IDでも現在の公開版しか返さない。詳細を開く時に、メモリ内一覧だけを真実として描画し続けない。SSRもこの取得規則を使用する。
 
@@ -166,7 +168,7 @@ operatingのみ通常詳細。temporarily_closedは200でも休業を最優先�
 
 ## 7. キャッシュと公開版整合
 
-成功JSON・公開画像は `Cache-Control: public, max-age=60, s-maxage=60, must-revalidate`、weak ETagはschema/revision/payload hash（画像はvariant hash）から生成する。HTML詳細ページも最大60秒、個人状態を含めない。静的JS/CSSのhash付きファイルのみimmutable長期キャッシュ可。
+成功JSON・公開画像は `Cache-Control: public, max-age=60, s-maxage=60, must-revalidate`、weak ETagはschema/revision/payload hash（画像はvariant hash）から生成する。HTML詳細ページも最大60秒、個人状態を含めない。静的JS/CSSのhash付きファイルのみimmutable長期キャッシュ可。healthは監視用なので成功・失敗とも `Cache-Control: no-store` とし、304を返さない。
 
 `If-None-Match` に一致し、現在の公開状態とrevisionが整合する時は304、本文なし、Date/ETag/Cache-Control/X-Data-Revisionを返す。指定revisionが現在と異なる時は304ではなく409。エラーは `Cache-Control: no-store`。
 
@@ -186,4 +188,4 @@ healthは `{"status":"ok"|"degraded","schema_version":1}` のみ。D1到達とac
 
 ## 10. 契約試験
 
-最低限、全応答の型・必須項目・NULL・enum、ID/query拒否、HEAD、ETag/304、revision409、部分取得、未公開404、取り下げ410、秘密フィールド除外、R2不正path、500の秘匿を実行する。設計上の型記法はそのまま実行コードではない。実装WUで共有schemaを作り、本書との対応を固定する。
+最低限、全応答の型・必須項目・NULL・enum、ID/query拒否、HEAD、ETag/304、revision409、部分取得、未公開404、取り下げ410、秘密フィールド除外、R2不正path、500の秘匿を実行する。healthのenvelope/cache例外と、休業詳細の空の写真フィールドも検証する。設計上の型記法はそのまま実行コードではない。実装WUで共有schemaを作り、本書との対応を固定する。

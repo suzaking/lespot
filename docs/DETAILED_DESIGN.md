@@ -56,7 +56,7 @@ accuracy_m>200では精度注意、>1000ではその位置を自動採用せず�
 ## 3. データ取得と整合性
 
 1. manifestを取得し、公開地域・プリセット・schema_version・revisionを検証する。
-2. originとradiusから検索円のbboxを求め、交差するenabled地域を選ぶ。初期国内範囲では緯度差 `radius/111320`、経度差 `radius/(111320*cos(lat))` に5%の安全余裕を加えたbboxで候補選択し、最終距離はHaversineで判定する。
+2. originとradiusから検索円のbboxを求め、交差するenabled地域を選ぶ。初期国内範囲では緯度差 `radius/111320`、経度差 `radius/(111320*cos(radians(lat)))` に5%の安全余裕を加えたbboxで候補選択し、最終距離はHaversineで判定する。latは度、三角関数への入力はラジアンとする。
 3. 8地域を超える場合は取得せず範囲縮小を案内する。国内以外・緯度絶対値85以上の処理は地域未対応扱い。世界対応を装わない。
 4. expected revisionを付けて地域payloadを並列取得する。通信同時実行は最大3、タイムアウト8秒、再試行は利用者操作または一度の版再取得のみ。
 5. 異なるrelease/revisionは結合しない。409または不一致があればmanifestから1回やり直し、再失敗は更新中表示。旧結果を新データとして表示しない。
@@ -125,11 +125,13 @@ open_nowと深夜を同時指定した場合は両方必要。0件でも勝手�
 
 1. 必要な各暦日と前日のweekly periodを実日時区間へ展開する。alwaysは毎日24時間。hours checkがfreshでなければ基礎状態はunknown。
 2. 日またぎ期間を各暦日の00:00/24:00で切り、その日に含まれる部分を集める。
-3. 祝日ならholiday_policyで当日の区間を置換する。sameは通常区間、specialはholiday_periods（0件ならclosed）、unknownはunknown。祝日マスタ範囲外でholiday_policy!=sameの場合もunknown。
-4. date overrideがあれば、freshなhours_exception checkの下で当日の全区間を置換する。closedは空、openはoverride_periods、unknownまたは期限切れ例外はunknown。古い例外がある日に通常営業へ黙って戻さない。
+3. 祝日ならholiday_policyで当日の区間を置換する。sameは通常区間、specialはholiday_periods（0件ならclosed）、unknownはunknown。ただしholiday_periodsもhours checkの対象であり、hours checkがfreshでなければspecialでもunknownのままとする。祝日マスタ範囲外でholiday_policy!=sameの場合もunknown。
+4. date overrideがあれば、freshなhours_exception checkの下で当日の全区間を置換する。closedは空、openはoverride_periods、unknownまたは期限切れ例外はunknown。古い例外がある日に通常営業へ黙って戻さない。freshな暦日例外は、その日全体の独立した確認として基礎時間がunknownでも適用できる。
 5. 区間をソートし、重複・接続を結合する。nowが含まれればopen、既知の空または範囲外はclosed、情報不足はunknown。
 
 例外は暦日ルール。火曜終日休業なら月22〜火02の火00〜02も消える。月曜の営業日全体を休む意図なら火曜の持越し区間にも必要な例外を登録する。これは入力支援・公開プレビューで注意表示する。
+
+TS-12には、hours check期限切れ+holiday_policy=specialではunknown、同じ日にfreshなopen/closed例外があればその例外を適用するケースを必ず含める。
 
 ### 7.3 滞在・夜間
 
