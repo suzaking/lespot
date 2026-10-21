@@ -1,0 +1,172 @@
+.shell {
+  max-width: 1240px;
+  margin: auto;
+  padding: 0 32px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space);
+  min-height: 90px;
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  text-decoration: none;
+  font-size: 1.8rem;
+  letter-spacing: -0.06em;
+  font-weight: 800;
+}
+.logo span {
+  display: inline-block;
+  margin-left: 1.2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+.areaTag {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+.intro {
+  padding: 38px 0 30px;
+}
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+}
+.intro h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin: 0.6rem 0;
+}
+.intro > p:last-child {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.results {
+  margin-top: 32px;
+}
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space);
+  margin-bottom: var(--space);
+}
+.resultsHeader h2 {
+  font-size: 1.15rem;
+  margin: 0;
+}
+.resultsHeader h2 span {
+  margin-left: 0.7rem;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+.resultsHeader p {
+  margin: 0.3rem 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.resultsHeader button {
+  font-size: 0.8rem;
+}
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+  gap: 24px;
+  align-items: start;
+}
+.mapPanel {
+  position: sticky;
+  top: 20px;
+}
+.mapPlaceholder {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-lg);
+  background: #eaf0e4;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.mapPlaceholder > span {
+  font-size: 3rem;
+}
+.mapPlaceholder h3 {
+  margin: 0.5rem 0;
+}
+.mapPlaceholder p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.tabs {
+  display: none;
+}
+.notes {
+  margin: 36px 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  max-width: 850px;
+}
+.notes summary {
+  min-height: 44px;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  font-weight: 700;
+}
+.footer span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+@media (max-width: 760px) {
+  .shell {
+    padding: 0 16px;
+  }
+  .header {
+    min-height: 72px;
+  }
+  .logo span {
+    display: none;
+  }
+  .intro {
+    padding: 24px 0;
+  }
+  .workspace {
+    display: block;
+  }
+  .mobileHidden {
+    display: none;
+  }
+  .mapPanel {
+    position: static;
+  }
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: var(--space);
+  }
+  .tabs button {
+    flex: 1;
+  }
+  .tabs button[aria-pressed='true'] {
+    background: var(--accent);
+    color: white;
+  }
+  .resultsHeader {
+    align-items: start;
+    flex-wrap: wrap;
+  }
+}

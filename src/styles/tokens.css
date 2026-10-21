@@ -1,0 +1,12 @@
+:root {
+  --text: #233e34;
+  --muted: #5b6d63;
+  --accent: #245b46;
+  --accent-soft: #edf3e9;
+  --background: #f7f8f3;
+  --surface: #fff;
+  --border: #d8dfd5;
+  --space: 1rem;
+  --space-lg: 1.5rem;
+  --radius: 14px;
+}

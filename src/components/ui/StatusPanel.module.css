@@ -1,0 +1,9 @@
+.panel {
+  padding: var(--space-lg);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.panel h3 {
+  margin-top: 0;
+}

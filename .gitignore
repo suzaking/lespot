@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env*
+*.local
+imports/
+playwright-report/
+test-results/
+coverage/
+.openai/

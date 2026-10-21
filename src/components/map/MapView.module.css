@@ -1,0 +1,36 @@
+.wrapper {
+  position: relative;
+}
+.map {
+  height: min(65vh, 620px);
+  min-height: 330px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #e9ede7;
+  z-index: 0;
+}
+.pin {
+  border-radius: 50% 50% 50% 0;
+  transform-origin: center;
+  background: #245b46;
+  border: 2px solid white;
+  color: white;
+  text-align: center;
+  line-height: 40px;
+  font: bold 14px/40px sans-serif;
+  box-shadow: 0 2px 7px #0004;
+}
+.active {
+  background: #934420;
+  outline: 3px solid #934420;
+}
+.warning {
+  background: #fff4db;
+  color: #533b08;
+  padding: var(--space);
+  border-radius: 8px;
+}
+.caption {
+  font-size: 0.8rem;
+  color: var(--muted);
+}

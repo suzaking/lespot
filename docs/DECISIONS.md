@@ -1,91 +1,17 @@
-# 2026-10-11 最新のユーザー指示と現行判断
+# 決定記録 — 2026-10-21
 
-- **USER_CONFIRMED（C-11）：写真をLeSpot側で運用しない。** 外部Googleマップの写真・Street Viewをユーザーが見ることは可。LeSpotによる画像取得、R2、画像API、撮影・アップロード・許可管理は除外。
-- **USER_CONFIRMED（C-12）：無料優先。** 新規の課金契約を必須にしない。各サービスの無料枠に上限があり得ることは明示。
-- **USER_CONFIRMED（C-13）：初期は一覧・場所だけでもよく、詳細はGoogleマップ外部リンクでもよい。** 地図内蔵・写真・全設備フィルターの旧MVP完了条件はMVP0へ適用しない。
-- **PROPOSED_DEFAULT（D-13）：** React＋Vite＋Cloudflare Pages Free静的資産＋Git JSON、Google Maps URLs＋Apple Map Linksで初期構成を小さくする。Leaflet＋地理院、D1/Workersは必要時に評価。
-- **SUPERSEDED：** 旧D-01/09/11中のD1/R2/Worker必須・写真40件・SvelteKit案、旧C-04中の写真MVP必須部分。古い本文は決定履歴であり、現行設計の根拠にはしない。
+| ID / 状態                       | 判断・理由                                                                                         |
+| ------------------------------- | -------------------------------------------------------------------------------------------------- |
+| D-21 USER_CONFIRMED             | ユーザーの実装指示により設計のみ制限を解除。ローカル実装/テスト/文書/GitHub反映を実施              |
+| D-22 USER_CONFIRMED             | 無料・管理負担・スマホUX優先。写真、独自バックエンド/DB、従量APIを設けない                         |
+| D-23 USER_CONFIRMED             | 地図と一覧の連動を必須化。旧一覧のみMVP0はSUPERSEDED                                               |
+| D-24 PROPOSED_DEFAULT（実装済） | React/Vite/TS＋Leaflet直接統合＋Zod。React Leafletの追加peer依存は避け、地図の責務を1部品へ隔離    |
+| D-25 PROPOSED_DEFAULT（実装済） | Sheets編集→CSV取込→検証済JSON。新規接続なしでも運用できる                                          |
+| D-26 PROPOSED_DEFAULT（実装済） | native input/selectと小規模CSS Modules。Radix等の複雑なUI機能は不要                                |
+| D-27 PROPOSED_DEFAULT（実装済） | GPSをメモリ保持、外部originなし。地図は操作後にロード                                              |
+| D-28 OPEN                       | 実施設の入口/区画座標・利用条件・権利確認。本番JSONは0件。候補のみDATA_CANDIDATESに記録            |
+| D-29 OPEN                       | Pages Free実設定・残量、公開URL、運営窓口、本番公開承認。デプロイしていない                        |
+| D-30 OPEN                       | ローカルPlaywrightブラウザ導入が環境制約で失敗。本番相当E2EとiOS/Android実機は未完了               |
+| D-31 SUPERSEDED                 | 旧写真/R2/D1/Worker API・高度な時間/価格推定・SvelteKit設計は現行ファイルから置換。履歴はGitに保持 |
 
-現行正本は[FREE_MVP_STRATEGY.md](FREE_MVP_STRATEGY.md)と[ARCHITECTURE.md](ARCHITECTURE.md)。外部サービスの個別契約・実アカウント無料残量、公開URL、運営連絡先、実施設の利用条件は未確認。
-
----
-
-# 決定・推奨・未決事項
-
-更新日：2026-10-11。React＋Viteへの変更指示と、無料運用を条件とする指示を反映。クラウド契約・本番公開の許可までは得ていない。
-
-## 1. ステータス
-
-USER_CONFIRMED：明示的ユーザー指示。PROPOSED_DEFAULT：設計者の合理的な推奨で、個別承認済みではない。OPEN：オーナー判断または外部確認が必要。SUPERSEDED：後続の判断に置換された旧案。
-
-## 2. 確定事項
-
-| ID | 状態 | 内容 |
-| --- | --- | --- |
-| C-01 | USER_CONFIRMED | LeSpotは「休憩」という目的に特化した地図型Webサービス |
-| C-02 | USER_CONFIRMED | 初期対象は栄・久屋大通・矢場町周辺。地域拡張を妨げない |
-| C-03 | USER_CONFIRMED | 無料の公共休憩からカフェ、仮眠、ホテルデイユースまで掲載対象 |
-| C-04 | USER_CONFIRMED | 現在地・地図・表示・絞込・近い順・詳細・料金営業時間設備・写真・外部経路がMVP |
-| C-05 | USER_CONFIRMED | 投稿・口コミ・お気に入り・混雑・情報修正依頼は将来機能 |
-| C-06 | USER_CONFIRMED | PC・スマートフォン対応。低維持費を重視し、使い勝手・保守性を著しく損なわない |
-| C-07 | USER_CONFIRMED | 未確認設備・営業時間・空席を確定扱いしない。規約・ライセンスを守る |
-| C-08 | USER_CONFIRMED | 今回は設計・C4 HTML。アプリを実装しない |
-| C-09 | USER_CONFIRMED | mainを基準に文書を直接Commitし、反映結果を再取得検証 |
-| C-10 | USER_CONFIRMED | AIは開発手段。製品へのAI搭載要件ではない |
-| C-11 | USER_CONFIRMED | 「全部無料でいけるならOK」。有料サービスの導入や自動有料化の承認とは解釈しない |
-| C-12 | USER_CONFIRMED | React＋Viteを基準に進める。直近にSvelteを使っていたことを採用理由にしない |
-| C-13 | USER_CONFIRMED | ソフトウェアアーキテクチャをC4モデルでHTML出力する |
-
-C-12/C-13の根拠は、React＋Viteへの推奨変更の説明後のユーザー指示「それで進めて。ソフトウェアアーキテクチャをC4モデルでHTMLに出力して」。D1/画像保存方式など、説明後に具体化した細部まで承認済みとはしない。
-
-## 3. 設計判断
-
-| ID | 状態 | 内容・代替・再評価条件 |
-| --- | --- | --- |
-| D-01 | SUPERSEDED | 旧SvelteKit＋Workers/D1/R2一式案。D-13/D-14へ置換。SvelteKit自体が技術的に不適切という判断ではない |
-| D-02 | PROPOSED_DEFAULT | Leaflet＋地理院pale/std。実機・現地で見づらければ無料で使える適法な代替を再比較。有料地図は別承認 |
-| D-03 | PROPOSED_DEFAULT | 地域データを取得しブラウザで距離・条件検索。1地域500件/1.5MB/gzip350KB、同時対象8地域を分割基準にする |
-| D-04 | PROPOSED_DEFAULT | Git JSON＋検証・公開CLI。非技術者や更新量が増えれば管理UIを再評価 |
-| D-05 | PROPOSED_DEFAULT | 項目別根拠・確認期限。unknown/stale/disputedは厳密な肯定条件に一致させない |
-| D-06 | PROPOSED_DEFAULT | 1スポット＝独立した休憩区画。施設全体から設備を自動継承しない |
-| D-07 | PROPOSED_DEFAULT | 予算は一般成人・予約なし・税込の最低必須利用料金。総滞在額の計算器ではない |
-| D-08 | PROPOSED_DEFAULT | GPSはメモリのみ、外部経路URLに出発地を自動付加しない |
-| D-09 | PROPOSED_DEFAULT | 初期60件、無料20件、屋内20件、写真付き40件。先行10件の調査で工数・目標を評価 |
-| D-10 | PROPOSED_DEFAULT | 閲覧ログインなし、広告・解析SDKなし。未測定の継続率等を推測しない |
-| D-11 | PROPOSED_DEFAULT | read-only公開API、検証済みrelease単位の公開と最新takedownsを守るrollback |
-| D-12 | PROPOSED_DEFAULT | 深夜・24時間は休憩区画の営業時間で判定。建物営業時間や空席と混同しない |
-| D-13 | USER_CONFIRMED | React＋Vite＋TypeScriptを基準とする。具体バージョンとルーター詳細は実装時に公式情報で固定 |
-| D-14 | PROPOSED_DEFAULT | Workers Free＋D1 Free＋Static Assets画像ゲート。R2・有料地図・独自ドメイン購入をMVP必須から外す。静的資産再配備の運用負担を受け入れる |
-| D-15 | PROPOSED_DEFAULT | React SSR/RSCを必須にせずCSR＋公開版に対応する簡易静的fallback HTML。位置・時間の対話検索にはJavaScriptが必要 |
-
-### D-14の理由
-
-純静的JSONのみなら最小になるが、データ公開切替・画像取り下げと配信デプロイが結合する。D1 Freeを残して公開状態のゲートを維持する。一方R2は無料枠付き従量契約なので、画像をStatic Assetsへ置換して必須契約から外す。
-
-Worker quota超過時に保護経路を画像へ素通しさせないこと、D1失敗時の503、内部assetパス拒否、過去版preview URL無効化、最新取り下げの維持は公開ゲート。設計を記述しただけで実証済みとはしない。詳細と公式出典はARCHITECTURE v1.1第8・9・12節。
-
-## 4. 未決事項・ゲート
-
-| ID | 状態 | 内容 | 必要な段階 |
-| --- | --- | --- | --- |
-| O-01 | OPEN（一部解決） | React＋Vite方針は解決。ルーター版、Git管理の具体運用、Static Assetsゲートの実現性は実装検証 | T-001、画像・公開実装時 |
-| O-02 | OPEN（一部解決） | 無料を条件とする方針は確定。有料化許可はない。実アカウントFree/既存使用量/無料枠内性能は未確認 | クラウド資源・CI・監視の有効化前 |
-| O-03 | OPEN | 公開範囲、正式URL、運営連絡先、データ更新担当。推奨：workers.dev、限定パイロット | 外部公開・実データ運用前 |
-| O-04 | OPEN | 60件/写真40件等の目標と現地確認・撮影許可の工数 | 初期収集計画・公開判定 |
-| O-05 | OPEN | コードライセンス・独自DB再利用条件。private維持、無断でMIT等を追加しない | Repository公開・再配布前 |
-
-無料プランのサービス枠と、電気・通信・人手・現地移動・撮影許可・既存AI契約等の費用は別。既存Paidアカウントを無断でダウングレードしない。費用条件を満たせないなら契約・公開だけを保留し、独立したローカル作業は進められる。
-
-## 5. 変更適用範囲
-
-ARCHITECTURE v1.1第10節を、旧SvelteKit/R2記述の明示的な置換規則とする。それ以外のFR/NFR、データ辞書、時間・価格・設備判定、検証要件を維持する。旧詳細文書・TASKS各行の逐語的な移行は、対象Work Unit開始時に行う。全詳細の移行済み、全要件承認済みとは記録しない。
-
-HTMLは説明用の出力であり、別の要件正本を作らない。C4のL4は未実装の関数・データ型契約に限定し、実コードを解析した図ではない。
-
-## 6. 設計レビュー履歴
-
-2026-10-11の初回レビューでは、ユーザーストーリーの対応、bboxの角度単位、祝日時間の鮮度、healthのenvelope/cache例外、非公開状態の優先順位・休業写真の扱いを補正。元の記録はCommit 5c7d496。
-
-同日の追加指示で、C-11〜13とD-13を記録。ARCHITECTUREをv1.1のC4構成へ更新し、R2を必須から外す推奨と、旧詳細仕様への適用範囲を明記。アプリ実行試験・クラウド設定・無料請求実績は未検証。
-
-決定変更時はID、日付、指示または承認根拠を維持する。合理的推奨をユーザー承認に変換しない。
+main直接Commitは既存AGENTSの方針を維持。Repository公開化・ライセンスの一括付与はしない。Web Parts Libraryは所有者と限定MIT-0範囲を確認したが、Astro/Recipe境界の移植コストと本体権利留保を踏まえコードをコピーしていない。

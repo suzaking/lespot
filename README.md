@@ -1,44 +1,50 @@
 # LeSpot
 
-> **現在の最小公開版（2026-10-11）：** 写真なし。React＋Viteの静的なスポット一覧で場所を表示し、Googleマップの施設検索・周辺ストリートビュー・徒歩経路、Appleマップへ外部遷移する。DB/APIを初期要件にしない。**[現行MVP0仕様](docs/FREE_MVP_STRATEGY.md)** ／ [新C4設計](docs/ARCHITECTURE.md) ／ [現行タスク](TASKS.md)。以下の旧写真・詳細機能一覧は履歴であり、初期公開の必須ではない。
-
-外出先で「少し休みたい」ときに、休憩するための条件から場所を探す地図型Webサービス。
+名古屋周辺の休憩スポットを、現在地または栄・久屋大通・矢場町から探す静的Webアプリ。
 
 ## 現在の状態
 
-- 対象：`Shota-Zaki/lespot`、既定ブランチ：`main`。
-- 今回の成果物は要件定義・基本設計・詳細設計・実装タスク。**アプリ本体は未実装・未公開**。
-- 設計基準日：2026-10-11。設計者の推奨案は、ユーザー承認済みの決定とは区別する。
-- 完了・検証の正本は [AI_WORK_STATE.md](AI_WORK_STATE.md)。承認状態は [docs/DECISIONS.md](docs/DECISIONS.md)。
+2026-10-21：React/Viteアプリ、地図と一覧、検索、CSV検証、テスト基盤を実装。本番未公開。**公開用施設データは0件**。未確認施設や架空データは掲載しないため、通常起動では掲載準備中と表示します。テストは合成データで検証します。E2E実行の制約と実績は [検証記録](docs/VERIFICATION.md) を参照。
 
-## サービスの範囲
+## 開発
 
-初期対象は名古屋市の栄・久屋大通・矢場町周辺。無料のベンチや公共施設から、カフェ、仮眠施設、ホテルのデイユースまでを「休憩場所」として扱う。施設カテゴリだけではなく、料金、距離、屋内外、営業時間、座席、設備、利用条件を比較できることを目指す。
+Node.js 24（検証環境24.19.0）、npmを使用。依存はpackage-lock.jsonで固定。
 
-MVPは現在地取得、地図と一覧、条件検索、距離順、詳細、料金・営業時間・設備・写真、外部地図への経路案内。ユーザー投稿、口コミ、お気に入り、混雑情報、アプリ内の情報修正依頼は将来機能。AIは開発手段であり、製品への搭載要件ではない。
+```bash
+npm ci
+npm run dev
+```
 
-## 設計書の入口
+http://localhost:4173 を開く。位置情報はlocalhostまたはHTTPSが必要。
 
-| 正本 | 責務 |
-| --- | --- |
-| [AGENTS.md](AGENTS.md) | 作業ルール、正本の読み方、変更・検証・引継ぎ |
-| [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) | 目的、スコープ、機能・非機能要件、成功基準 |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 構成、技術選定、境界、拡張方針 |
-| [docs/DETAILED_DESIGN.md](docs/DETAILED_DESIGN.md) | 検索、料金、営業時間、状態遷移、モジュール契約 |
-| [docs/DATA_MODEL.md](docs/DATA_MODEL.md) | ER図、テーブル・フィールド・列挙値の正本 |
-| [docs/API.md](docs/API.md) | HTTP契約、DTO、エラー、キャッシュ |
-| [docs/UI_UX.md](docs/UI_UX.md) | 画面、導線、ワイヤーフレーム、アクセシビリティ |
-| [docs/DATA_OPERATIONS.md](docs/DATA_OPERATIONS.md) | データ収集、出典、写真、審査、更新・公開 |
-| [docs/OPERATIONS.md](docs/OPERATIONS.md) | 環境、認証・権限、セキュリティ、運用・復旧 |
-| [docs/RESEARCH_AND_COSTS.md](docs/RESEARCH_AND_COSTS.md) | 公式調査、利用条件、比較、費用・試算 |
-| [docs/TEST_PLAN.md](docs/TEST_PLAN.md) | 検証項目、要件との対応、公開判定 |
-| [docs/DECISIONS.md](docs/DECISIONS.md) | 確定事項、暫定推奨、未決事項 |
-| [TASKS.md](TASKS.md) | 依存関係付きの実装タスク・完了条件 |
-| [NEXT_WORK.md](NEXT_WORK.md) | 次のWork Unitと停止条件 |
-| [AI_WORK_STATE.md](AI_WORK_STATE.md) | 実施済み作業と実際の検証状態 |
+```bash
+npm run check
+npx playwright install chromium
+npm run test:e2e
+```
 
-## 再開
+E2E前に `npm run build` が必要（checkにも含む）。E2Eは既定で本番ビルドのpreviewを起動する。既存検証サーバーを使う場合のみ `E2E_BASE_URL=http://127.0.0.1:4173 npm run test:e2e`。npm run checkはE2Eを含まない。
 
-`/continue Shota-Zaki/lespot` を入口とし、`AGENTS.md` → `AI_WORK_STATE.md` → `NEXT_WORK.md` → 対象タスクと必要な設計書だけを読む。
+## データ更新
 
-設計書に将来のコマンドやパスがあっても、その実装が存在することを意味しない。設計の作成、承認、実装、ビルド・試験、実データ確認、公開は別々の状態として扱う。
+1. `data/template.csv` の列を非公開Google Sheetsへ取り込み、確認済み情報を入力。
+2. Sheetsの「ファイル → ダウンロード → カンマ区切り形式」で対象タブをCSV保存。
+3. Git管理外の `imports/spots.csv` に置く。
+4. `npm run data:import -- imports/spots.csv` → `npm run check`。
+5. `public/spots.json` の差分を確認・Commit。本番公開前は `npm run release:check`。
+
+シートの一般公開やAPIキーは不要。取込失敗時は既存JSONを書き換えない。全件取り下げ時のみ `--allow-empty` を指定し、内容を確認して通常ビルド・配信する（release:checkは初回公開用の0件禁止ゲート）。詳しくは[データ運用](docs/DATA_OPERATIONS.md)。
+
+## 構成とドキュメント
+
+- React + Vite + TypeScript strict / CSS Modules・共通トークン
+- Leaflet + 地理院淡色タイル（操作後の遅延読込）
+- Zodによる静的JSON検証、csv-parseによるCSV入力
+- 独自バックエンド、DB、写真保存、分析SDKなし
+- 配信候補はCloudflare Pages Freeの静的配信。接続・デプロイ未実施
+
+[要件](docs/REQUIREMENTS.md) / [C4](docs/ARCHITECTURE.md) / [データ](docs/DATA_MODEL.md) / [UI](docs/UI_UX.md) / [詳細](docs/DETAILED_DESIGN.md) / [運用](docs/OPERATIONS.md) / [比較・費用](docs/RESEARCH_AND_COSTS.md) / [テスト](docs/TEST_PLAN.md) / [決定記録](docs/DECISIONS.md)
+
+旧写真/R2/D1/Worker/API設計はGit履歴に保存。現行文書は2026-10-21の実装指示に合わせて置換済み。
+
+再開：`/continue Shota-Zaki/lespot`。AGENTS → AI_WORK_STATE → NEXT_WORKを読む。

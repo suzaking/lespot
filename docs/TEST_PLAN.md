@@ -1,104 +1,17 @@
-> **2026-10-11の方針更新：** この文書には写真・D1・Worker APIを含む旧MVPの内容が残る。**現在のMVP0では写真運用、D1/R2、公開API、LeSpot内地図を必須にしない。** 現行の初期公開仕様は[FREE_MVP_STRATEGY.md](FREE_MVP_STRATEGY.md)、C4構成は[ARCHITECTURE.md](ARCHITECTURE.md)が優先。以下は拡張時の履歴資料であり、写真を後から実装する許可ではない。
+# テスト方針
 
-# テスト・検証計画 v1.0
+| 層                        | 検証内容                                                                           |
+| ------------------------- | ---------------------------------------------------------------------------------- |
+| TypeScript                | strict、未使用、配列境界、全src/scripts/tests                                      |
+| ESLint / Prettier         | TSとHooksの静的解析、整形統一                                                      |
+| Vitest core               | Haversine既知値、距離境界/同距離順、AND検索、無料/不明/期限切れ、URL構築           |
+| Vitest boundary           | JSON未知版/重複/座標逆転/不正URL/日付/fixture/非公開拒否、CSV引用符/BOM/非公開除外 |
+| Vitest React              | フィルター操作、リセット、0件、GPS拒否、読込失敗→再試行                            |
+| CLI                       | 不正CSVで前回JSONが変化しないこと                                                  |
+| Playwright desktop/mobile | 本番previewの検索→カード→地図ピン→一覧、外部リンク、拒否、再試行、キーボード、axe  |
+| ブラウザ                  | 320/390px・PCの視覚確認、タイル表示、リンク・focus                                 |
+| 公開前実機                | iOS Safari/Android Chromeの実GPS/外部アプリ、読み上げ、施設位置照合                |
 
-**本書は試験仕様。現在、アプリのテスト・build・実機・現地検証は全て未実施。** 設計文書の確認結果は `AI_WORK_STATE.md` に別記する。expected resultの記載はPASSの記録ではない。
+Playwrightのネットワークfixtureはtestsからの合成データのみ。本番public/へコピーしない。テスト合格は施設情報の真偽やStreet View撮影範囲を証明しない。
 
-## 1. 試験層と再現条件
-
-単体：時計・位置・schema版・holiday fixtureを注入した純粋関数。Vitestを推奨。
-
-契約・結合：公開DTO、ローカルD1/R2、publisher、HTTP status・headers・機密除外。Cloudflare互換環境に加えstagingでも確認する。
-
-ブラウザ：Playwright、キーボード、位置情報mock、通信失敗、戻る、画像・地図エラー。自動a11yはaxe-coreを補助にする。
-
-実機・現地：iOS Safari、Android Chrome、Windows Chrome/Edge、macOS Safari/Chrome。現行・前主要版の実際のversion、端末、回線、検証日時を記録。未保有端末は未実施とし、代理エミュレーションを実機完了と記さない。
-
-架空fixtureは `is_fixture=1`、名称先頭「架空：」。座標はテスト用と明示し、営業時間・料金・祝日を実在施設の情報として扱わない。時計は固定UTC、施設timezoneはAsia/Tokyo。日時の曜日・日付境界は実行するテストで検算する。
-
-## 2. 必須テストケース
-
-| ID | 操作・入力 | 期待結果 | 層 |
-| --- | --- | --- | --- |
-| TS-01 | 初回表示、現在地ボタン未操作 | 権限promptなし、プリセットから閲覧可能 | E2E/実機 |
-| TS-02 | geo許可、拒否、timeout、非対応、accuracy 201/1001m | 状態を区別。拒否後も検索可能。1000m超は本人が採用するまで自動検索中心にしない | 単体/E2E |
-| TS-03 | GPSで検索し、詳細・戻る・再読込 | アプリ内戻るはメモリ復元。URL/history.state/storage/通信/ログにGPSなし。再読込はpresetへ | E2E/security |
-| TS-04 | 同一座標、同距離ID、radius境界±0.01m、NaN・緯度範囲外 | 0m、ID順、境界内のみ一致、不正入力拒否。表示丸めが判定を変えない | 単体 |
-| TS-05 | 複数地域境界・同ID重複・9地域候補 | 正しい取得対象と重複排除。9地域は範囲縮小案内。不同内容の同IDは不整合 | 単体/結合 |
-| TS-06 | 同カテゴリ複数、座席複数、設備複数、mixed | カテゴリ・座席OR、設備AND、mixedはindoorに自動一致しない | 単体 |
-| TS-07 | 設備yes/no/conditional/unknownとfresh/stale/disputed | fresh yesのみ通常一致。conditionalは明示許可時のみ。期限ぴったりでstale | 単体 |
-| TS-08 | 無料0円、不明NULL、450円注文、600+200円、会員のみ・変動価格 | 仕様どおり最低利用料金を判定。NULL→0禁止、必須合計800、条件のみの料金は予算検索不一致 | 単体/UI |
-| TS-09 | 価格プランvalid_from/toと確認期限が跨日で失効 | 公開時の最小値だけを使わず再評価。有効日末のtimezoneを守る | 単体 |
-| TS-10 | 09〜18営業、18:00、17:30+30分、17:31+30分 | 順にclosed、30分可能、30分不可。空席ありとは表示しない | 単体 |
-| TS-11 | 月22〜火02、火01、火曜終日closed override | 通常はopen、火例外でclosed。前日からの持越しも消える | 単体 |
-| TS-12 | 祝日same/special/unknown、CSV coverage外、期限切れ例外 | 各policyを適用。未知を通常営業へ補完しない。例外優先順位が一定 | 単体 |
-| TS-13 | 深夜判定04:59/05:00、当日24hに清掃休止・例外 | 対象日切替を表示。連続30分/全24hの条件を満たした場合のみ一致 | 単体/UI |
-| TS-14 | 滞在limited/unlimited/unknown、昼休み・日またぎ、仮眠許可なし | 制限と連続営業時間を両方満たす時のみ一致。ソファから仮眠を推定しない | 単体 |
-| TS-15 | draft filter変更後cancel/Escape/back、apply、reset | 取消は元条件保持、applyのみ結果反映、resetはdraftだけ | E2E |
-| TS-16 | 0件、未対応、全地域失敗、一部失敗 | 異なる表示。無断で条件を緩和せず、部分件数を全件と表明しない | E2E |
-| TS-17 | manifest取得中に公開更新、遅い旧応答、revision409 | 旧応答を破棄、異版を混ぜず1回再取得。無限再試行なし | 結合/E2E |
-| TS-18 | foreground60秒、background復帰、15分offline、端末時計差5分超 | 指定の再検証、最新不明表示、時間条件停止・時計確認。GPSを永続化しない | 単体/E2E |
-| TS-19 | GET/HEAD、ETag一致、revision不一致、未知query、悪いID、POST | body/headers/304/409/400/405が契約どおり。エラーに入力・SQL・secretを反射しない | 契約 |
-| TS-20 | draft/suspended/retired/temporary_closedの詳細URL、旧画像URL | 404/410/休業詳細を区別。未公開本文・写真を迂回取得できない | 契約/security |
-| TS-21 | 地図tile障害・JS無効・ピン多数・同位置・card選択 | 一覧/SSR詳細は継続、地図出典維持、同一結果・選択IDを同期 | E2E/実機 |
-| TS-22 | 写真なし、破損読込、拡大dialog、権利と撮影日 | 欠損でも詳細閲覧可能。alt/credit/撮影日不明を正しく表示 | E2E |
-| TS-23 | 外部経路リンクをPC/iOS/Androidで開く | destination/歩行指定、originなし、固定ドメイン。web/appどちらも許容 | 契約/実機 |
-| TS-24 | authoring不正enum/FK/knownにcheck欠落/未来確認日/fixture混入 | 公開拒否。warningだけで致命的違反を通さない | 単体/結合 |
-| TS-25 | SQL文字列・XSS・危険URL・画像巨大展開/SVG/偽装 | parameter化/平文/URL拒否/画像拒否。任意外部fetchなし | security |
-| TS-26 | publisher中断・同じSHA再実行・CAS競合・応答timeout | 中途版非公開、冪等、競合停止、現在revision確認後だけ再試行 | 結合 |
-| TS-27 | R2成功/D1失敗、画像欠落、payload超過500件/1.5MB/350KB | 未参照画像は残せるが不完全版を公開しない。上限超過を切捨てない | 結合 |
-| TS-28 | 画像取り下げ後に旧版rollback | latest takedownsを適用。権利失効画像が復活せず、新安全版へ復旧可能 | 結合/運用 |
-| TS-29 | 新規空DBと写真backupから復元 | 元metadata/hash再現、schema整合、最新取り下げ維持、実測復旧時間記録 | 運用 |
-| TS-30 | production/staging誤指定、権限不足、secret露出 | 環境plan不一致で停止、必要scope説明、ログ/配信bundleにsecretなし | security/運用 |
-| TS-31 | 500件fixture、50回条件変更、cold5回、API100回 | NFR性能とpayloadを測定。中央値/p95・CPU・条件を記録し未達を隠さない | 性能 |
-| TS-32 | キーボード、読上げ、200%拡大、320px、reduced-motion | 主要導線完結、focus復帰、文字欠け・色だけの状態表示なし | a11y/実機 |
-| TS-33 | 対応OS/ブラウザ、地下の位置拒否、屋外の地図判読 | 実機導線と背景地図の利用可能性を確認。商用地図代替の要否を判断 | 実機/現地 |
-| TS-34 | 監視の意図的失敗、使用量確認、deploy rollback | 通知の到達、予算判断の実行、復旧記録。未設定を稼働中としない | 運用 |
-| TS-35 | 60件のcoverage・根拠・期限・写真・連絡先・帰属表示 | REQUIREMENTSの初期データ基準と権利/運用ゲートを満たす | データ審査 |
-| TS-36 | 5名×3課題、公開後30日20件再点検 | 同意済み匿名集計、定義した成功基準で評価。未測定の利用率を作らない | UX/運用 |
-
-## 3. 要件トレーサビリティ
-
-| 要件 | 必須ケース | 主な実装タスク |
-| --- | --- | --- |
-| FR-01/02 | TS-01〜03 | T-019 |
-| FR-03/04 | TS-04/05/21 | T-006/020/021 |
-| FR-05/06 | TS-06〜14/15/16 | T-007〜010/022 |
-| FR-07 | TS-03/20/22 | T-017/023 |
-| FR-08/09 | TS-08〜14 | T-008/009 |
-| FR-10 | TS-22/25/28 | T-012/017/023 |
-| FR-11 | TS-23 | T-023 |
-| FR-12 | TS-07/18/24/28/35 | T-007/015/036 |
-| FR-13 | TS-24/26〜30 | T-013〜015 |
-| FR-14 | TS-02/16〜22 | T-018/024 |
-| FR-15 | TS-05/27 | T-006/018/026 |
-| FR-16 | TS-32/35 | T-025 |
-| NFR-01/02/03 | TS-27/31 | T-032 |
-| NFR-04/10 | TS-21/29/34 | T-034/035 |
-| NFR-05/06 | TS-03/19/20/25/30 | T-030 |
-| NFR-07/08 | TS-32/33 | T-033 |
-| NFR-09 | TS-04〜14/24/26 | T-003/004/031 |
-| NFR-11 | TS-31/34 | T-032/034 |
-| NFR-12 | TS-07/17/18/28 | T-015/018 |
-
-範囲表記は範囲内の全IDを意味する。1ケースが複数要件を検証できるが、一部のみ実行して全要件PASSにはしない。
-
-## 4. 性能計測手順
-
-fixture500件、最大13設備、通常・日またぎ・例外時間、料金・checksを含める。写真はmockと実際の最適化済み画像で別計測。OS/ブラウザ/CPU/メモリ/通信条件/データSHAを固定する。
-
-coldはcacheを消した5回で一覧利用可能までの中央値、位置prompt待ちは除外して別記。4G相当は下り10Mbps・RTT150ms。条件変更50回のp95、ピン更新p95、API100回のp95を記録し、HTTP Date/端末時刻差を把握する。
-
-stagingでWorker CPU、D1 rows_read/rows_written、R2操作、payload raw/gzipを採取する。FreeのCPU上限未達があればSSR範囲や処理を改善し、それでも無理ならO-02へ有料案を提示する。費用削減を理由に未知データを断定・非公開データをcacheへ混ぜない。
-
-## 5. UX試験の実施
-
-本人の同意を得た5名に、無料休憩、屋内電源、現在地なしの3課題を順序を入れ替えて実施する。候補選定と外部経路リンク到達を完了、運営者の説明介入を失敗として記録する。候補が存在しない条件の際は別の0件回復課題として分離し、達成不可能な課題で成功率を歪めない。
-
-15試行中12以上の独立成功、成功試行中央値60秒以内、4/5以上の条件理解を暫定基準とする。母数・場所・データ版・課題を記録し、市場全体の満足率と解釈しない。競合比較は同じ条件・地理範囲・課題で任意に追加できるが、MVP公開ゲートを無断拡大しない。
-
-## 6. 公開判定と記録様式
-
-公開前必須：FR全件、重大security/a11y障害0、rights不明公開画像0、fixture混入0、GPS/secret漏洩0、必要実機・現地検証、初期データ基準、監視通知、復旧、予算・連絡先・利用条件の承認。軽微な未達は影響・回避策・修正タスクとオーナーの例外承認を記録し、黙って完了にしない。
-
-実装時の結果は `docs/verification/YYYY-MM-DD-<scope>.md` に、新規作成する。記録項目はcase ID、Git SHA、release_id、revision、環境、端末/version、実行日時、入力fixture、実測値、expected/actual、PASS/FAIL/NOT_RUN、証跡、未解決事項。未実施はNOT_RUN。データ公開後30日のTS-36後半は初回公開の前提ではなく、MVP検証マイルストーンとして別管理する。
+`npm run check` はE2Eを含まない。`npm run release:check` は実データ0件/期限切れを拒否した後、checkとE2Eを順に実行する。実績はVERIFICATION。

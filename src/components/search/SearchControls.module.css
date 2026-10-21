@@ -1,0 +1,35 @@
+.controls {
+  padding: var(--space-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.location {
+  display: flex;
+  align-items: end;
+  gap: var(--space);
+  flex-wrap: wrap;
+}
+.location label {
+  flex: 1;
+  min-width: 140px;
+}
+.help,
+.message {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message:empty {
+  display: none;
+}
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space);
+  margin-top: var(--space);
+}
+@media (max-width: 420px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}
