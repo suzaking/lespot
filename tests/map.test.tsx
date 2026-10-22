@@ -21,7 +21,7 @@ it('names markers and supports click/space and selected state', () => {
       onSelect={onSelect}
     />,
   );
-  const marker = screen.getByRole('button', { name: `${spot.name}を選択` });
+  const marker = screen.getByRole('button', { name: `1 ${spot.name}を選択` });
   fireEvent.click(marker);
   expect(onSelect).toHaveBeenCalledWith(spot.id);
   fireEvent.keyDown(marker, { key: ' ' });

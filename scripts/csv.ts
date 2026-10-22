@@ -18,6 +18,26 @@ export const columns = [
   'published',
   'fixture',
 ];
+export function exportCsv(data: Dataset): string {
+  const quote = (value: unknown) => {
+    const text = String(value);
+    if (/^[\s]*[=+@-]/u.test(text))
+      throw new Error('表計算で数式として解釈される値はCSVへ出力できません');
+    return `"${text.replaceAll('"', '""')}"`;
+  };
+  return (
+    [
+      columns.join(','),
+      ...parseDataset(data).spots.map((spot) => {
+        const row: Record<string, unknown> = {
+          ...spot,
+          facilities: spot.facilities.join('|'),
+        };
+        return columns.map((column) => quote(row[column])).join(',');
+      }),
+    ].join('\r\n') + '\r\n'
+  );
+}
 export function importCsv(content: string, today?: string): Dataset {
   const records = parse(content, {
     bom: true,

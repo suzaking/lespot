@@ -4,9 +4,11 @@
 
 非公開Google Sheetsを管理用の第一候補とする。既存の接続権限・対象シートは未設定のため、CSV取込を完成させた。シート公開、サービスアカウント発行、API課金は不要。
 
-`data/template.csv` をSheetsへインポート。列はDATA_MODELに一致させ、公開列にtrue/false、fixtureには実データのfalseを入力。設備は `|` 区切り。出典の利用条件を確認し、写真や口コミは転記しない。秘密・個人連絡先を表へ入れない。
+初回は `mkdir -p imports` → `npm run data:export -- imports/current.csv` で現在の掲載JSONをCSV化しSheetsへインポート。空から作る場合は `data/template.csv` を使用。出力先の既存ファイルは上書きしない。CSVはUTF-8 BOM付き、引用符をエスケープし、数式開始文字を持つ値の出力を拒否する。列はDATA_MODELに一致させ、公開列にtrue/false、fixtureには実データのfalseを入力。設備は `|` 区切り。出典の利用条件を確認し、写真や口コミは転記しない。秘密・個人連絡先を表へ入れない。
 
-公式情報だけで入口/休憩区画座標や条件を確定できない場合はpublished=falseのままにする。候補の調査状況はDATA_CANDIDATES参照。
+座標は入口・席・施設代表位置のどれかを確認する。代表位置で登録する場合は画面で限界を明示し、個別席への経路や空席を保証しない。再利用可能な位置データと一般利用条件を確認できない場合はpublished=falseのままにする。初期2件の根拠はDATA_EVIDENCE、候補はDATA_CANDIDATES参照。
+
+既存Sheetsを編集用の正本とする。data:exportは公開中の行だけを書き出すため、既存Sheets全体をこれで置換すると非公開行やメモを失う。書出しは初回作成・公開内容の照合用に使う。
 
 ## 手動更新
 

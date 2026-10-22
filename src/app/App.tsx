@@ -194,7 +194,7 @@ export default function App() {
         </section>
         <section className={styles.notes} aria-label="ご利用にあたって">
           <p>
-            距離は徒歩の移動距離ではありません。料金・利用条件は確認日時点の情報です。施設検索の結果やStreet
+            ピンは施設の代表位置で、入口・休憩席の正確な位置や空席を示すものではありません。距離は徒歩の移動距離ではありません。料金・利用条件は確認日時点の情報です。施設検索の結果やStreet
             Viewの撮影位置は、目的の場所と異なる場合があります。
           </p>
           <details>

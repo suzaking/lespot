@@ -18,6 +18,7 @@ export default function MapView({
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const markers = useRef(new Map<string, L.Marker>());
+  const bounds = useRef<L.LatLngBounds | null>(null);
   const selectRef = useRef(onSelect);
   const [tileError, setTileError] = useState(false);
   useEffect(() => {
@@ -44,7 +45,15 @@ export default function MapView({
     );
     tiles.on('tileerror', () => setTileError(true));
     tiles.addTo(m);
-    const resize = new ResizeObserver(() => m.invalidateSize());
+    const resize = new ResizeObserver(() => {
+      m.invalidateSize();
+      if (bounds.current)
+        m.fitBounds(bounds.current, {
+          padding: [48, 56],
+          maxZoom: 15,
+          animate: false,
+        });
+    });
     resize.observe(container.current);
     return () => {
       resize.disconnect();
@@ -53,9 +62,6 @@ export default function MapView({
       markerStore.clear();
     };
   }, []);
-  useEffect(() => {
-    map.current?.setView([origin.lat, origin.lon], 15, { animate: false });
-  }, [origin]);
   useEffect(() => {
     const m = map.current;
     if (!m) return;
@@ -73,7 +79,9 @@ export default function MapView({
           iconAnchor: [22, 44],
         }),
       }).addTo(m);
-      marker.getElement()?.setAttribute('aria-label', `${spot.name}を選択`);
+      marker
+        .getElement()
+        ?.setAttribute('aria-label', `${i + 1} ${spot.name}を選択`);
       marker.on('click', () => selectRef.current(spot.id));
       marker.getElement()?.addEventListener('keydown', (event) => {
         if (event.key === ' ') {
@@ -83,7 +91,16 @@ export default function MapView({
       });
       markers.current.set(spot.id, marker);
     });
-  }, [results]);
+    bounds.current = L.latLngBounds([
+      [origin.lat, origin.lon],
+      ...results.map(({ spot }): L.LatLngTuple => [spot.lat, spot.lon]),
+    ]);
+    m.fitBounds(bounds.current, {
+      padding: [48, 56],
+      maxZoom: 15,
+      animate: false,
+    });
+  }, [results, origin]);
   useEffect(() => {
     for (const [id, marker] of markers.current) {
       const element = marker.getElement();

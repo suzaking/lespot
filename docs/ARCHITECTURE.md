@@ -18,6 +18,8 @@ flowchart TD
 ```mermaid
 flowchart TD
  S[SheetsのCSV] --> V[ローカル検証CLI]
+ J --> E[CSV書出しCLI]
+ E --> S
  V --> J[public/spots.json]
  J --> B[Vite build]
  C[Reactソース] --> B
@@ -28,6 +30,8 @@ flowchart TD
 ```
 
 Sheetsとの認証接続は未実施。ブラウザはSheetsを直接参照しない。DB/バックエンドは存在しない。Pagesは候補であり未接続。
+
+import/exportは同じ列定義・検証スキーマを使用する。公開JSONの初期2件はDATA_EVIDENCEに根拠を記録。
 
 ## C3: SPA components
 

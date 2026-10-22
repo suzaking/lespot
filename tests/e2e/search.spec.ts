@@ -22,7 +22,9 @@ test('search, card selection, links, map fallback and accessibility', async ({
 }) => {
   await page.goto('/');
   await expect(page.getByRole('article')).toHaveCount(3);
-  await page.getByLabel('料金', { exact: true }).selectOption('free');
+  await page
+    .getByRole('combobox', { name: '料金', exact: true })
+    .selectOption('free');
   await expect(page.getByRole('article')).toHaveCount(1);
   await page
     .getByRole('button', { name: '検証専用スポット1', exact: true })
@@ -43,9 +45,9 @@ test('search, card selection, links, map fallback and accessibility', async ({
     })
     .click();
   await expect(
-    page.getByRole('button', { name: '検証専用スポット1を選択' }),
+    page.getByRole('button', { name: '1 検証専用スポット1を選択' }),
   ).toBeVisible();
-  await page.getByRole('button', { name: '検証専用スポット1を選択' }).click();
+  await page.getByRole('button', { name: '1 検証専用スポット1を選択' }).click();
   await expect(page.getByRole('article')).toBeVisible();
   expect(
     await page.evaluate(

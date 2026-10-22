@@ -1,28 +1,41 @@
 # 検証記録
 
-実施：2026-10-21〜22。Node24.19.0、固定依存、ローカル実装。実データ・公開環境の検証とは別。
+最終実施：2026-10-22。Node24.19.0、固定依存。本番公開前のローカル検証。
 
-## 実行済み
+## 合格
 
-- TypeScript strict型検査：成功。
-- ESLint：成功。地図effect cleanupのref警告を修正。
-- Vitest：共通関数/入力検証/React操作/CSV失敗時の旧JSON保持/地図ピンのクリック・Space・選択状態の31件成功（4ファイル）。
-- `npm run check`：型検査→ESLint→Prettier→31テスト→JSON検証→本番buildの全工程成功。
-- `npm ci --no-audit --no-fund` で246パッケージを再インストールし、続く本番buildも成功。ロックファイルから再現確認済み。
-- Vite本番build：成功。初回JSは約322KB（gzip約99.7KB）、地図JSは約151KB（gzip約44.6KB）。地図CSSも別chunk。地図は明示操作後だけ読込。値は実行時出力の丸め値。
-- クラウドChrome/dev：実際の地理院タイル表示、地域切替、PCの地図と一覧の横並びを確認。
-- 合成データ3件の検証画面：PCでピン2選択→カード2へfocus/選択、カード1選択→ピン1強調の双方向連動を確認。
-- 390px/320px iframe表示を目視確認。390px料金freeで3件→1件、地図切替。axe-core初期一覧画面は両幅とも指摘0件。iOS Safariそのものの検証ではない。
-- 外部リンクはURL構造・固定ホスト・座標・origin省略をテスト。実アプリ起動やGoogle検索の正しい施設解決は未検証。
+- npm ci：前Work Unitで246パッケージをロックから再導入しbuild成功。今回、新しいアプリ依存は追加していない。
+- npm run check：TypeScript strict → ESLint → Prettier → Vitest35件（5ファイル）→ JSON検証2件 → 本番build、全工程成功。
+- Vitest：距離/検索/料金/期限/入力境界/URL、React操作・GPS拒否・再試行、CSV取込失敗時の正常JSON保持、ピンclick/Space/選択、実データのCSV往復と数式セル出力拒否。
+- E2E_CHROMIUM_PATH指定の npm run release:check：データ公開準備検査 → check → 本番distのE2E9件、全て成功。デプロイは行わない。
+- Playwright：PC1280×720、モバイル390×664、狭幅320×740、各3ケース。実データ2件の取得/名称検索/外部URL/ピン選択→カードfocus/出典展開/横はみ出し、合成データの無料フィルター/カード選択/地図縮退、Tabスキップ/GPS拒否/地域変更/0件/500→再試行。
+- axe：一覧操作後と実データの地図操作・出典展開後で指摘0件。全ページ・全状態のアクセシビリティ保証ではない。
+- 徒歩リンクを実際にクリックし新しいタブのURL・origin省略を確認。Googleへの通信はテスト応答へ置換しており、Google側表示や地図アプリ起動の試験ではない。
+- 実データCLI：data:export → data:import（Git管理外の別出力）→ JSON深い一致、成功。Sheets自体の接続・画面操作は未実施。
+- 本番build：初回JS322.19KB（gzip99.76KB）、遅延地図JS151.22KB（gzip44.73KB）、CSS5.87KB/15.67KB。明示操作後のみ地図chunkを取得。
+- 前Work UnitのクラウドChromeで実地理院タイルと地図/一覧連動を確認。今回の自動E2Eはタイル失敗を意図的に再現。
 
-## BLOCKED / NOT_RUN
+## 実行環境と修正経緯
 
-- Playwrightはdesktop/mobile各2ケースの計4ケースを実行したが、全てブラウザ起動前に失敗。実行ファイル不在。`playwright install chromium` はダウンロードが不正ZIPとなり導入失敗。アプリのE2E合格ではない。
-- 本番distのE2E、実iOS/Android、実GPS、スクリーンリーダー、現地位置照合、Cloudflareヘッダー/配信/復旧は未検証。
-- 本番施設0件のためrelease:checkは公開準備不足として拒否する設計。
+標準の playwright install chromium と --only-shell は配布ZIPが不正で失敗。検証専用の @sparticuz/chromium@153.0.0 を別ディレクトリへ導入し、同梱BrotliからChromium153.0.8010.0を展開。アプリ/package-lock/配信物には含めない。Playwright1.64.1標準のChromium156との互換性検証は未実施。
+
+導入済みブラウザを指定できるE2E_CHROMIUM_PATHを追加。独自のセキュリティ無効化引数は追加していない。previewはテスト時127.0.0.1だけへbindし、runnerが起動/終了を管理。
+
+固定zoomで結果ピンが画面外になる不具合を起点＋結果boundsの余白付き表示で修正。ピンの可視番号が読み上げ名に含まれないaxe指摘も修正。料金selectはcomboboxロールでテスト指定。
+
+ヘッドレス環境に日本語フォントがなく初回スクリーンショットは欠字となった。検証環境だけに公式Noto Sans CJK JPを導入して再検証。画面は端末のシステムフォントを使用し、外部フォント通信は増やしていない。
+
+## 未検証・公開ゲート
+
+- 実iOS Safari/Android端末、実GPS、スクリーンリーダー、外部地図アプリの実起動、現地照合。
+- ピンは公式オープンデータの施設代表位置。個別席/入口/空席は保証しない。根拠はDATA_EVIDENCE。
+- Pages Freeのアカウント設定・ヘッダー適用・配信/復旧、公開URL、運営窓口、本番公開承認。
+- Actions無料残量/課金停止、Sheets直接接続。無料設定未確認の外部処理は有効化していない。
 
 ## 再現
 
-`npm ci` → `npm run check` → ブラウザ導入済み環境で `npm run test:e2e`。
+通常：npm ci → npx playwright install chromium → npm run release:check。
 
-クラウド検証用qaページは一時ファイルで、Commit/本番buildに含めない。testsのfixtureは公開JSONへ入れない。テストは施設情報の真偽を証明しない。
+導入済みChromium：E2E_CHROMIUM_PATH=/absolute/path/to/chromium npm run release:check。日本語フォントを備えた環境を使用。npm run check単独はE2Eを含まない。
+
+fixture/一時QA/ブラウザ/フォント/画像は本番JSON・build・Commitに含めない。自動テストは施設情報の真偽を証明しない。

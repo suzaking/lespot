@@ -1,1 +1,41 @@
-{ "schemaVersion": 1, "spots": [] }
+{
+  "schemaVersion": 1,
+  "spots": [
+    {
+      "id": "tsuruma-park",
+      "name": "鶴舞公園",
+      "category": "park",
+      "lat": 35.155394,
+      "lon": 136.920657,
+      "address": "名古屋市昭和区鶴舞1",
+      "cost": "free",
+      "conditions": "一般の入園は無料。園内の有料施設・店舗・駐車場は別料金です。通常は終日入園可能ですが、行事や工事による規制と現地表示を優先してください。座席の位置・空席は未確認です。",
+      "facilities": [],
+      "sourceUrl": "https://www.nagoya-info.jp/spot/detail/109/",
+      "sourceLabel": "名古屋観光コンベンションビューロー：鶴舞公園",
+      "rights": "公式案内の事実を独自に要約（写真・本文転載なし）。座標は愛知県「景観資源・名古屋市」フィーチャ2を丸めて利用。このデータは同資料を改変して利用しています。愛知県、CC BY 2.1 JP（https://creativecommons.org/licenses/by/2.1/jp/）。原資料：https://maps.pref.aichi.jp/map/files/opendata/c200538/c200538.csv",
+      "verifiedAt": "2026-10-21",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "noritake-garden",
+      "name": "ノリタケの森",
+      "category": "park",
+      "lat": 35.17989,
+      "lon": 136.881573,
+      "address": "名古屋市西区則武新町3-1-36",
+      "cost": "free",
+      "conditions": "入園無料。クラフトセンター入館や飲食店の利用は別料金です。持参の飲食物は噴水ひろば・せせらぎ周辺の椅子やベンチで、譲り合って利用してください。食べ歩き・芝生上での飲食は禁止。ゴミは持ち帰り、園内禁煙。開園状況は公式案内をご確認ください。",
+      "facilities": ["噴水ひろば・せせらぎ周辺に椅子・ベンチ（空席は未確認）"],
+      "sourceUrl": "https://www.noritake.co.jp/mori/others/faq/",
+      "sourceLabel": "ノリタケの森：よくあるご質問",
+      "rights": "公式FAQの事実を独自に要約（写真・本文転載なし）。座標は愛知県「景観資源・名古屋市」フィーチャ13を丸めて利用。このデータは同資料を改変して利用しています。愛知県、CC BY 2.1 JP（https://creativecommons.org/licenses/by/2.1/jp/）。原資料：https://maps.pref.aichi.jp/map/files/opendata/c200538/c200538.csv",
+      "verifiedAt": "2026-10-21",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    }
+  ]
+}

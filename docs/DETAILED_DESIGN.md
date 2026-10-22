@@ -18,6 +18,8 @@ Appが選択IDを保持。絞込で消えたIDは選択表示しない。カー�
 
 Leaflet本体はlazy import。MapViewのmountで地図作成、unmountでremove。検索結果変更はmarkerだけ更新。選択変更で地図を作り直さない。ResizeObserverで表示切替・幅変更を反映。React Error Boundaryとタイルエラー表示で一覧へ縮退。同座標の複数ピンは重なるが全カードから個別選択できる。密集時の専用クラスタリングは未実装。
 
+検索起点と全結果をboundsに含め、ピンが欠けない余白・最大zoom15で表示。幅変更時も再調整する。可視番号をピンの読み上げ名に含め、音声操作と読み上げを一致させる。施設代表位置と入口/席の違いを画面に明示。
+
 ## 外部リンク
 
 固定HTTPSホスト＋URLSearchParams。Google Maps URLsのapi=1、徒歩はtravelmode=walking、Street Viewはmap_action=pano。originは常に省略。新規タブとnoopener/noreferrerを明示。Google検索結果とパノラマの場所・撮影日は保証しない。
