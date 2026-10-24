@@ -122,6 +122,20 @@ export default function App() {
           aria-pressed={panel === 'info'}
           onClick={() => setPanel(panel === 'info' ? 'closed' : 'info')}
         >i</button>
+        <button
+          className={styles.utilityButton}
+          type="button"
+          aria-label="現在地から探す"
+          disabled={geo.pending}
+          onClick={geo.locate}
+        >
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+          </svg>
+        </button>
+        {geo.message && <p role="status" className={styles.geoMessage}>{geo.message}</p>}
       </div>
 
       {panel === 'closed' && (
