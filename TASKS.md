@@ -31,3 +31,13 @@
 - D-UI-02 DONE：検索フォーム再配置、3つのクイックフィルター、カード再設計、地図で見る導線とモバイルタブを実装。
 - D-UI-03 DONE：Vercel `dpl_DLeiZiHAtTDyBBF3LB2eLKfCxDW6` READY。TypeScript、ESLint、Prettier、Vitest35件、JSON2件、Vite build成功。HTML/CSS/JS/JSONのHTTP 200確認。
 - D-UI-04 NOT_RUN：最新版のPlaywright E2E（PC/390px/320px）、実iOS/Androidのレイアウト・GPS・地図ピン操作・スクリーンリーダー確認。
+
+## 2026-10-24 Map-first UI再設計
+
+- [x] `design.md`新設と他の地図アプリからのUIパターン整理
+- [x] 装飾的LPを検索・地図主体の画面へ置換
+- [x] PCの固定レイアウト、モバイル切替と選択地点プレビュー
+- [x] 現行フィルター・出典・外部地図・位置情報保護の維持
+- [x] 単体テスト36件成功、型/Lint/整形・本番ビルド成功
+- [ ] 更新版Playwright E2E（PC/390px/320px）とブラウザ目視比較
+- [ ] iOS/Android実機、GPS、実地図、アクセシビリティ確認

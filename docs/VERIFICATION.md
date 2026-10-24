@@ -52,3 +52,10 @@ release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E
 - Vercelビルドログで `tsc --noEmit`、`eslint .`、`prettier --check .`、Vitest35件（5ファイル）、JSON検証2件、Vite buildを確認。生成CSS/JSはVercel配信。
 - 実サイト https://lespot-lac.vercel.app/ にてトップHTML、CSS、JavaScript、`spots.json`のHTTP 200を確認し、公開データ2件とセキュリティヘッダーを照合。
 - 新版UIのPlaywright E2E、画面キャプチャ比較、iOS Safari/Android実機、実GPS、スクリーンリーダー、地図外部アプリ実起動は未実施。旧2026-10-22版のE2E9件とは分けて扱う。
+
+## 2026-10-24 地図検索UI改修（最新）
+
+- `design.md`を新設し、検索・地図/一覧ワークスペースへ画面を作り直した。React/Leaflet/Zodの既存コア、静的JSON、地図の操作後読み込みを維持。
+- 追加したUI単体テストには無料フィルターのトグル挙動を含む。改修版のVercelビルドでTypeScript、ESLint、Prettier、Vitest36件、JSON2件、Vite build成功。
+- 最初の本番デプロイ`dpl_7bAeadhEGZJQqacNXokXfQymALuU`はREADY、`https://lespot-lac.vercel.app/`のHTML/CSS/JS/JSONはHTTP 200。最終の微調整（モバイル地図へのスクロール）は後続コミットに反映する。
+- 更新した`tests/e2e/published.spec.ts`と`tests/e2e/search.spec.ts`はNOT_RUN。Playwright、画面の目視比較、実iOS/Android、実GPS、地図サービスの実動作・スクリーンリーダー試験は未実施。旧版のE2E成功を今回の証拠として扱わない。

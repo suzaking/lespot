@@ -28,3 +28,7 @@ AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開�
 2026-10-24：ユーザーがVercelでの公開を指定。Vercel Hobbyでの静的公開を進める。公開意向を再質問しない。アカウント接続・Hobby/個人非商用条件を確認し、有料変更・不要な全Repositoryアクセスは追加しない。
 
 TASKS、NEXT_WORK、AI_WORK_STATEに検証済み範囲と未完了を残し、`/continue suzaking/lespot` で復元可能にする。
+
+## UI設計の正本（2026-10-24更新）
+
+デザイン、レイアウト、インタラクションはリポジトリ直下の`design.md`を正本とする。旧`docs/UI_UX.md`の歴史的記述より優先する。地図/一覧の連動、レスポンシブ対応、地図タイルのオプトイン、GPS非永続化、出典・利用条件表示を守る。

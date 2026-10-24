@@ -1,25 +1,21 @@
-# LeSpot 次のWork Unit — 2026-10-24
+# LeSpot — 次の作業（2026-10-24）
 
-## 現在の稼働状況
+## 現在の構成
 
-- GitHub: `suzaking/lespot` / `main`（現在のVercel接続実体）。過去資料の `Shota-Zaki/lespot` は現行接続先と異なる。利用者の明示指示なしにRepository移転はしない。
-- Production: https://lespot-lac.vercel.app/
-- デザイン全面改修の公開Commit: `7b789fce3075d78e96df2fea742fb6c51ebcd257`
-- Vercel deployment: `dpl_DLeiZiHAtTDyBBF3LB2eLKfCxDW6` / READY
-- 静的な施設データ2件、React/Vite/Leaflet、写真なし。Vercelの型/Lint/整形・Vitest35件・JSON検証・ビルドが成功。実URLでHTML/CSS/JS/JSONのHTTP 200を確認。
-- 新デザインのPlaywright E2Eおよび実機iOS/Androidの操作・GPS・地図・スクリーンリーダーはNOT_RUN。旧デザインで実施したE2E9件と区別する。
+- GitHub正本：`suzaking/lespot` / `main`（既存Vercel Git接続先）
+- 公開URL：https://lespot-lac.vercel.app/
+- UI設計正本：[design.md](design.md)
+- React / Vite / TypeScript strict / Leaflet / 静的JSON / CSS Modules
+- 初期公開データ：公式根拠を確認した2件（鶴舞公園とノリタケの森）
+- 2026-10-24にmap-firstレイアウトへ変更。写真・外部フォント・新規依存なし。
 
-## 次に進める作業
+## 優先タスク
 
-1. Chromium等を備えた環境で新デザインの `npm run release:check` を実行。PC/390px/320pxで検索、チップ、表示切替、地図ピン、外部地図、フォーカス、横スクロール、axeを検証し、問題を修正。
-2. 実iOS SafariとAndroid Chromeで現在地、地図タイル、外部アプリ起動、タッチ操作、320px〜768pxでのレイアウトを確認。
-3. 実データを増やす場合は出典・権利・施設の休憩利用条件・位置・確認期限が確認できる施設だけを追加。架空施設や無断写真は公開しない。
-4. 2026-11-21までに現在掲載中2件の公式情報を再確認し、公開JSONの期限を適切に更新。
-5. Vercel Blobは作成・`BLOB_READ_WRITE_TOKEN`接続済みだが現行静的アプリ未使用。UpstashはMarketplace導入済みでRedis DB実体未接続。無料枠と明確な必要性を評価してからストレージ連携し、現行検索UXや個人情報方針を損なわない。
-6. 公開運用のエラー監視、連絡先・更新手順、復旧/ロールバック手順を整える。
+1. 最新の`main`を取得し、`npm ci`、`npm run check`、`npm run release:check`を再実行する。最新版Playwrightは実行環境不足のため未実施。
+2. PC1280/800・スマホ390/320で検索・フィルター・地図への切替・選択地点プレビュー・詳細へのフォーカス遷移・横はみ出し・axeを目視とE2Eで確認する。
+3. 実iOS Safari/Android ChromeでGPS許可/拒否・国土地理院タイル・外部地図起動を確認する。
+4. 施設データを追加する場合は利用条件、休憩場所、再利用可能な座標、出典、確認期限を確認してから公開する。既存2件は2026-11-21に確認期限を迎える。
+5. Vercel Blobは接続済み・静的アプリから未使用。Upstashはインストール済みだがRedisリソース未接続。無料枠と明確な用途が確定するまで不要な読み書き機能を追加しない。
+6. 最新の本番デプロイ、配信ヘッダー、エラーログを確認し、`docs/VERIFICATION.md`へ追記する。
 
-## 守ること
-
-Hobbyの個人・非商用条件、追加課金なし、ユーザーGPSの非永続化、公式ソース/権利検証、GitHubからの読み戻し、型/Lint/Prettier/単体・ブラウザテスト。新サービスや有料プランへ無断変更しない。
-
-再開はこのファイルと`AGENTS.md`、`AI_WORK_STATE.md`、`docs/UI_UX.md`を参照。
+有料プラン・新しいサービス・写真・ユーザー位置履歴・解析SDKを無断追加しない。古い文書にある`Shota-Zaki/lespot`への移転も行わない。
