@@ -124,3 +124,30 @@ p {
     transition: none !important;
   }
 }
+
+.sheetGrip {
+  display: none;
+}
+
+@media (max-width: 799px) {
+  .sheetGrip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 38px;
+    height: 38px;
+    border: 0;
+    padding: 0;
+    background: white;
+    touch-action: none;
+    cursor: ns-resize;
+  }
+
+  .sheetGrip > span {
+    height: 4px;
+    width: 38px;
+    border-radius: 4px;
+    background: #d4dbdd;
+  }
+}
