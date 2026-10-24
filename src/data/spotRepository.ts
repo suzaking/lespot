@@ -1,6 +1,7 @@
 import { parseDataset, type Dataset } from '../lib/validation';
+
 export async function loadSpots(signal: AbortSignal): Promise<Dataset> {
-  const response = await fetch(`${import.meta.env.BASE_URL}spots.json`, {
+  const response = await fetch('/api/spots', {
     signal,
     cache: 'no-cache',
   });
