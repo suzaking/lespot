@@ -43,7 +43,7 @@ E2E前に `npm run build` が必要（checkにも含む）。E2Eは既定で本�
 - Leaflet + 地理院淡色タイル（操作後の遅延読込）
 - Zodによる静的JSON検証、csv-parseによるCSV入力
 - 独自バックエンド、DB、写真保存、分析SDKなし
-- 配信候補はCloudflare Pages Freeの静的配信。接続・デプロイ未実施
+- 配信先はVercel Hobbyの静的配信（個人・非商用が条件）。接続・デプロイ待ち。[公開手順](docs/VERCEL_DEPLOYMENT.md)
 
 [要件](docs/REQUIREMENTS.md) / [C4](docs/ARCHITECTURE.md) / [データ](docs/DATA_MODEL.md) / [UI](docs/UI_UX.md) / [詳細](docs/DETAILED_DESIGN.md) / [運用](docs/OPERATIONS.md) / [比較・費用](docs/RESEARCH_AND_COSTS.md) / [テスト](docs/TEST_PLAN.md) / [決定記録](docs/DECISIONS.md)
 

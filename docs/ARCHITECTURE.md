@@ -24,12 +24,12 @@ flowchart TD
  J --> B[Vite build]
  C[Reactソース] --> B
  B --> D[dist 静的資産]
- D -->|承認後| P[Cloudflare Pages Free]
+ D -->|Hobby確認後| P[Vercel Hobby]
  P --> R[利用者ブラウザ]
  R --> T[地理院タイル]
 ```
 
-Sheetsとの認証接続は未実施。ブラウザはSheetsを直接参照しない。DB/バックエンドは存在しない。Pagesは候補であり未接続。
+Sheetsとの認証接続は未実施。ブラウザはSheetsを直接参照しない。DB/バックエンドは存在しない。2026-10-24の指定で配信先はVercel Hobbyへ変更。公開意向は確認済み、Vercel接続・アカウント確認待ち。
 
 import/exportは同じ列定義・検証スキーマを使用する。公開JSONの初期2件はDATA_EVIDENCEに根拠を記録。
 

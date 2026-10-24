@@ -1,6 +1,6 @@
-# 作業状態 — 2026-10-22
+# 作業状態 — 2026-10-24
 
-対象：Shota-Zaki/lespot / main。ローカル実装・検証・GitHub反映は許可済み。本番公開・新サービス接続・課金は別承認。
+対象：Shota-Zaki/lespot / main。2026-10-24ユーザーがVercel公開を指定。Vercel Hobbyの静的公開を進める。公開の意向は確認済み。有料変更は未承認。
 
 ## 完了
 
@@ -14,12 +14,12 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 
 ## 残作業
 
-ローカルWebアプリの実装・自動検証は完了。本番公開は未実施。Pages設定/無料条件/公開URL/運営窓口とユーザー承認が必要。Sheets直接同期は不要でCSV代替運用可能。Actionsは無料条件未確認のためopsテンプレートのみ。
+ローカルWebアプリの実装・自動検証は完了。本番公開は未実施。Vercelアプリは未インストール/未接続。インストール提案済みで、接続待ち。vercel.json、.vercelignore、公開手順を追加、Cloudflare用_headersを削除。Hobbyアカウント/個人非商用条件/公開URL/運営窓口は接続後に確認。SheetsはCSV代替運用可能。Actionsは無料条件未確認のためopsテンプレートのみ。
 
 実iOS/Android端末・実GPS・外部アプリ起動・読み上げ・現地確認は未実施。必要なアカウント・端末がない状態を成功にしない。
 
 ## GitHub・再開
 
-基点：5edc482332f54e151e572de3c10727c48e746c87。main直接Commit方針。今回のSHAは本ファイルを含む履歴で確認し、反映後にGitHubから再取得検証する。
+基点：6a738eaf4ba37cf0a792b0367cca9e12a2ccc88f。main直接Commit方針。今回のSHAは本ファイルを含む履歴で確認し、反映後にGitHubから再取得検証する。
 
 次：NEXT_WORKの公開ゲート確認。/continue Shota-Zaki/lespot で復元する。承認済みの技術選定・CSV代替を再質問しない。

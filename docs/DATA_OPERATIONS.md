@@ -25,7 +25,7 @@ CSVの列・公開状態・全行ID重複を確認し、公開行だけを型・
 
 ## 配信
 
-本番公開承認後のみ：`npm run release:check` → Pages Freeの設定確認 → dist配信。Pages側build commandは `npm run build`、outputはdist、Node24。必ずレビュー済みJSONを使う。build失敗時に以前のデプロイを維持することは実アカウントで公開前に検証する。
+2026-10-24にユーザーがVercel公開を指定。`npm run release:check` → Vercel Hobby/用途条件の確認 → dist配信。Vercel buildは `node --import tsx scripts/prepare-release.ts && npm run check`、outputはdist、Node24。必ずレビュー済みJSONを使う。build失敗時の前回配信維持は実アカウントで確認する。詳細はVERCEL_DEPLOYMENT。
 
 ## 自動化
 
@@ -33,7 +33,7 @@ CSVの列・公開状態・全行ID重複を確認し、公開行だけを型・
 
 GitHub Actionsはprivate repoの無料残量/有料超過設定が未確認なので自動有効化しない。`ops/validate.yml.example` は手動dispatchだけの検証テンプレート。無料残量と課金停止を確認・承認した後に `.github/workflows/validate.yml` へ移す。デプロイ・Commit・シート取得の権限を持たない。
 
-Sheets直接同期/Pages自動配信は未接続。無断で公開CSV URLに変更しない。必要になったら読み取り専用権限、出力先、トークン保管、公開ゲートを決めて追加する。
+Sheets直接同期/Vercel自動配信は未接続。無断で公開CSV URLに変更しない。必要になったら読み取り専用権限、出力先、トークン保管、公開ゲートを決めて追加する。
 
 ## 復旧
 

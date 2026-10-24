@@ -25,4 +25,6 @@ AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開�
 
 公開、Repository公開化、Paid化、新サービス接続を無断で行わない。可逆な実装・テスト・文書更新は継続する。
 
+2026-10-24：ユーザーがVercelでの公開を指定。Vercel Hobbyでの静的公開を進める。公開意向を再質問しない。アカウント接続・Hobby/個人非商用条件を確認し、有料変更・不要な全Repositoryアクセスは追加しない。
+
 TASKS、NEXT_WORK、AI_WORK_STATEに検証済み範囲と未完了を残し、`/continue Shota-Zaki/lespot` で復元可能にする。

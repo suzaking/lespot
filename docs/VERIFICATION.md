@@ -29,7 +29,7 @@
 
 - 実iOS Safari/Android端末、実GPS、スクリーンリーダー、外部地図アプリの実起動、現地照合。
 - ピンは公式オープンデータの施設代表位置。個別席/入口/空席は保証しない。根拠はDATA_EVIDENCE。
-- Pages Freeのアカウント設定・ヘッダー適用・配信/復旧、公開URL、運営窓口、本番公開承認。
+- Vercel Hobbyのアカウント設定・ヘッダー適用・配信/復旧、公開URL、運営窓口。2026-10-24にVercel公開の意向は確認済みで、接続待ち。
 - Actions無料残量/課金停止、Sheets直接接続。無料設定未確認の外部処理は有効化していない。
 
 ## 再現
@@ -39,3 +39,9 @@
 導入済みChromium：E2E_CHROMIUM_PATH=/absolute/path/to/chromium npm run release:check。日本語フォントを備えた環境を使用。npm run check単独はE2Eを含まない。
 
 fixture/一時QA/ブラウザ/フォント/画像は本番JSON・build・Commitに含めない。自動テストは施設情報の真偽を証明しない。
+
+## 2026-10-24：Vercel向け準備
+
+vercel.jsonにVite/install/build/outputとCSP/権限/キャッシュを設定し、Cloudflare用public/_headersを廃止。.vercelignoreでCSV原本・秘密ファイル・テスト成果物等をアップロード対象外にした。新しい依存やバックエンドは追加していない。
+
+release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E2E9件がすべて成功。Vercel buildCommandの前半データ検査とnpm run checkもこの中で実行済み。実Vercelのbuildとヘッダー適用は接続後の確認事項であり、Vite previewでのE2E成功と同一視しない。
