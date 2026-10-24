@@ -8,6 +8,12 @@
 
 ## 現在の状態
 
+**施設データの管理はCSVからUpstash Redisへ移行。** 地図をメイン画面として表示し、管理者は`/admin.html`からスポットを追加・編集・削除します。DB/APIは`docs/DB_OPERATIONS.md`、地図UIは`design.md`を参照。初回のみ`data/bootstrap-spots.json`の確認済み2件をDBに登録し、以後の更新で上書きしません。
+
+従来のCSVインポート/エクスポートはレガシー互換ツールであり本番運用には使用しません。
+
+
+
 2026-10-24：Vercel Hobbyに公開し、UI/UXをv3へ全面改修しました。公開URL：https://lespot-lac.vercel.app/ 。検索・現在地・地図と一覧・外部地図リンク・CSV管理を実装。鶴舞公園とノリタケの森の2件を登録。35件のVitestとPC/390px/320pxの9件の本番ビルドE2Eが成功。新UIの本番ブラウザE2Eと実機試験は未実施。出典・再利用条件は [確認根拠](docs/DATA_EVIDENCE.md)、実行環境と未検証事項は [検証記録](docs/VERIFICATION.md) を参照。ピンは施設代表位置であり、入口・個別席や空席を保証しません。
 
 ## 開発

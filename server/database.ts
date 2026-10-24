@@ -1,5 +1,5 @@
-import bootstrap from '../../data/bootstrap-spots.json';
-import { datasetSchema, parseDataset, type Dataset } from '../../src/lib/validation';
+import bootstrap from '../data/bootstrap-spots.json';
+import { datasetSchema, parseDataset, type Dataset } from '../src/lib/validation';
 
 const KEY = 'lespot:spots:v1';
 const SCRIPT = "if redis.call('GET', KEYS[1]) == ARGV[1] then redis.call('SET', KEYS[1], ARGV[2]); return 1 else return 0 end";

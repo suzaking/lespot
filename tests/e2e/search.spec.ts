@@ -13,7 +13,7 @@ const data = {
   })),
 };
 test.beforeEach(async ({ page }) => {
-  await page.route('**/spots.json', (r) => r.fulfill({ json: data }));
+  await page.route('**/api/spots', (r) => r.fulfill({ json: data }));
   await page.route('https://cyberjapandata.gsi.go.jp/**', (r) => r.abort());
 });
 test('search, card selection, links, map fallback and accessibility', async ({
@@ -82,10 +82,10 @@ test('keyboard, denied location, empty and retry', async ({ page }) => {
   await expect(
     page.getByText('条件に合うスポットが見つかりません'),
   ).toBeVisible();
-  await page.route('**/spots.json', (r) => r.fulfill({ status: 500 }));
+  await page.route('**/api/spots', (r) => r.fulfill({ status: 500 }));
   await page.reload();
   await expect(page.getByRole('alert')).toBeVisible();
-  await page.route('**/spots.json', (r) =>
+  await page.route('**/api/spots', (r) =>
     r.fulfill({ json: { schemaVersion: 1, spots: [] } }),
   );
   await page.getByRole('button', { name: '再試行' }).click();

@@ -6,7 +6,7 @@ import { areas, defaultFilters } from '../src/lib/config';
 import { searchSpots } from '../src/lib/search';
 
 const data = parseDataset(
-  JSON.parse(readFileSync('public/spots.json', 'utf8')),
+  JSON.parse(readFileSync('data/bootstrap-spots.json', 'utf8')),
 );
 
 describe('published dataset', () => {

@@ -19,3 +19,9 @@
 6. 最新の本番デプロイ、配信ヘッダー、エラーログを確認し、`docs/VERIFICATION.md`へ追記する。
 
 有料プラン・新しいサービス・写真・ユーザー位置履歴・解析SDKを無断追加しない。古い文書にある`Shota-Zaki/lespot`への移転も行わない。
+
+## 2026-10-24 DB化追記
+
+- 管理画面 `/admin.html`、公開API `/api/spots`、認証API `/api/admin/spots`。詳細は`docs/DB_OPERATIONS.md`。
+- 実Redisデータ初期化はDBキーが存在しない場合のみ。`data/bootstrap-spots.json`を非公開初期スナップショットとして保持。
+- 公開地図を初期表示。API不通・認証失敗・DB更新・競合/復元・iPhone/AndroidのUIを検証する。Blobはバイナリファイルが必要になるまで未使用。
