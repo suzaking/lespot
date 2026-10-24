@@ -26,6 +26,12 @@ test('real published JSON loads and links work without map tiles', async ({
   await page
     .getByRole('button', { name: '1 ノリタケの森を選択', exact: true })
     .click();
+  if (isMobile) {
+    await expect(
+      page.getByRole('button', { name: '一覧で詳細を見る' }),
+    ).toBeVisible();
+    await page.getByRole('button', { name: '一覧で詳細を見る' }).click();
+  }
   await expect(
     page.getByRole('button', { name: 'ノリタケの森', exact: true }),
   ).toBeFocused();

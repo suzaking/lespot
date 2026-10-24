@@ -47,3 +47,16 @@ it('recovers from fetch error and distinguishes empty data', async () => {
     expect(screen.getByText('掲載スポットを確認中です')).toBeInTheDocument(),
   );
 });
+
+it('offers working quick filters without fabricating cost information', async () => {
+  vi.mocked(loadSpots).mockResolvedValue({ schemaVersion: 1, spots });
+  render(<App />);
+  await screen.findAllByRole('article');
+  const freeChip = screen.getByRole('button', { name: '無料', exact: true });
+  await userEvent.click(freeChip);
+  expect(freeChip).toHaveAttribute('aria-pressed', 'true');
+  expect(screen.getAllByRole('article')).toHaveLength(1);
+  await userEvent.click(freeChip);
+  expect(freeChip).toHaveAttribute('aria-pressed', 'false');
+  expect(screen.getAllByRole('article')).toHaveLength(3);
+});

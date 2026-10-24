@@ -48,6 +48,12 @@ test('search, card selection, links, map fallback and accessibility', async ({
     page.getByRole('button', { name: '1 検証専用スポット1を選択' }),
   ).toBeVisible();
   await page.getByRole('button', { name: '1 検証専用スポット1を選択' }).click();
+  if (isMobile) {
+    await expect(
+      page.getByRole('button', { name: '一覧で詳細を見る' }),
+    ).toBeVisible();
+    await page.getByRole('button', { name: '一覧で詳細を見る' }).click();
+  }
   await expect(page.getByRole('article')).toBeVisible();
   expect(
     await page.evaluate(
