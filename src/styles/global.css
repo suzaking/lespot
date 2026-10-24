@@ -6,7 +6,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 24px;
 }
 
 body {
@@ -15,13 +14,13 @@ body {
   color: var(--text);
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif;
-  line-height: 1.7;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
 a {
   color: var(--accent);
-  text-underline-offset: 4px;
+  text-underline-offset: 3px;
 }
 
 button,
@@ -34,20 +33,16 @@ button,
 select,
 input {
   min-height: 44px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--text);
-  padding: 0.55rem 0.8rem;
   max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #d2dbdd;
+  padding: 8px 10px;
+  background: white;
+  color: var(--text);
 }
 
 button {
   cursor: pointer;
-  transition:
-    background 160ms ease,
-    border-color 160ms ease,
-    transform 160ms ease;
 }
 
 button:hover {
@@ -56,33 +51,36 @@ button:hover {
 
 button:disabled {
   cursor: default;
-  opacity: 0.58;
+  opacity: 0.65;
+}
+
+button[aria-pressed='true'] {
+  color: var(--accent);
 }
 
 label {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  font-size: 0.82rem;
+  gap: 5px;
+  color: #45545a;
+  font-size: 0.76rem;
   font-weight: 650;
-  min-width: 0;
 }
 
 :focus-visible {
-  outline: 3px solid #e99857;
-  outline-offset: 3px;
+  outline: 3px solid #e3a463;
+  outline-offset: 2px;
 }
 
 .primary {
+  color: white;
   border-color: var(--accent);
   background: var(--accent);
-  color: white;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .primary:hover {
-  background: #1e513f;
-  border-color: #1e513f;
+  background: #075e56;
 }
 
 .srOnly {
@@ -101,13 +99,13 @@ label {
   position: fixed;
   top: -100px;
   left: 10px;
-  padding: 1rem;
-  background: white;
   z-index: 9999;
+  padding: 12px;
+  background: white;
 }
 
 .skipLink:focus {
-  top: 10px;
+  top: 8px;
 }
 
 summary {
