@@ -30,7 +30,9 @@ export function SheetGrip({
         event.currentTarget.setPointerCapture?.(event.pointerId);
       }}
       onPointerUp={endDrag}
-      onPointerCancel={() => { startY.current = null; }}
+      onPointerCancel={() => {
+        startY.current = null;
+      }}
       onClick={() => {
         if (ignoreClick.current) {
           ignoreClick.current = false;

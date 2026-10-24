@@ -14,8 +14,6 @@ export function isSpotInViewport(spot: Spot, viewport: MapViewport): boolean {
       ? spot.lon >= viewport.west && spot.lon <= viewport.east
       : spot.lon >= viewport.west || spot.lon <= viewport.east;
   return (
-    spot.lat >= viewport.south &&
-    spot.lat <= viewport.north &&
-    longitudeMatches
+    spot.lat >= viewport.south && spot.lat <= viewport.north && longitudeMatches
   );
 }

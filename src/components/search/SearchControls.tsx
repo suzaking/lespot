@@ -49,19 +49,31 @@ export function SearchControls({
   function keyboard(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Escape') {
       setSuggestionsOpen(false);
-    } else if (event.key === 'Enter' && suggestionsOpen && suggestions.length > 0) {
+    } else if (
+      event.key === 'Enter' &&
+      suggestionsOpen &&
+      suggestions.length > 0
+    ) {
       event.preventDefault();
       choose(suggestions[0]!);
-    } else if (event.key === 'ArrowDown' && suggestionsOpen && suggestions.length > 0) {
+    } else if (
+      event.key === 'ArrowDown' &&
+      suggestionsOpen &&
+      suggestions.length > 0
+    ) {
       event.preventDefault();
-      suggestionsRef.current?.querySelector<HTMLElement>('[role="option"]')?.focus();
+      suggestionsRef.current
+        ?.querySelector<HTMLElement>('[role="option"]')
+        ?.focus();
     }
   }
 
   return (
     <section className={styles.controls} aria-label="スポット検索">
       <div className={styles.searchBar}>
-        <span className={styles.brandMark} aria-hidden="true">L</span>
+        <span className={styles.brandMark} aria-hidden="true">
+          L
+        </span>
         <label className={styles.query}>
           <span className="srOnly">スポット名・場所</span>
           <input
@@ -94,7 +106,15 @@ export function SearchControls({
             setSuggestionsOpen(false);
           }}
         >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            aria-hidden="true"
+          >
             <path d="M4 7h16M4 17h16" />
             <circle cx="9" cy="7" r="2.5" fill="white" />
             <circle cx="15" cy="17" r="2.5" fill="white" />
@@ -102,7 +122,13 @@ export function SearchControls({
         </button>
       </div>
       {suggestionsOpen && suggestions.length > 0 && (
-        <ul id="place-suggestions" ref={suggestionsRef} className={styles.suggestions} role="listbox" aria-label="検索候補">
+        <ul
+          id="place-suggestions"
+          ref={suggestionsRef}
+          className={styles.suggestions}
+          role="listbox"
+          aria-label="検索候補"
+        >
           {suggestions.map((spot) => (
             <li
               key={spot.id}
@@ -116,10 +142,13 @@ export function SearchControls({
                   choose(spot);
                 } else if (event.key === 'ArrowDown') {
                   event.preventDefault();
-                  (event.currentTarget.nextElementSibling as HTMLElement | null)?.focus();
+                  (
+                    event.currentTarget.nextElementSibling as HTMLElement | null
+                  )?.focus();
                 } else if (event.key === 'ArrowUp') {
                   event.preventDefault();
-                  const previous = event.currentTarget.previousElementSibling as HTMLElement | null;
+                  const previous = event.currentTarget
+                    .previousElementSibling as HTMLElement | null;
                   if (previous) previous.focus();
                   else inputRef.current?.focus();
                 } else if (event.key === 'Escape') {
@@ -142,38 +171,116 @@ export function SearchControls({
               <select value={area} onChange={(e) => chooseArea(e.target.value)}>
                 {area === 'map' && <option value="map">地図の表示範囲</option>}
                 {area === 'current' && <option value="current">現在地</option>}
-                {areas.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}
+                {areas.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.name}
+                  </option>
+                ))}
               </select>
             </label>
-            <button className={styles.locate} onClick={geo.locate} disabled={geo.pending}>
+            <button
+              className={styles.locate}
+              onClick={geo.locate}
+              disabled={geo.pending}
+            >
               {geo.pending ? '取得中…' : '現在地から探す'}
             </button>
           </div>
           <div className={styles.chips} aria-label="クイックフィルター">
-            <button aria-pressed={filters.cost === 'free'} onClick={() => setFilters({ ...filters, cost: filters.cost === 'free' ? 'all' : 'free' })}>無料</button>
-            <button aria-pressed={filters.category === 'park'} onClick={() => setFilters({ ...filters, category: filters.category === 'park' ? 'all' : 'park' })}>公園・広場</button>
-            <button aria-pressed={filters.radius === 1000} onClick={() => setFilters({ ...filters, radius: filters.radius === 1000 ? 3000 : 1000 })}>1km以内</button>
+            <button
+              aria-pressed={filters.cost === 'free'}
+              onClick={() =>
+                setFilters({
+                  ...filters,
+                  cost: filters.cost === 'free' ? 'all' : 'free',
+                })
+              }
+            >
+              無料
+            </button>
+            <button
+              aria-pressed={filters.category === 'park'}
+              onClick={() =>
+                setFilters({
+                  ...filters,
+                  category: filters.category === 'park' ? 'all' : 'park',
+                })
+              }
+            >
+              公園・広場
+            </button>
+            <button
+              aria-pressed={filters.radius === 1000}
+              onClick={() =>
+                setFilters({
+                  ...filters,
+                  radius: filters.radius === 1000 ? 3000 : 1000,
+                })
+              }
+            >
+              1km以内
+            </button>
           </div>
           <div className={styles.filters}>
-            <label>カテゴリ
-              <select value={filters.category} onChange={(e) => setFilters({ ...filters, category: e.target.value as Filters['category'] })}>
+            <label>
+              カテゴリ
+              <select
+                value={filters.category}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    category: e.target.value as Filters['category'],
+                  })
+                }
+              >
                 <option value="all">すべて</option>
-                {Object.entries(categories).map(([value, name]) => <option key={value} value={value}>{name}</option>)}
+                {Object.entries(categories).map(([value, name]) => (
+                  <option key={value} value={value}>
+                    {name}
+                  </option>
+                ))}
               </select>
             </label>
-            <label>料金
-              <select value={filters.cost} onChange={(e) => setFilters({ ...filters, cost: e.target.value as Filters['cost'] })}>
+            <label>
+              料金
+              <select
+                value={filters.cost}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    cost: e.target.value as Filters['cost'],
+                  })
+                }
+              >
                 <option value="all">すべて</option>
-                {Object.entries(costs).map(([value, name]) => <option key={value} value={value}>{name}</option>)}
+                {Object.entries(costs).map(([value, name]) => (
+                  <option key={value} value={value}>
+                    {name}
+                  </option>
+                ))}
               </select>
             </label>
-            <label>直線距離
-              <select value={filters.radius} onChange={(e) => setFilters({ ...filters, radius: Number(e.target.value) })}>
-                {[500, 1000, 3000, 10000].map((r) => <option key={r} value={r}>{r < 1000 ? `${r}m` : `${r / 1000}km`}以内</option>)}
+            <label>
+              直線距離
+              <select
+                value={filters.radius}
+                onChange={(e) =>
+                  setFilters({ ...filters, radius: Number(e.target.value) })
+                }
+              >
+                {[500, 1000, 3000, 10000].map((r) => (
+                  <option key={r} value={r}>
+                    {r < 1000 ? `${r}m` : `${r / 1000}km`}以内
+                  </option>
+                ))}
               </select>
             </label>
           </div>
-          {geo.message && <p role="status" className={styles.message}>{geo.message}</p>}
+          {geo.message && (
+            <p role="status" className={styles.message}>
+              {geo.message}
+            </p>
+          )}
         </div>
       )}
     </section>

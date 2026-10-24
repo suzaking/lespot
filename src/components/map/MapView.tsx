@@ -46,7 +46,11 @@ export default function MapView({
     }).setView([initialOrigin.current.lat, initialOrigin.current.lon], 13);
     map.current = m;
     L.control
-      .zoom({ position: 'bottomright', zoomInTitle: '拡大', zoomOutTitle: '縮小' })
+      .zoom({
+        position: 'bottomright',
+        zoomInTitle: '拡大',
+        zoomOutTitle: '縮小',
+      })
       .addTo(m);
 
     const tiles = L.tileLayer(
@@ -62,7 +66,9 @@ export default function MapView({
     tiles.addTo(m);
 
     let userMovePending = false;
-    const markUserMove = () => { userMovePending = true; };
+    const markUserMove = () => {
+      userMovePending = true;
+    };
     const trackControls = (event: PointerEvent) => {
       if (
         event.target instanceof Element &&
@@ -132,7 +138,9 @@ export default function MapView({
           iconAnchor: [22, 44],
         }),
       }).addTo(m);
-      marker.getElement()?.setAttribute('aria-label', `${i + 1} ${spot.name}を選択`);
+      marker
+        .getElement()
+        ?.setAttribute('aria-label', `${i + 1} ${spot.name}を選択`);
       marker.on('click', () => onSelectRef.current(spot.id));
       marker.getElement()?.addEventListener('keydown', (event) => {
         if (event.key === ' ') {
@@ -147,7 +155,9 @@ export default function MapView({
   useEffect(() => {
     for (const [id, marker] of markers.current) {
       marker.getElement()?.classList.toggle(styles.active!, id === selected);
-      marker.getElement()?.setAttribute('aria-pressed', String(id === selected));
+      marker
+        .getElement()
+        ?.setAttribute('aria-pressed', String(id === selected));
       marker.setZIndexOffset(id === selected ? 1000 : 0);
     }
     const marker = selected ? markers.current.get(selected) : undefined;
@@ -156,7 +166,11 @@ export default function MapView({
 
   return (
     <div className={styles.wrapper}>
-      <div ref={container} className={styles.map} aria-label="休憩スポットの地図" />
+      <div
+        ref={container}
+        className={styles.map}
+        aria-label="休憩スポットの地図"
+      />
       {tileError && (
         <p role="status" className={styles.warning}>
           地図の一部を読み込めません。一覧と外部地図リンクをご利用ください。

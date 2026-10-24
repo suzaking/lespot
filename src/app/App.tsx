@@ -25,9 +25,13 @@ export default function App() {
   const [selected, setSelected] = useState<string | null>(null);
   const [panel, setPanel] = useState<Panel>('closed');
   const [expanded, setExpanded] = useState(false);
-  const [sheetExtent, setSheetExtent] = useState<'peek' | 'half' | 'full'>('half');
+  const [sheetExtent, setSheetExtent] = useState<'peek' | 'half' | 'full'>(
+    'half',
+  );
   const [mapBounds, setMapBounds] = useState<MapViewport | null>(null);
-  const [pendingViewport, setPendingViewport] = useState<MapViewport | null>(null);
+  const [pendingViewport, setPendingViewport] = useState<MapViewport | null>(
+    null,
+  );
   const [cameraKey, setCameraKey] = useState(0);
 
   const geo = useGeolocation((point) => {
@@ -104,7 +108,11 @@ export default function App() {
     setExpanded(false);
   }
   function chooseSuggestion(spot: Spot): void {
-    setFilters({ ...filters, query: spot.name, radius: Math.max(filters.radius, 10000) });
+    setFilters({
+      ...filters,
+      query: spot.name,
+      radius: Math.max(filters.radius, 10000),
+    });
     setOrigin({ lat: spot.lat, lon: spot.lon });
     setMapBounds(null);
     setPendingViewport(null);
@@ -179,7 +187,11 @@ export default function App() {
       </section>
 
       {pendingViewport && (
-        <button className={styles.searchHere} type="button" onClick={searchHere}>
+        <button
+          className={styles.searchHere}
+          type="button"
+          onClick={searchHere}
+        >
           このエリアを検索
         </button>
       )}

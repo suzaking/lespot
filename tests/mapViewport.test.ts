@@ -7,7 +7,7 @@ describe('map viewport search', () => {
     center: { lat: 35.1709, lon: 136.9084 },
     north: 35.18,
     south: 35.16,
-    west: 136.90,
+    west: 136.9,
     east: 136.92,
   };
   it('includes only points inside the visible rectangle', () => {
@@ -16,7 +16,14 @@ describe('map viewport search', () => {
     expect(isSpotInViewport({ ...spot, lon: 136.95 }, viewport)).toBe(false);
   });
   it('handles date-line crossing rectangles', () => {
-    expect(isSpotInViewport({ ...spot, lon: 179.8 }, { ...viewport, west: 179, east: -179 })).toBe(true);
-    expect(isSpotInViewport(spot, { ...viewport, west: 179, east: -179 })).toBe(false);
+    expect(
+      isSpotInViewport(
+        { ...spot, lon: 179.8 },
+        { ...viewport, west: 179, east: -179 },
+      ),
+    ).toBe(true);
+    expect(isSpotInViewport(spot, { ...viewport, west: 179, east: -179 })).toBe(
+      false,
+    );
   });
 });
