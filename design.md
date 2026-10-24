@@ -53,3 +53,23 @@ Feature parity with all of Google Maps (global POI index, turn-by-turn navigatio
 - Run TypeScript, ESLint, Prettier, Vitest, Vite build and published API smoke test.
 - Run Playwright at desktop and mobile sizes before claiming screenshot/interaction validation. Test initial map-only state; search/filter panel toggles; marker -> peek -> expanded details; closing and returning to results; denied GPS; keyboard; missing map tiles; no horizontal overflow; and axe.
 - Do not confuse mock-based tests with full production browser verification. Real iOS Safari and Android Chrome remain separate QA tasks.
+
+## 2026-10-24 map gesture and autocomplete iteration
+
+### Viewport search
+
+The map is the user's spatial workspace. A manual drag, scroll-wheel zoom or map zoom-control action raises a small floating **「このエリアを検索」** action, without issuing a new DB request during each gesture. Clicking it applies the visible map bounds and sorts the existing, validated Redis-derived spots from that map center. The search radius dropdown is used for manual area search; when searching the visible map, bounds take precedence. Selecting a fixed area or changing a manual filter clears the prior viewport constraint.
+
+**Do not forcibly fitBounds after each filter change**. Camera recenter happens only when the user deliberately chooses a new search area/current location/POI suggestion. Result and marker updates must preserve the user's camera. Marker selection pans deliberately.
+
+### Suggestions
+
+The search capsule shows at most five matching registered spots from the same public DB dataset; display name and address only. Never fake Google's global POI database or suggest unverified businesses. Provide arrow/Enter/Escape keyboard support; selecting a suggestion pans to it and reveals its place detail. No separate geocoding API or paid quota required.
+
+### Mobile bottom sheets
+
+The handle at the top of results and place panels supports vertical drag via pointer events. Results move from **peek → half → expanded**, and downward from peek dismisses. The selected-place preview expands to evidence and conditions when swiped up; downward shrinks or closes. Maintain a visible strip of the map; body scrolling inside the panel should not drag the map. Handle is a keyboard-operable button as well.
+
+### Limitations
+
+This is a functional approximation of familiar map interaction patterns, not Google Maps itself. No Google imagery, proprietary listings, transit, traffic, routing engine, offline downloads or reviews. Leaflet + GSI remains free to operate within provider terms, and Spot CRUD stays in Upstash Redis.
