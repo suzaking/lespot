@@ -32,3 +32,11 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - 対象正本をgitSourceに指定したstagingデプロイ試行はHTTP 400 `incorrect_git_source_info`（GitHub repository can't be found）。成功・公開した扱いにしない。Production URLなし。
 - 次の承認ゲート：GitHub `Shota-Zaki`アカウント側でVercel GitHub Appへ **`lespot`のみ** のアクセスを許可する。既存`suzaking/lespot`の誤デプロイを避ける。Hobbyプランではprivate repoのコミット作者とチームオーナーの一致条件にも注意。追加課金禁止。
 - Gitの正しい接続後、`docs/VERCEL_DEPLOYMENT.md`に従い検証してプレビュー、本番公開、URL/レスポンスヘッダー確認。作業時点でCLIのユーザーPCインストールと直接`get-started.md`取得は未実施（公式Getting Started docs・Vercel MCP使用）。
+
+## 2026-10-24 公開結果（実測更新）
+
+- GitHubの書き込み権限が復旧し、`suzaking/lespot` の `main` に2件Commit。`7f33c90`（vercel.jsonのJSON整形）と `1cc5f7e`（vercel.jsonのみPrettier整形チェック除外）。各変更後にGitHubから再取得し反映確認。
+- Vercel本番 `dpl_9Sr1p4Z7nm76auqECaPtHnaBU5ZQ` がREADY。URL https://lespot-lac.vercel.app/ 、コミット `1cc5f7e`。Vercel buildで型/Lint/Prettier・Vitest35/35・実JSON2件・Vite build成功。
+- 実サイト `/` と `/spots.json` がHTTP 200。CSP、Permissions-Policy、Referrer-Policy、X-Content-Type-Options、Cache-ControlをHTTPで確認。Vercel SSOは本番ドメイン以外の個別URL/Previewを保護する設定。
+- Blob Store `lespot-content` (東京hnd1) 作成済み、`BLOB_READ_WRITE_TOKEN` は production/preview/developmentに接続。Blob上にデータは保存しておらず、アプリコードにも未統合。Upstash Marketplaceはインストール済みだがRedis環境変数は確認できず、Redis作成・利用は未完了。
+- 実iOS/Androidや本番ブラウザ操作E2Eは未実施。Repository AGENTSの `Shota-Zaki/lespot` 記述は現行実体 `suzaking/lespot` と異なる。無断移転しない。
