@@ -1,7 +1,8 @@
+import { readFileSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-test('real published JSON loads and links work without map tiles', async ({
+test('verified bootstrap spots render through the DB API contract', async ({
   page,
   context,
   isMobile,
@@ -9,6 +10,8 @@ test('real published JSON loads and links work without map tiles', async ({
   await page.route('https://cyberjapandata.gsi.go.jp/**', (route) =>
     route.abort(),
   );
+  const bootstrap = JSON.parse(readFileSync('data/bootstrap-spots.json', 'utf8'));
+  await page.route('**/api/spots', (route) => route.fulfill({ json: bootstrap }));
   await page.goto('/');
   await expect(page.getByRole('article')).toHaveCount(2);
   await page.getByLabel('スポット名・場所').fill('ノリタケ');
