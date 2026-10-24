@@ -45,18 +45,21 @@ export default function MapView({
     );
     tiles.on('tileerror', () => setTileError(true));
     tiles.addTo(m);
-    const resize = new ResizeObserver(() => {
-      m.invalidateSize();
-      if (bounds.current)
-        m.fitBounds(bounds.current, {
-          padding: [48, 56],
-          maxZoom: 15,
-          animate: false,
-        });
-    });
-    resize.observe(container.current);
+    const resize =
+      typeof ResizeObserver === 'undefined'
+        ? null
+        : new ResizeObserver(() => {
+            m.invalidateSize();
+            if (bounds.current)
+              m.fitBounds(bounds.current, {
+                padding: [48, 56],
+                maxZoom: 15,
+                animate: false,
+              });
+          });
+    resize?.observe(container.current);
     return () => {
-      resize.disconnect();
+      resize?.disconnect();
       m.remove();
       map.current = null;
       markerStore.clear();
