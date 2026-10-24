@@ -10,10 +10,10 @@ AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開�
 
 ## 実装・データ
 
-- React/Vite/TypeScript strict、Leaflet、静的JSON。バックエンド、DB、写真管理、解析SDKを増やさない。
+- React/Vite/TypeScript strict、Leaflet、Upstash Redis、Vercel Functionsを使用。DB管理が現行方針。写真管理・解析SDKは追加しない。
 - CSS Modules、共通トークン、純粋検索関数、境界検証を維持する。重複・過剰な抽象化を避ける。
 - unknownや期限切れを無料・設備あり・利用可としない。区画の利用条件を施設全体から推測しない。
-- 本番データは出典・確認日・権利・場所・利用条件を確認する。fixtureはtestsだけ。公開JSONへの合成データ混入を拒否する。
+- 本番データは出典・確認日・権利・場所・利用条件を確認する。fixtureはtestsだけ。Redisへの合成データ混入を拒否する。
 - Googleの写真・口コミ・施設情報を無断取得しない。Maps URLsは外部リンクだけ。
 - GPSは許可時のメモリだけ。URL、ログ、ストレージ、外部経路のoriginへ書かない。
 - `npm run check` と本番ビルド対象のE2Eを実行。環境制約はBLOCKED/NOT_RUNとして記録し、成功と書かない。
@@ -31,4 +31,4 @@ TASKS、NEXT_WORK、AI_WORK_STATEに検証済み範囲と未完了を残し、`/
 
 ## UI設計の正本（2026-10-24更新）
 
-デザイン、レイアウト、インタラクションはリポジトリ直下の`design.md`を正本とする。旧`docs/UI_UX.md`の歴史的記述より優先する。地図/一覧の連動、レスポンシブ対応、地図タイルのオプトイン、GPS非永続化、出典・利用条件表示を守る。
+デザイン、レイアウト、インタラクションはリポジトリ直下の`design.md`を正本とする。地図は初期表示が基本。GPSは許可制・非永続化。施設の唯一の正本はUpstash Redisとし、更新時にDBを初期スナップショットで上書きしない。管理APIの認証・入力検証を維持する。

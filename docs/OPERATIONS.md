@@ -1,29 +1,38 @@
-# 開発・無料運用・公開ゲート
+# LeSpot 運用
 
-## ローカル
+## 現行構成
 
-npm ci → npm run check → Playwright導入済み環境でnpm run test:e2e。ビルド結果はdist。現在の実行環境に制約があればVERIFICATIONへ記録する。
+Vercel Hobby（Vite静的配信＋Node.js Functions）、
+Upstash Redis（施設DB）、
+Leaflet＋国土地理院タイルで運用します。
+管理画面は`/admin.html`、地図・検索は`/`です。
 
-Node24、ロックファイル、型検査、ESLint、Prettier、Vitestで再現する。実施設確認と本番相当E2E完了前は完成扱いしない。
+DB管理、秘密情報、バックアップおよび復旧は
+[DB_OPERATIONS.md](DB_OPERATIONS.md)を正本とします。
 
-## 公開前に確認すること
+## 公開と検証
 
-- VercelアカウントがHobbyであること、個人・非商用用途であること、使用量・上限、Pro/課金サービスに変更がないこと。
-- Functions/Storage/Analyticsを追加せず、付属vercel.appの無料URLを使うこと。
-- ユーザーが2026-10-24にVercel公開を指定済み。対象アカウント、URL、運営者/情報更新窓口を確認。
-- 実施設の区画位置・利用条件・出典/権利と確認期限。
-- 本番ビルドのE2E・実機リンク起動、vercel.jsonヘッダー適用、更新失敗時の旧版維持・取り下げ。
+1. GitHubの`suzaking/lespot`最新mainを確認します。
+2. `npm ci`、`npm run check`、ブラウザの`npm run release:check`を実施します。
+3. Vercelの対応するCommitでProductionをデプロイします。
+4. `/`、`/admin.html`、`/api/spots`の応答を確認します。
+5. 無認証の管理APIアクセスが拒否されることを確認します。
+6. 地図ピン・検索・GPS拒否・外部地図・実機UIを検証します。
 
-Vercel設定の閲覧・接続・デプロイは未実施。無料残量を確認済みと推測しない。50人という人数だけでは稼働保証にならない。VERCEL_DEPLOYMENTを参照。
+ブラウザE2Eと実機テストを実行していない場合、成功扱いにしません。
 
-## セキュリティ・プライバシー
+## セキュリティ
 
-GPSはユーザー操作時のみメモリ保持。ログ/解析/URL/保存なし。外部経路へorigin送信なし。地図タイルはIPと表示範囲を提供元へ送るため画面で説明する。
+管理キーとRedisトークンはVercelの環境変数に格納します。
+クライアントにRedis資格情報を配信せず、管理APIはBearer認証、
+Origin照合、Zodのデータ検証、楽観的リビジョン検査を実施します。
 
-Zod strict検証、固定先外部地図URL、Reactのテキストエスケープ、出典HTTPS、noopener/noreferrer。vercel.jsonにCSP、Referrer-Policy、Permissions-Policy、nosniffを設定。Leafletの動的位置CSSのためstyle-srcのみunsafe-inlineを許可。scriptはselfのみ。
-
-写真・ログイン・投稿・秘密鍵・ユーザーデータ保存なし。public/に置くものは全て公開される。CSV原本/秘密情報を置かない。
+GPS座標をDBに保存しません。Googleマップの口コミや写真を取得しません。
+本番レスポンスにはCSP、nosniff、Referrer-Policyと位置情報制限を付与します。
 
 ## コスト
 
-地理院タイルとMaps URLsは契約APIを使わない。Vercel Hobbyの静的配信だけを使う。Hobbyは個人・非商用のみで追加使用量を購入できず、上限時は停止/待機の可能性がある。広告や商用化の際は無料前提を再検討し、有料変更は承認を得る。上限変更/規約変更/地図停止は残るリスク。CIは無料残量・課金停止設定の確認前に有効化しない。
+Vercel Hobbyは個人・非商用利用の範囲に限ります。
+Upstash RedisのFreeプランの上限や利用量を定期的に確認し、
+有料プラン・Prod Packへの変更は行いません。
+Blobはファイル保存が必要になるまで利用しません。

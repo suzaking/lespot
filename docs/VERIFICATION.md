@@ -59,3 +59,12 @@ release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E
 - 追加したUI単体テストには無料フィルターのトグル挙動を含む。改修版のVercelビルドでTypeScript、ESLint、Prettier、Vitest36件、JSON2件、Vite build成功。
 - 最初の本番デプロイ`dpl_7bAeadhEGZJQqacNXokXfQymALuU`はREADY、`https://lespot-lac.vercel.app/`のHTML/CSS/JS/JSONはHTTP 200。最終の微調整（モバイル地図へのスクロール）は後続コミットに反映する。
 - 更新した`tests/e2e/published.spec.ts`と`tests/e2e/search.spec.ts`はNOT_RUN。Playwright、画面の目視比較、実iOS/Android、実GPS、地図サービスの実動作・スクリーンリーダー試験は未実施。旧版のE2E成功を今回の証拠として扱わない。
+
+## 2026-10-24 Redis DB移行と地図初期表示
+
+- 本番デプロイ `dpl_D9u6fBqCS9wBAN7iyTFu4Y45k9L3` はREADY。
+- Vercelの型・Lint・整形・Vitest39件、初期移行スナップショット2件、Viteビルドが成功。
+- 本番 `https://lespot-lac.vercel.app/api/spots` はHTTP 200で2件を返した。DB初期化のSET NX後も検証済み。
+- `/admin.html`はHTTP 200、`/spots.json`は404（廃止）。管理APIのBearer認証・revision更新はVitestで検証。実運営者の本番ログイン・編集保存は未実施。
+- 初回サーバーimportの不整合でHTTP 500を確認し、Node ESM参照を修正。現在の本番で公開API HTTP 200を確認した。
+- 新レイアウトのPC/スマホPlaywright、iPhone/Android実機、現地GPS・タイル・外部地図・読み上げの確認は未実施。

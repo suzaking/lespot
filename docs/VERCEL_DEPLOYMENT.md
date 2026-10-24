@@ -33,3 +33,7 @@ Vercel Hobbyは個人・非商用利用に限る。有料ドメイン・追加�
 ## プライバシー
 
 利用者のGPSはボタン許可後にメモリだけで処理し保存しない。地図タイルは利用者が明示操作した場合のみ国土地理院から取得する。秘密情報は環境変数に保管し、Repositoryや公開JSONへ書き込まない。
+
+## 2026-10-24 DB運用へ変更
+
+既存の静的JSONのみ配信する記述は古い方針です。本番 `/api/spots`はVercel Functions→Upstash Redisを使い、`/admin.html`と`/api/admin/spots`が管理者専用です。`public/spots.json`はありません。接続キー`KV_REST_API_URL`、`KV_REST_API_TOKEN`、`KV_REST_API_READ_ONLY_TOKEN`、`LESPOT_ADMIN_TOKEN`はVercel環境変数のみに設定します。詳しくは[DB運用](DB_OPERATIONS.md)を参照してください。

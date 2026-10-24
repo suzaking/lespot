@@ -1,79 +1,43 @@
-# C4アーキテクチャ v2
+# LeSpot アーキテクチャ v3
 
-## C1: Context
-
-```mermaid
-flowchart TD
- U[利用者] --> L[LeSpot]
- O[運営者] --> S[非公開Google Sheets]
- S -->|CSV確認・公開| L
- L -->|任意で地図表示| G[国土地理院タイル]
- L -->|外部リンク| M[Google・Apple Maps]
-```
-
-外部サービスには写真・口コミを取りに行かない。タイル表示時にIPと表示範囲が伝わる。
-
-## C2: Containers
+## 構成
 
 ```mermaid
 flowchart TD
- S[SheetsのCSV] --> V[ローカル検証CLI]
- J --> E[CSV書出しCLI]
- E --> S
- V --> J[public/spots.json]
- J --> B[Vite build]
- C[Reactソース] --> B
- B --> D[dist 静的資産]
- D -->|Hobby確認後| P[Vercel Hobby]
- P --> R[利用者ブラウザ]
- R --> T[地理院タイル]
+ U[利用者ブラウザ] -->|ページ| V[Vercel 静的配信]
+ U -->|GET /api/spots| R[Vercel Node.js Function]
+ R -->|Upstash REST| DB[(Upstash Redis)]
+ U -->|地図タイル| G[国土地理院]
+ U -->|外部地図| M[Google / Apple Maps]
+ O[運営者] -->|認証付き管理画面| A[Vercel Admin Function]
+ A -->|認証 + 比較更新| DB
+ B[初回の確認済み2件] -->|SET NXのみ| DB
 ```
 
-Sheetsとの認証接続は未実施。ブラウザはSheetsを直接参照しない。DB/バックエンドは存在しない。2026-10-24の指定で配信先はVercel Hobbyへ変更。公開意向は確認済み、Vercel接続・アカウント確認待ち。
+### 公開処理
 
-import/exportは同じ列定義・検証スキーマを使用する。公開JSONの初期2件はDATA_EVIDENCEに根拠を記録。
+`src/data/spotRepository.ts` → `GET /api/spots` →
+`server/database.ts` → Upstash Redis → Zodで検証したJSON。
 
-## C3: SPA components
+CSVからのデプロイ時生成や`public/spots.json`は廃止しました。
+DBが空の場合だけ、`data/bootstrap-spots.json`を初期登録します。
+既存DBは上書きされません。DB障害時はHTTP 503を返します。
 
-```mermaid
-flowchart TD
- App[App] --> Controls[SearchControls]
- App --> Repo[useSpots / spotRepository]
- App --> Core[searchSpots / validation]
- App --> List[SpotList / SpotCard]
- App --> Map[MapView 遅延読込]
- Controls --> Geo[useGeolocation]
- List --> Links[SpotActions / mapLinks]
-```
+### 編集処理
 
-選択ID・基準座標・フィルターはApp内。ドメイン処理はReactに依存しない。MapViewだけがLeafletに依存し、検索条件変更では地図インスタンスを再生成しない。
+`/admin.html` → `src/admin/Admin.tsx` →
+`/api/admin/spots` → Bearer認証・Origin検査・Zod検証 →
+Redis上の楽観的比較更新（Lua EVAL）。
+保存に成功するとrevisionを増やして配信します。
 
-## C4: Code
+### 地図と検索
 
-```mermaid
-classDiagram
- class Spot {
-  id: string
-  lat: number
-  lon: number
-  cost: free paid unknown
-  verifiedAt: date
-  validUntil: date
- }
- class SearchResult {
-  spot: Spot
-  distance: number
- }
- class Validation {
-  parseDataset(unknown): Dataset
- }
- class Search {
-  distanceMeters(a,b): number
-  searchSpots(spots,origin,filters,today): SearchResult[]
- }
- SearchResult --> Spot
- Search --> SearchResult
- Validation --> Spot
-```
+`src/app/App.tsx`が検索条件と選択中のスポットを保持し、
+Leafletの`MapView`に渡します。初回表示から地図が主役です。
+PCは一覧＋地図、スマホは地図＋検索/結果シートです。
+GPSは許可制で、DBに送信しません。
 
-本番配信の条件はOPERATIONS、費用比較はRESEARCH_AND_COSTS。旧Worker/D1/R2/一覧だけのMVPは置換済み。
+### ファイルストレージ
+
+Vercel Blobは接続済みですが、画像等の必要性が確定するまで
+アプリのデータ経路に含めません。施設の構造化データを二重管理しません。

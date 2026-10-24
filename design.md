@@ -33,14 +33,14 @@ Desktop ≥ 800px
 ├───────────────────────┬─────────────────────────────────────┤
 │ Search / area / GPS   │                                     │
 │ Filters (compact)     │              REAL MAP               │
-│ 2 places · near first │   (explicit "地図を読み込む" first) │
+│ 2 places · near first │   (map is visible on first load)  │
 │ ───────────────────── │                                     │
 │ Result row            │                                     │
 │ Result row            │                                     │
 │ independent scroll    │                                     │
 └───────────────────────┴─────────────────────────────────────┘
 
-Mobile < 800px
+Mobile < 800px · map canvas with top controls and bottom sheet
 ┌─────────────────────────┐
 │ LeSpot             情報 │
 │ search / area / filters │
@@ -68,7 +68,7 @@ UI is **content-first, compact, neutral**:
 
 - **Desktop**: persistent 380–440px search/results sidebar, remaining width real map. Independent sidebar scroll; map not pushed beneath results.
 - **Mobile**: one set of semantic filters, a visible list/map switch; no side-scrolling. Selected marker does not abruptly switch away from map. Its compact preview offers `一覧で詳細を見る`. The preview does not claim an actual photo or precise entrance.
-- Map tiles from GSI are requested **only when the person chooses to open the map**. Before that show a simple neutral disclosure/control, **not an invented map illustration**. This preserves the existing privacy model.
+- Map tiles from GSI are requested as the map becomes visible on initial load. Explain the third-party request in the privacy information. GPS coordinates remain opt-in and never saved.
 - GPS requested only by explicit button. No geolocation is stored, logged or forwarded as an external route origin.
 - Selected list row and map marker refer to the same spot ID. When deliberately moving from map preview to details, scroll/focus the matching list item. Marker numbering matches the list.
 - Filter chips represent actual filters and reflect pressed states. An accessible reset button clears them.
