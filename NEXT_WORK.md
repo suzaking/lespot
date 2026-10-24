@@ -19,3 +19,9 @@ Design authority: [design.md](design.md).
 4. Validate admin create/update/delete on production with authorized test record and safe cleanup only after confirming owner access; do not fabricate success.
 5. Keep source/evidence freshness (the 2 current seed places need review by 2026-11-21).
 6. Do not incur additional service costs or silently enable Google Maps Platform APIs.
+
+## 最新公開確認 2026-10-24
+
+- 実装Commit `0ee4bf916251252c867b70182e0e3221ad11fc43`、Vercel `dpl_ESPq55ySbNAuPVAmco32LfHp6CWX` READY。
+- Vitest 40/40、型/Lint/Prettier/Viteビルド成功、本番HTML/JS/CSS/API HTTP200。
+- 次の品質ゲート：最新版のPlaywright/実機ビジュアルQA、モバイルのボトムシート操作、オーバーレイと地図の重なり、結果/地点のフォーカス移動、外部地図、アクセシビリティ、画面スクロール。

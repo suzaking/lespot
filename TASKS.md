@@ -41,3 +41,12 @@
 - [x] 単体テスト36件成功、型/Lint/整形・本番ビルド成功
 - [ ] 更新版Playwright E2E（PC/390px/320px）とブラウザ目視比較
 - [ ] iOS/Android実機、GPS、実地図、アクセシビリティ確認
+
+## 2026-10-24 全画面マップ化
+
+- [x] 固定ヘッダー・白枠・常時表示の結果パネルを撤去
+- [x] 地図フルブリード、フローティング検索、スポット詳細Peek/Expand、検索結果シート
+- [x] 現在地・情報ボタン、外部徒歩ルートとDB検索機能を保持
+- [x] Googleマップ風UXを`design.md`に定義し、Googleの商標・素材は複製しない
+- [x] TypeScript/ESLint/Prettier、Vitest40件、Viteビルド、本番HTTP配信検証
+- [ ] 最新版Playwright E2E・PC/スマホ実ブラウザレイアウト・操作検証

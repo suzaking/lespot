@@ -68,3 +68,10 @@ release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E
 - `/admin.html`はHTTP 200、`/spots.json`は404（廃止）。管理APIのBearer認証・revision更新はVitestで検証。実運営者の本番ログイン・編集保存は未実施。
 - 初回サーバーimportの不整合でHTTP 500を確認し、Node ESM参照を修正。現在の本番で公開API HTTP 200を確認した。
 - 新レイアウトのPC/スマホPlaywright、iPhone/Android実機、現地GPS・タイル・外部地図・読み上げの確認は未実施。
+
+## 2026-10-24 全画面地図UIへの刷新
+
+- 実装Commit `0ee4bf916251252c867b70182e0e3221ad11fc43`、Vercel production deployment `dpl_ESPq55ySbNAuPVAmco32LfHp6CWX` READY。
+- 型・Lint・Prettier・Vitest全40件（6ファイル）・Vite本番ビルド成功。エラー再試行時に結果パネルが閉じる問題を修正し再実行済み。
+- 実本番 `/`、`/api/spots`、`/admin.html`、アプリJS/CSSをHTTP 200で取得。`/api/spots`は鶴舞公園・ノリタケの森の2件。静的旧`/spots.json`は廃止。
+- 新版のPlaywright E2E、画面キャプチャによる比較、iPhone/Android実機、地図タイル実描画・実GPS・スクリーンリーダー確認はNOT_RUN。ユニットテスト成功と区別する。

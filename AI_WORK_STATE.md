@@ -56,3 +56,11 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - UIの実装は`src/app/App.tsx`、各CSS Modules、`SearchControls`、`SpotCard`、`SpotActions`。モバイル地図へ切替時には地図の位置までスクロールする。
 - 最新のE2Eテストは画面切替・地点プレビューの操作に更新したが、ブラウザ試験は未実施。実デバイス、実GPS、画面リーダーの検証も未実施。
 - 検証と公開URLの最新情報は`docs/VERIFICATION.md`。プラン有料化、新サービス追加、ユーザー位置情報の保存は行っていない。
+
+## 2026-10-24 全画面マップUI（最新）
+
+- ユーザー指定のGoogleマップ操作体系へ寄せて画面を刷新。固定のヘッダー/白い枠/結果サイドバーを廃止し、地図を端まで全画面表示。
+- 地図上のフローティング検索（初期表示）、折りたたみ式条件、位置情報・情報ボタン、必要なときだけ開く検索結果・スポット詳細シートを実装。
+- Google固有のロゴ・地図素材・レビュー・ストリートビュー・経路エンジンは複製しない。既存の国土地理院＋Leaflet／Upstash Redis API／Vercel Blob設定は維持。
+- 本番アプリ実装Commit `0ee4bf916251252c867b70182e0e3221ad11fc43` はVercel `dpl_ESPq55ySbNAuPVAmco32LfHp6CWX`でREADY。TypeScript/ESLint/Prettier、Vitest40/40、Vite build成功。
+- 公開URLのHTML/JS/CSS/`GET /api/spots`をHTTP 200で確認、Redisスポット2件。今回のPlaywright E2E/実ブラウザスクリーンショット/実iOS・AndroidテストはNOT_RUN。
