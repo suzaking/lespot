@@ -4,7 +4,7 @@
 
 ## 現在の状態
 
-2026-10-22：検索・現在地・地図と一覧・外部地図リンク・CSV管理を実装。鶴舞公園とノリタケの森の2件を登録。35件のVitestとPC/390px/320pxの9件の本番ビルドE2Eが成功。本番未公開。出典・再利用条件は [確認根拠](docs/DATA_EVIDENCE.md)、実行環境と未検証事項は [検証記録](docs/VERIFICATION.md) を参照。ピンは施設代表位置であり、入口・個別席や空席を保証しません。
+2026-10-24：Vercel Hobbyに公開し、UI/UXをv3へ全面改修しました。公開URL：https://lespot-lac.vercel.app/ 。検索・現在地・地図と一覧・外部地図リンク・CSV管理を実装。鶴舞公園とノリタケの森の2件を登録。35件のVitestとPC/390px/320pxの9件の本番ビルドE2Eが成功。新UIの本番ブラウザE2Eと実機試験は未実施。出典・再利用条件は [確認根拠](docs/DATA_EVIDENCE.md)、実行環境と未検証事項は [検証記録](docs/VERIFICATION.md) を参照。ピンは施設代表位置であり、入口・個別席や空席を保証しません。
 
 ## 開発
 
@@ -43,10 +43,10 @@ E2E前に `npm run build` が必要（checkにも含む）。E2Eは既定で本�
 - Leaflet + 地理院淡色タイル（操作後の遅延読込）
 - Zodによる静的JSON検証、csv-parseによるCSV入力
 - 独自バックエンド、DB、写真保存、分析SDKなし
-- 配信先はVercel Hobbyの静的配信（個人・非商用が条件）。接続・デプロイ待ち。[公開手順](docs/VERCEL_DEPLOYMENT.md)
+- 配信先はVercel Hobbyの静的配信（個人・非商用が条件）。2026-10-24公開済み。[公開手順](docs/VERCEL_DEPLOYMENT.md)
 
 [要件](docs/REQUIREMENTS.md) / [C4](docs/ARCHITECTURE.md) / [データ](docs/DATA_MODEL.md) / [UI](docs/UI_UX.md) / [詳細](docs/DETAILED_DESIGN.md) / [運用](docs/OPERATIONS.md) / [比較・費用](docs/RESEARCH_AND_COSTS.md) / [テスト](docs/TEST_PLAN.md) / [決定記録](docs/DECISIONS.md)
 
 旧写真/R2/D1/Worker/API設計はGit履歴に保存。現行文書は2026-10-21の実装指示に合わせて置換済み。
 
-再開：`/continue Shota-Zaki/lespot`。AGENTS → AI_WORK_STATE → NEXT_WORKを読む。
+再開：`suzaking/lespot` の実接続先を確認して進める。AGENTS → AI_WORK_STATE → NEXT_WORKを読む。

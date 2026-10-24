@@ -1,48 +1,35 @@
-# Vercelでの公開
+# Vercelでの公開・運用
 
-2026-10-24のユーザー指定により配信先をVercelへ変更。本番公開の意向は確認済み。未接続のためアカウント/プランと実配信は未確認。
+2026-10-24にLeSpotをVercel Hobbyで公開。現在の接続先は非公開Repository `suzaking/lespot` の `main`。過去の文書に記載された `Shota-Zaki/lespot` とは異なり、Repo移転は利用者の明示指示がある場合だけ実施する。
 
-## 無料運用の前提
+## 本番環境
 
-Vercel Hobbyは個人・非商用に限定。利用料無料のサイトでも広告・業務目的等は別判定なので、Hobbyの用途条件を守る。現在のコードには広告・決済・アフィリエイト・Functions・画像最適化・解析SDKがない。上限超過時は機能停止/待機の可能性があり、50人という利用者数だけで稼働を保証しない。Proへの変更や追加購入は行わない。
+- URL: https://lespot-lac.vercel.app/
+- Vercel Project: `zaki-7fc3/lespot` (`prj_x8SleXqg0siwHMQwPPkHfiKBaOtT`)
+- Framework: React / Vite、Node.js 24.x、生成先 `dist`
+- Install: `npm ci --no-audit --no-fund`
+- Build: `node --import tsx scripts/prepare-release.ts && npm run check`
+- 公開デプロイ: `dpl_DLeiZiHAtTDyBBF3LB2eLKfCxDW6` / READY（2026-10-24、デザインv3）
+- Code Commit: `7b789fce3075d78e96df2fea742fb6c51ebcd257`
+- `vercel.json` のCSP、Referrer-Policy、Permissions-Policy、nosniff、キャッシュ制御を適用。HTML、CSS、JS、公開JSONのHTTP 200を確認。
+- Vercel Blobのストア `lespot-content` を作成し、`BLOB_READ_WRITE_TOKEN` が接続されている。ただし現行アプリでは未使用。Upstash Marketplaceは導入したがRedisリソースと接続変数は未確認/未使用。
+
+## 無料運用
+
+Vercel Hobbyは個人・非商用利用に限る。有料ドメイン・追加従量サービス・有料アップグレードは承認なく行わない。現行UIは写真・Functions・DBアクセス・解析SDK・画像最適化を必要としない。想定50人でも枠の利用量・停止リスクは継続確認する。
 
 - https://vercel.com/docs/plans/hobby
 - https://vercel.com/docs/limits/fair-use-guidelines
-- https://vercel.com/pricing
 
-## プロジェクト設定
+## 更新と再デプロイ
 
-| 項目                    | 設定                                                          |
-| ----------------------- | ------------------------------------------------------------- |
-| Git Repository / Branch | Shota-Zaki/lespot / main                                      |
-| Plan                    | 個人アカウントのHobbyを確認                                   |
-| Framework Preset        | Vite                                                          |
-| Root Directory          | Repositoryルート（変更不要）                                  |
-| Node.js                 | 24.x（package.jsonのenginesも24）                             |
-| Install                 | npm ci --no-audit --no-fund                                   |
-| Build                   | node --import tsx scripts/prepare-release.ts && npm run check |
-| Output                  | dist                                                          |
-| Environment Variables   | 不要                                                          |
-| Domain                  | Vercel付属のvercel.app。取得結果のURLを記録する               |
+1. ソース・施設情報を変更する前に `AGENTS.md` / `AI_WORK_STATE.md` / `NEXT_WORK.md` とGitHub最新mainを読む。
+2. 出典の権利/位置/休憩条件を確認して、非公開Sheets→CSV→検証済み`public/spots.json`を更新。fixturesを公開しない。
+3. `npm run check` と `npm run release:check` を実行し、実機試験を別途記録。テスト未実施は成功と記さない。
+4. GitHub mainを更新し、Vercelの該当commit・本番デプロイ対象を照合する。
+5. 公開URLの`/`、`/spots.json`、JS/CSS、レスポンスヘッダー、検索・地図・外部地図リンクを検証する。新デザインのE2E・実機検証は現時点で未実施。
+6. エラー時は既存正常デプロイを保持し、誤情報を復活させないよう施設JSONを検証してから修復またはロールバックする。
 
-vercel.jsonがinstall/build/output/headerの正本。既存ダッシュボードの上書き設定を確認する。buildでデータ期限と型/Lint/整形/単体試験を検査し、失敗時は配信させない。ブラウザE2Eは公開前にローカルでrelease:checkを実行する。
+## プライバシー
 
-公開操作は接続済みVercelアプリを優先。Git連携を使う場合は対象Repositoryだけを選び、不要な全Repository権限を増やさない。Git連携後はmainのCommitが自動本番配信されるため、その設定を確認する。Repository自体を公開化する必要はない。
-
-直接CLIで配信する場合も.vercelignoreでCSV原本・環境変数ファイル・テスト成果物を除外。.vercelのローカル接続情報はCommitしない。秘密情報を新たに要求しない。
-
-## 配信後の確認
-
-1. 実アカウントのHobby、Deployment Ready、返されたProduction URLとCommitを照合する。
-2. / と /spots.json が200、JSONが2件（または承認済み最新データ）であることを確認する。
-3. CSP / Permissions-Policy / Referrer-Policy / nosniff、spots.jsonのCache-Controlを実HTTP応答で確認する。Vite previewはVercelヘッダー適用を再現しない。
-4. 地図タイル・GPS許可/拒否・検索/一覧/ピン・外部地図リンクを公開URLで確認する。CSPでVercelのプレビュー用Toolbarが動かない場合があっても、製品に不要な外部scriptを許可しない。
-5. 本番で閲覧にVercelログインを要求しないことを確認する。Previewの保護は維持し、用途を確認せずプロジェクト全体の保護を弱めない。
-6. データ更新はSheets→CSV→検証→JSON Commit→Vercel再配信。エラー時の前回正常配信維持を確認する。誤情報の復旧は取り下げ対象を復活させない。
-
-## 参照
-
-- Vite: https://vercel.com/docs/frameworks/frontend/vite
-- vercel.json: https://vercel.com/docs/project-configuration/vercel-json
-
-公開URL、Vercel project ID、プラン確認、HTTP実測結果は接続・実配信後にAI_WORK_STATEとVERIFICATIONへ記録する。未接続の段階で公開成功とは書かない。
+利用者のGPSはボタン許可後にメモリだけで処理し保存しない。地図タイルは利用者が明示操作した場合のみ国土地理院から取得する。秘密情報は環境変数に保管し、Repositoryや公開JSONへ書き込まない。

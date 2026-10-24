@@ -1,6 +1,6 @@
 # LeSpot Agent Rules
 
-対象：Shota-Zaki/lespot / main。既存のmain直接Commit運用を維持。他Repositoryのwork運用を持ち込まない。
+対象：suzaking/lespot / main（現行GitHub/Vercel接続先。過去のShota-Zaki表記と不一致のため無断移転しない）。既存のmain直接Commit運用を維持。他Repositoryのwork運用を持ち込まない。
 
 ## 正本・開始手順
 
@@ -27,4 +27,4 @@ AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開�
 
 2026-10-24：ユーザーがVercelでの公開を指定。Vercel Hobbyでの静的公開を進める。公開意向を再質問しない。アカウント接続・Hobby/個人非商用条件を確認し、有料変更・不要な全Repositoryアクセスは追加しない。
 
-TASKS、NEXT_WORK、AI_WORK_STATEに検証済み範囲と未完了を残し、`/continue Shota-Zaki/lespot` で復元可能にする。
+TASKS、NEXT_WORK、AI_WORK_STATEに検証済み範囲と未完了を残し、`/continue suzaking/lespot` で復元可能にする。

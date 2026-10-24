@@ -45,3 +45,10 @@ fixture/一時QA/ブラウザ/フォント/画像は本番JSON・build・Commit�
 vercel.jsonにVite/install/build/outputとCSP/権限/キャッシュを設定し、Cloudflare用public/_headersを廃止。.vercelignoreでCSV原本・秘密ファイル・テスト成果物等をアップロード対象外にした。新しい依存やバックエンドは追加していない。
 
 release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E2E9件がすべて成功。Vercel buildCommandの前半データ検査とnpm run checkもこの中で実行済み。実Vercelのbuildとヘッダー適用は接続後の確認事項であり、Vite previewでのE2E成功と同一視しない。
+
+## 2026-10-24 デザインv3の検証
+
+- GitHub最新の新UIコードをVercel productionへデプロイ。対象Commit `7b789fce3075d78e96df2fea742fb6c51ebcd257`、Deployment `dpl_DLeiZiHAtTDyBBF3LB2eLKfCxDW6` READY。
+- Vercelビルドログで `tsc --noEmit`、`eslint .`、`prettier --check .`、Vitest35件（5ファイル）、JSON検証2件、Vite buildを確認。生成CSS/JSはVercel配信。
+- 実サイト https://lespot-lac.vercel.app/ にてトップHTML、CSS、JavaScript、`spots.json`のHTTP 200を確認し、公開データ2件とセキュリティヘッダーを照合。
+- 新版UIのPlaywright E2E、画面キャプチャ比較、iOS Safari/Android実機、実GPS、スクリーンリーダー、地図外部アプリ実起動は未実施。旧2026-10-22版のE2E9件とは分けて扱う。

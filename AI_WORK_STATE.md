@@ -40,3 +40,11 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - 実サイト `/` と `/spots.json` がHTTP 200。CSP、Permissions-Policy、Referrer-Policy、X-Content-Type-Options、Cache-ControlをHTTPで確認。Vercel SSOは本番ドメイン以外の個別URL/Previewを保護する設定。
 - Blob Store `lespot-content` (東京hnd1) 作成済み、`BLOB_READ_WRITE_TOKEN` は production/preview/developmentに接続。Blob上にデータは保存しておらず、アプリコードにも未統合。Upstash Marketplaceはインストール済みだがRedis環境変数は確認できず、Redis作成・利用は未完了。
 - 実iOS/Androidや本番ブラウザ操作E2Eは未実施。Repository AGENTSの `Shota-Zaki/lespot` 記述は現行実体 `suzaking/lespot` と異なる。無断移転しない。
+
+## 2026-10-24 デザインv3公開（最新の実測）
+
+- 稼働Repository: `suzaking/lespot` / `main`。UI全面刷新を実装・Commit。最新のアプリ公開Commitは `7b789fce3075d78e96df2fea742fb6c51ebcd257`。公開デプロイ `dpl_DLeiZiHAtTDyBBF3LB2eLKfCxDW6` はREADY。
+- URL: https://lespot-lac.vercel.app/ 。トップHTML、CSS、JavaScript、`spots.json`がHTTP 200。JSONは確認済み2件。CSP、Permissions-Policy、キャッシュ設定を確認。
+- ヒーロー、ブランド、検索パネル、フィルターチップ、カード、レスポンシブ地図/一覧切替、地図読み込み前の案内、出典detailsを新設・再設計。新しい画像・外部API・アプリ依存は増やしていない。
+- VercelビルドのTypeScript、ESLint、Prettier、Vitest35件、データ検証、Vite本番ビルドが成功。新UIのPlaywright E2E・実iOS/Android・スクリーンリーダーはNOT_RUN。旧版のE2E9件成功は最新版の試験実績ではない。
+- Blob/Upstashは前節記載の通り未使用であり、新デザインのリリースは静的配信のみ。本文中の古い未公開・未接続・誤Repository記述は履歴情報であり、この節とNEXT_WORKの最新実測を優先。
