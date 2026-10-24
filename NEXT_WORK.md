@@ -13,3 +13,9 @@ AGENTS → AI_WORK_STATE → docs/VERIFICATION → docs/OPERATIONSを読む。�
 5. 実iPhone/AndroidでGPS・地図アプリ・読み上げを確認。端末なしなら未実施として記録。
 
 Sheetsは非公開CSV編集で運用可能。直接同期・Actionsは無料条件と接続承認を確認するまで有効化しない。追加候補はDATA_CANDIDATES、照合根拠はDATA_EVIDENCE。
+
+## I-10 接続ブロッカー追記（2026-10-24）
+
+Vercel MCP接続とHobbyチーム認証は済み。既存Project `zaki-7fc3/lespot`（`prj_x8SleXqg0siwHMQwPPkHfiKBaOtT`）は`suzaking/lespot`へ誤接続状態で、Deployments 0件。正本`Shota-Zaki/lespot` / mainへのVercel Gitアクセスはなく、preview要求は`incorrect_git_source_info`。既存プロジェクトから誤Repositoryを本番配信しない。
+
+次の作業はユーザーがGitHub `Shota-Zaki`でVercel GitHub Appの`lespot`単独アクセスを承認後、Vercel git_namespaces/search_repoで対象の表示を確認し、既存プロジェクトのGit接続を正本へ修正（UI操作が必要なら案内）してからデプロイする。Hobby/private repoのコミット作者制約も確認。公開意向は承認済みで再質問しない。Node 24、Vite、既存vercel.json、静的配信、課金不可は維持する。
