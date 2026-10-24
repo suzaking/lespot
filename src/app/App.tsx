@@ -52,7 +52,8 @@ export default function App() {
       )
     : undefined;
 
-  const activePanel = data.status === 'error' && panel === 'closed' ? 'results' : panel;
+  const activePanel =
+    data.status === 'error' && panel === 'closed' ? 'results' : panel;
 
   function chooseArea(id: string): void {
     const next = areas.find((item) => item.id === id);
