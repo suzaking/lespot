@@ -10,7 +10,9 @@
   border: 1px solid var(--border);
   border-radius: 19px;
   box-shadow: 0 5px 20px #23432c07;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .card:hover {
@@ -38,7 +40,9 @@
   border-radius: 13px;
   background: #e6eee4;
   color: #35664a;
-  font: 800 0.87rem Georgia, serif;
+  font:
+    800 0.87rem Georgia,
+    serif;
 }
 
 .cardHeading {

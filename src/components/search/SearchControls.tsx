@@ -22,7 +22,9 @@ export function SearchControls({
         <label className={styles.searchInput}>
           <span className={styles.label}>キーワード検索</span>
           <span className={styles.searchField}>
-            <span className={styles.searchIcon} aria-hidden="true">⌕</span>
+            <span className={styles.searchIcon} aria-hidden="true">
+              ⌕
+            </span>
             <input
               type="search"
               placeholder="公園、施設名、住所など"
@@ -37,7 +39,10 @@ export function SearchControls({
         <div className={styles.location}>
           <label className={styles.areaInput}>
             <span className={styles.label}>検索する地域</span>
-            <select value={area} onChange={(event) => chooseArea(event.target.value)}>
+            <select
+              value={area}
+              onChange={(event) => chooseArea(event.target.value)}
+            >
               {area === 'current' && <option value="current">現在地</option>}
               {areas.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -46,13 +51,19 @@ export function SearchControls({
               ))}
             </select>
           </label>
-          <button className={styles.geoButton} onClick={geo.locate} disabled={geo.pending}>
+          <button
+            className={styles.geoButton}
+            onClick={geo.locate}
+            disabled={geo.pending}
+          >
             <span aria-hidden="true">◎</span>
             {geo.pending ? '取得中…' : '現在地から探す'}
           </button>
         </div>
       </div>
-      <p role="status" className={styles.message}>{geo.message}</p>
+      <p role="status" className={styles.message}>
+        {geo.message}
+      </p>
       <div className={styles.filterPanel}>
         <div className={styles.filterHeader}>
           <strong>絞り込み</strong>
@@ -61,19 +72,34 @@ export function SearchControls({
         <div className={styles.quickFilters} aria-label="かんたん絞り込み">
           <button
             aria-pressed={filters.cost === 'free'}
-            onClick={() => setFilters({ ...filters, cost: filters.cost === 'free' ? 'all' : 'free' })}
+            onClick={() =>
+              setFilters({
+                ...filters,
+                cost: filters.cost === 'free' ? 'all' : 'free',
+              })
+            }
           >
             無料スポット
           </button>
           <button
             aria-pressed={filters.category === 'park'}
-            onClick={() => setFilters({ ...filters, category: filters.category === 'park' ? 'all' : 'park' })}
+            onClick={() =>
+              setFilters({
+                ...filters,
+                category: filters.category === 'park' ? 'all' : 'park',
+              })
+            }
           >
             公園・広場
           </button>
           <button
             aria-pressed={filters.radius === 1000}
-            onClick={() => setFilters({ ...filters, radius: filters.radius === 1000 ? 3000 : 1000 })}
+            onClick={() =>
+              setFilters({
+                ...filters,
+                radius: filters.radius === 1000 ? 3000 : 1000,
+              })
+            }
           >
             1km以内
           </button>
@@ -84,12 +110,17 @@ export function SearchControls({
             <select
               value={filters.category}
               onChange={(event) =>
-                setFilters({ ...filters, category: event.target.value as Filters['category'] })
+                setFilters({
+                  ...filters,
+                  category: event.target.value as Filters['category'],
+                })
               }
             >
               <option value="all">すべて</option>
               {Object.entries(categories).map(([value, label]) => (
-                <option key={value} value={value}>{label}</option>
+                <option key={value} value={value}>
+                  {label}
+                </option>
               ))}
             </select>
           </label>
@@ -98,12 +129,17 @@ export function SearchControls({
             <select
               value={filters.cost}
               onChange={(event) =>
-                setFilters({ ...filters, cost: event.target.value as Filters['cost'] })
+                setFilters({
+                  ...filters,
+                  cost: event.target.value as Filters['cost'],
+                })
               }
             >
               <option value="all">すべて</option>
               {Object.entries(costs).map(([value, label]) => (
-                <option key={value} value={value}>{label}</option>
+                <option key={value} value={value}>
+                  {label}
+                </option>
               ))}
             </select>
           </label>
@@ -125,7 +161,8 @@ export function SearchControls({
         </div>
       </div>
       <p className={styles.help}>
-        <span aria-hidden="true">ⓘ</span> 位置情報を許可しなくても地域指定で検索できます。
+        <span aria-hidden="true">ⓘ</span>{' '}
+        位置情報を許可しなくても地域指定で検索できます。
       </p>
     </section>
   );

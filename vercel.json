@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "installCommand": "npm ci --no-audit --no-fund",
-  "buildCommand": "node scripts/print-formatted.mjs && exit 1",
+  "buildCommand": "node --import tsx scripts/prepare-release.ts && npm run check",
   "outputDirectory": "dist",
   "headers": [
     {

@@ -158,7 +158,9 @@ export default function App() {
               <h2 id="results-title">
                 見つかった場所
                 <span className={styles.count} aria-live="polite">
-                  {data.status === 'ready' ? `${results.length} SPOTS` : '— SPOTS'}
+                  {data.status === 'ready'
+                    ? `${results.length} SPOTS`
+                    : '— SPOTS'}
                 </span>
               </h2>
               <p className={styles.resultsSummary}>
@@ -184,10 +186,7 @@ export default function App() {
             >
               <span aria-hidden="true">☷</span> 一覧
             </button>
-            <button
-              aria-pressed={view === 'map'}
-              onClick={() => showMap()}
-            >
+            <button aria-pressed={view === 'map'} onClick={() => showMap()}>
               <span aria-hidden="true">◎</span> 地図
             </button>
           </div>
@@ -275,11 +274,11 @@ export default function App() {
                       <span className={styles.previewCenter}>◎</span>
                     </div>
                     <div className={styles.mapPlaceholderCopy}>
-                      <span className={styles.previewEyebrow}>THE CITY IS YOURS</span>
+                      <span className={styles.previewEyebrow}>
+                        THE CITY IS YOURS
+                      </span>
                       <h3>地図から、見つけよう。</h3>
-                      <p>
-                        地図を開くと周辺のスポットをまとめて確認できます。
-                      </p>
+                      <p>地図を開くと周辺のスポットをまとめて確認できます。</p>
                       <button
                         className="primary"
                         onClick={() => setMapEnabled(true)}
@@ -294,7 +293,11 @@ export default function App() {
             </div>
           )}
         </section>
-        <section id="about" className={styles.notes} aria-label="ご利用にあたって">
+        <section
+          id="about"
+          className={styles.notes}
+          aria-label="ご利用にあたって"
+        >
           <div className={styles.notesTitle}>
             <span>GOOD TO KNOW</span>
             <h2>安心して、ひと休み。</h2>
@@ -306,14 +309,17 @@ export default function App() {
             <details>
               <summary>位置情報と外部サービスについて</summary>
               <p>
-                現在地はボタンを押して許可したときだけ取得し、この画面のメモリだけで使用します。保存・解析送信はしません。地図を開くと国土地理院にIPアドレスと表示範囲が伝わります。外部地図は新しいタブで開き、Street Viewの撮影位置などは施設と異なる場合があります。徒歩ルートの出発地に現在地を自動送信しません。
+                現在地はボタンを押して許可したときだけ取得し、この画面のメモリだけで使用します。保存・解析送信はしません。地図を開くと国土地理院にIPアドレスと表示範囲が伝わります。外部地図は新しいタブで開き、Street
+                Viewの撮影位置などは施設と異なる場合があります。徒歩ルートの出発地に現在地を自動送信しません。
               </p>
             </details>
           </div>
         </section>
       </main>
       <footer className={styles.footer}>
-        <div className={styles.footerBrand}>LeSpot<span>®</span></div>
+        <div className={styles.footerBrand}>
+          LeSpot<span>®</span>
+        </div>
         <p>何もしない時間も、いい時間。</p>
         <span>MADE FOR LITTLE BREAKS IN NAGOYA</span>
       </footer>

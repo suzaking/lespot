@@ -177,7 +177,12 @@
   position: relative;
   min-height: 330px;
   overflow: hidden;
-  background: radial-gradient(circle at 57% 45%, #356753 0, #214a3d 64%, #193d32 100%);
+  background: radial-gradient(
+    circle at 57% 45%,
+    #356753 0,
+    #214a3d 64%,
+    #193d32 100%
+  );
 }
 
 .heroOrbitOuter,
@@ -216,7 +221,9 @@
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%) rotate(-8deg);
-  font: italic clamp(2.8rem, 4.4vw, 5.5rem) Georgia, serif;
+  font:
+    italic clamp(2.8rem, 4.4vw, 5.5rem) Georgia,
+    serif;
   color: #fff8e7;
   text-align: center;
   white-space: nowrap;
@@ -435,9 +442,27 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(39deg, transparent 48%, #fff8 48.5%, #fff8 50%, transparent 50.5%),
-    linear-gradient(142deg, transparent 30%, #d0ded1 30.5%, #d0ded1 32%, transparent 32.5%),
-    linear-gradient(10deg, transparent 73%, #fff9 73.5%, #fff9 75%, transparent 75.5%),
+    linear-gradient(
+      39deg,
+      transparent 48%,
+      #fff8 48.5%,
+      #fff8 50%,
+      transparent 50.5%
+    ),
+    linear-gradient(
+      142deg,
+      transparent 30%,
+      #d0ded1 30.5%,
+      #d0ded1 32%,
+      transparent 32.5%
+    ),
+    linear-gradient(
+      10deg,
+      transparent 73%,
+      #fff9 73.5%,
+      #fff9 75%,
+      transparent 75.5%
+    ),
     radial-gradient(ellipse at 70% 18%, #c5dfc5 0, #e9f0e6 65%);
 }
 
