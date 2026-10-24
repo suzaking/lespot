@@ -2,7 +2,8 @@ import { lazy, Suspense, useMemo, useState } from 'react';
 import { areas, categories, defaultFilters } from '../lib/config';
 import { searchSpots, formatDistance, type Filters } from '../lib/search';
 import { mapLinks } from '../lib/mapLinks';
-import type { Coordinates } from '../lib/validation';
+import type { Coordinates, Spot } from '../lib/validation';
+import { isSpotInViewport, type MapViewport } from '../lib/mapViewport';
 import { useSpots } from '../hooks/useSpots';
 import { useGeolocation } from '../hooks/useGeolocation';
 import { SearchControls } from '../components/search/SearchControls';
@@ -10,6 +11,7 @@ import { SpotList } from '../components/spots/SpotList';
 import { SpotCard } from '../components/spots/SpotCard';
 import { StatusPanel } from '../components/ui/StatusPanel';
 import { MapBoundary } from '../components/ui/MapBoundary';
+import { SheetGrip } from '../components/ui/SheetGrip';
 import styles from './App.module.css';
 
 const MapView = lazy(() => import('../components/map/MapView'));
@@ -23,24 +25,40 @@ export default function App() {
   const [selected, setSelected] = useState<string | null>(null);
   const [panel, setPanel] = useState<Panel>('closed');
   const [expanded, setExpanded] = useState(false);
+  const [sheetExtent, setSheetExtent] = useState<'peek' | 'half' | 'full'>('half');
+  const [mapBounds, setMapBounds] = useState<MapViewport | null>(null);
+  const [pendingViewport, setPendingViewport] = useState<MapViewport | null>(null);
+  const [cameraKey, setCameraKey] = useState(0);
 
   const geo = useGeolocation((point) => {
     setOrigin(point);
+    setCameraKey((n) => n + 1);
+    setMapBounds(null);
+    setPendingViewport(null);
     setArea('current');
     setSelected(null);
     setPanel('results');
   });
   const today = new Date().toISOString().slice(0, 10);
-  const results = useMemo(
-    () => searchSpots(data.spots, origin, filters, today),
-    [data.spots, origin, filters, today],
-  );
+  const results = useMemo(() => {
+    const found = searchSpots(
+      data.spots,
+      origin,
+      mapBounds ? { ...filters, radius: 250000 } : filters,
+      today,
+    );
+    return mapBounds
+      ? found.filter(({ spot }) => isSpotInViewport(spot, mapBounds))
+      : found;
+  }, [data.spots, origin, filters, today, mapBounds]);
   const selectedResult = results.find((result) => result.spot.id === selected);
   const selectedId = selectedResult?.spot.id ?? null;
   const areaName =
     area === 'current'
       ? '現在地'
-      : (areas.find((item) => item.id === area)?.name ?? '栄');
+      : area === 'map'
+        ? '表示範囲'
+        : (areas.find((item) => item.id === area)?.name ?? '栄');
   const filtered =
     filters.query !== defaultFilters.query ||
     filters.category !== defaultFilters.category ||
@@ -61,22 +79,60 @@ export default function App() {
     geo.cancel();
     setArea(id);
     setOrigin(next);
+    setMapBounds(null);
+    setPendingViewport(null);
+    setCameraKey((n) => n + 1);
     setSelected(null);
     setPanel('results');
   }
   function updateFilters(next: Filters): void {
     setFilters(next);
+    setMapBounds(null);
+    setPendingViewport(null);
     setSelected(null);
     setPanel('results');
   }
   function selectSpot(id: string): void {
+    setPendingViewport(null);
     setSelected(id);
     setExpanded(false);
     setPanel('place');
   }
   function openResults(): void {
+    setSheetExtent('half');
     setPanel('results');
     setExpanded(false);
+  }
+  function chooseSuggestion(spot: Spot): void {
+    setFilters({ ...filters, query: spot.name, radius: Math.max(filters.radius, 10000) });
+    setOrigin({ lat: spot.lat, lon: spot.lon });
+    setMapBounds(null);
+    setPendingViewport(null);
+    setCameraKey((n) => n + 1);
+    setSelected(spot.id);
+    setExpanded(false);
+    setPanel('place');
+  }
+  function searchHere(): void {
+    if (!pendingViewport) return;
+    setOrigin(pendingViewport.center);
+    setArea('map');
+    setMapBounds(pendingViewport);
+    setPendingViewport(null);
+    setSelected(null);
+    openResults();
+  }
+  function extendResults(): void {
+    setSheetExtent((level) => (level === 'peek' ? 'half' : 'full'));
+  }
+  function reduceResults(): void {
+    if (sheetExtent === 'full') setSheetExtent('half');
+    else if (sheetExtent === 'half') setSheetExtent('peek');
+    else closePanel();
+  }
+  function reducePlace(): void {
+    if (expanded) setExpanded(false);
+    else closePanel();
   }
   function retrySpots(): void {
     setPanel('results');
@@ -115,11 +171,18 @@ export default function App() {
               origin={origin}
               selected={selectedId}
               onSelect={selectSpot}
+              onViewportChange={setPendingViewport}
+              cameraKey={cameraKey}
             />
           </Suspense>
         </MapBoundary>
       </section>
 
+      {pendingViewport && (
+        <button className={styles.searchHere} type="button" onClick={searchHere}>
+          このエリアを検索
+        </button>
+      )}
       <div className={styles.searchDock}>
         <SearchControls
           area={area}
@@ -128,6 +191,8 @@ export default function App() {
           setFilters={updateFilters}
           geo={geo}
           onShowResults={openResults}
+          spots={data.spots}
+          onChooseSuggestion={chooseSuggestion}
         />
       </div>
       <div className={styles.utilityDock}>
@@ -183,10 +248,10 @@ export default function App() {
       {activePanel === 'results' && (
         <section
           id="results"
-          className={`${styles.overlayPanel} ${styles.resultsPanel}`}
+          className={`${styles.overlayPanel} ${styles.resultsPanel} ${sheetExtent === 'peek' ? styles.sheetPeek : sheetExtent === 'full' ? styles.sheetFull : ''}`}
           aria-labelledby="results-title"
         >
-          <div className={styles.sheetHandle} aria-hidden="true" />
+          <SheetGrip onUp={extendResults} onDown={reduceResults} />
           <header className={styles.panelHeader}>
             <div>
               <h2 id="results-title">
@@ -261,7 +326,7 @@ export default function App() {
           className={`${styles.overlayPanel} ${styles.placePanel} ${expanded ? styles.placeExpanded : ''}`}
           aria-labelledby="selected-place-title"
         >
-          <div className={styles.sheetHandle} aria-hidden="true" />
+          <SheetGrip onUp={() => setExpanded(true)} onDown={reducePlace} />
           <header className={styles.placeHeader}>
             <div>
               <h2 id="selected-place-title">{selectedResult.spot.name}</h2>
