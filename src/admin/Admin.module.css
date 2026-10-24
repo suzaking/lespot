@@ -1,0 +1,29 @@
+.page { min-height: 100dvh; background: #f5f7f7; color: #20282b; }
+.topbar { display: flex; align-items: center; gap: 20px; padding: 14px clamp(16px, 3vw, 36px); background: #fff; border-bottom: 1px solid #e2e7e8; }
+.topbar a { font-size: 0.86rem; text-decoration: none; }
+.login { max-width: 470px; margin: min(10vh, 70px) auto; padding: 28px; background: #fff; border: 1px solid #e2e7e8; border-radius: 10px; }
+.login h1, .heading h1 { margin: 0 0 8px; font-size: 1.45rem; }
+.login p, .heading p { color: #637077; font-size: 0.85rem; }
+.login form { display: grid; gap: 16px; }
+.login input { width: 100%; }
+.login button, .save { background: #08796f; color: #fff; font-weight: 700; border: 0; }
+.heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px clamp(16px, 3vw, 36px); }
+.toolbar, .sectionTitle, .spotRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.toolbar { flex-wrap: wrap; }
+.columns { display: grid; grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.4fr); gap: 22px; margin: 0 clamp(16px, 3vw, 36px); }
+.list, .editor { align-self: start; min-width: 0; padding: 22px; background: #fff; border: 1px solid #e2e7e8; border-radius: 10px; }
+.sectionTitle h2, .editor h2 { margin: 0 0 14px; font-size: 1.05rem; }
+.spotRow { padding: 14px 0; border-top: 1px solid #e2e7e8; }
+.spotRow > div:first-child { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.spotRow small { color: #68777c; overflow-wrap: anywhere; }
+.spotRow > div:last-child { display: flex; gap: 6px; flex-shrink: 0; }
+.editor form { display: grid; gap: 15px; }
+.editor label { font-size: 0.77rem; }
+.editor input, .editor select, .editor textarea { width: 100%; }
+.editor textarea { resize: vertical; min-height: 70px; font: inherit; padding: 9px; border: 1px solid #d2dbdd; border-radius: 8px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+.help { margin: 0; color: #647278; font-size: 0.76rem; }
+.status { max-width: 900px; margin: 20px auto; padding: 0 16px; color: #8a4d2a; }
+.save { width: fit-content; padding: 10px 22px; }
+@media (max-width: 800px) { .columns { grid-template-columns: 1fr; } .heading { flex-direction: column; align-items: start; } }
+@media (max-width: 430px) { .two { grid-template-columns: 1fr; } .spotRow { align-items: start; flex-direction: column; } .list, .editor { padding: 14px; } }

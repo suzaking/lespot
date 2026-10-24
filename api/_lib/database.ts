@@ -1,5 +1,4 @@
-import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import bootstrap from '../../data/bootstrap-spots.json';
 import { datasetSchema, parseDataset, type Dataset } from '../../src/lib/validation';
 
 const KEY = 'lespot:spots:v1';
@@ -59,9 +58,6 @@ function decode(value: unknown): Stored {
 
 async function seed(): Promise<void> {
   // SET NX is atomic and never overwrites a dataset changed by an administrator.
-  // The fixture file is bundled with the serverless function, not public dist.
-  const path = fileURLToPath(new URL('../../data/bootstrap-spots.json', import.meta.url));
-  const bootstrap: unknown = JSON.parse(await readFile(path, 'utf8'));
   const data = parseDataset(bootstrap);
   await command(['SET', KEY, JSON.stringify({ revision: 1, data }), 'NX']);
 }

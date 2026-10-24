@@ -134,3 +134,18 @@
     grid-column: span 2;
   }
 }
+
+.advanced { margin-top: 10px; }
+.advanced > summary { display: none; }
+@media (min-width: 800px) { .advanced > .filters { display: grid; } }
+@media (max-width: 799px) {
+  .advanced > summary {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+    font-size: 0.76rem;
+    color: var(--accent);
+  }
+  .advanced:not([open]) > .filters { display: none; }
+  .advanced > .filters { margin-top: 0; }
+}

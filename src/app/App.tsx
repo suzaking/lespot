@@ -19,7 +19,7 @@ export default function App() {
   const [filters, setFilters] = useState<Filters>(defaultFilters);
   const [selected, setSelected] = useState<string | null>(null);
   const [view, setView] = useState<'list' | 'map'>('list');
-  const [mapEnabled, setMapEnabled] = useState(false);
+  const [mapEnabled, setMapEnabled] = useState(true);
 
   const geo = useGeolocation((point) => {
     setOrigin(point);
@@ -57,14 +57,6 @@ export default function App() {
     if (id) setSelected(id);
     setMapEnabled(true);
     setView('map');
-    if (window.matchMedia('(max-width: 799px)').matches) {
-      requestAnimationFrame(() => {
-        document.getElementById('spot-map')?.scrollIntoView({
-          block: 'start',
-          behavior: 'instant',
-        });
-      });
-    }
   }
 
   function focusSelectedCard(id: string): void {
@@ -119,7 +111,7 @@ export default function App() {
           />
           <section
             id="results"
-            className={styles.results}
+            className={`${styles.results} ${view === 'map' ? styles.resultsCompact : ''}`}
             aria-labelledby="results-title"
           >
             <div className={styles.resultsHeader}>
@@ -209,7 +201,7 @@ export default function App() {
                 ピンは施設の代表位置で、入口や席・空席を示しません。
                 距離は直線距離です。料金・利用条件は確認日時点の情報です。
                 現在地は許可した場合のみ取得し、保存しません。
-                地図を開くと国土地理院にIPアドレスと表示範囲が伝わります。
+                地図表示のため国土地理院にIPアドレスと表示範囲が伝わります。
                 外部サービスにはそのサービスの規約が適用され、
                 徒歩ルートの出発地に現在地を自動送信しません。
               </p>
@@ -219,7 +211,7 @@ export default function App() {
 
         <section
           id="spot-map"
-          className={`${styles.mapStage} ${view === 'list' ? styles.mapHiddenOnMobile : ''}`}
+          className={styles.mapStage}
           aria-label="地図表示"
         >
           {mapEnabled ? (
@@ -249,7 +241,7 @@ export default function App() {
               </div>
             </div>
           )}
-          {selectedResult && (
+          {selectedResult && view === 'map' && (
             <div className={styles.selectionSheet} aria-live="polite">
               <div className={styles.sheetText}>
                 <strong>{selectedResult.spot.name}</strong>

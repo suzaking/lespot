@@ -329,3 +329,64 @@
     font-size: 0.72rem;
   }
 }
+
+/* Map is the primary viewport: filters and the results drawer float above it. */
+@media (max-width: 799px) {
+  .layout {
+    position: relative;
+    height: calc(100dvh - 56px);
+    min-height: 480px;
+    overflow: hidden;
+    display: block;
+  }
+  .mapStage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    height: 100%;
+    min-height: 0;
+  }
+  .sidebar {
+    position: absolute;
+    inset: 0;
+    z-index: 800;
+    pointer-events: none;
+    overflow: visible;
+    background: transparent;
+  }
+  .sidebar > :first-child {
+    pointer-events: auto;
+    margin: 10px 12px;
+    border-radius: 12px;
+    box-shadow: 0 3px 16px #00000019;
+  }
+  .results {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 39%;
+    min-height: 180px;
+    max-height: 50%;
+    overflow-y: auto;
+    background: white;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -3px 14px #0000001a;
+    pointer-events: auto;
+  }
+  .resultsCompact {
+    height: 116px;
+    min-height: 116px;
+    overflow: hidden;
+  }
+  .notes {
+    display: none;
+  }
+  .mapHiddenOnMobile {
+    display: block;
+  }
+  .selectionSheet {
+    bottom: 132px;
+    z-index: 1200;
+  }
+}

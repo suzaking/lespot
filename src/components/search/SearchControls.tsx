@@ -92,7 +92,9 @@ export function SearchControls({
           1km以内
         </button>
       </div>
-      <div className={styles.filters}>
+      <details className={styles.advanced}>
+        <summary>詳細な絞り込み</summary>
+        <div className={styles.filters}>
         <label>
           カテゴリ
           <select
@@ -146,7 +148,8 @@ export function SearchControls({
             ))}
           </select>
         </label>
-      </div>
+        </div>
+      </details>
     </section>
   );
 }

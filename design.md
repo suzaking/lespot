@@ -87,3 +87,9 @@ UI is **content-first, compact, neutral**:
 ## Architecture and cost
 
 Keep React / Vite / TypeScript strict, Leaflet + GSI tiles, Zod, CSS Modules, static verified JSON and existing CSV flow. No new JS UI libraries, analytics, user accounts, required DB, paid API, storage reads, or photo hosting for this redesign. Existing Blob and Upstash connections are not a justification to introduce costs into a static search view.
+
+## 2026-10-24 map and DB update
+
+The **map must be visible when the app opens**; do not show a large opt-in map placeholder. Map tiles are obtained from GSI during normal map use, and this third-party access is disclosed in the information screen. GPS remains opt-in. Desktop keeps a compact left search/results sidebar; mobile shows the map as a full background canvas with floating search controls at the top and a compact, expandable list sheet at the bottom. The place sheet and marker selection should preserve visible map context.
+
+**DB is the authoritative source**: Upstash Redis over a Vercel server-only Function; never ship a Redis token in the browser. `GET /api/spots` serves validated public data, and authenticated `GET/PUT /api/admin/spots` supports editing. Optimistic revision checks protect edits. A nonpublic bootstrapping snapshot seeds only an absent key with `SET NX` and never overwrites modified records. Vercel Blob is for future binary files only, not for small structured text records.
