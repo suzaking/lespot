@@ -1,6 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import { ZodError } from 'zod';
-import { loadStored, replaceStored } from '../../server/database';
+import { loadStored, replaceStored } from '../../server/database.js';
 
 export const config = { maxDuration: 10 };
 

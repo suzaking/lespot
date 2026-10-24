@@ -1,4 +1,4 @@
-import { loadStored } from '../server/database';
+import { loadStored } from '../server/database.js';
 
 export const config = { maxDuration: 10 };
 

@@ -1,9 +1,9 @@
-import bootstrap from '../data/bootstrap-spots.json';
+import bootstrap from '../data/bootstrap-spots.json' with { type: 'json' };
 import {
   datasetSchema,
   parseDataset,
   type Dataset,
-} from '../src/lib/validation';
+} from '../src/lib/validation.js';
 
 const KEY = 'lespot:spots:v1';
 const SCRIPT =
