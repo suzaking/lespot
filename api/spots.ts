@@ -7,7 +7,7 @@ export async function GET(): Promise<Response> {
     const record = await loadStored();
     return Response.json(record.data, {
       headers: {
-        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=60',
+        'Cache-Control': 'no-store',
         'X-Content-Type-Options': 'nosniff',
       },
     });
