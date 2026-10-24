@@ -25,3 +25,10 @@ Design authority: [design.md](design.md).
 - 実装Commit `0ee4bf916251252c867b70182e0e3221ad11fc43`、Vercel `dpl_ESPq55ySbNAuPVAmco32LfHp6CWX` READY。
 - Vitest 40/40、型/Lint/Prettier/Viteビルド成功、本番HTML/JS/CSS/API HTTP200。
 - 次の品質ゲート：最新版のPlaywright/実機ビジュアルQA、モバイルのボトムシート操作、オーバーレイと地図の重なり、結果/地点のフォーカス移動、外部地図、アクセシビリティ、画面スクロール。
+
+## 2026-10-24 操作改善の次の検証
+
+- リリースコード: `17b60e6`、Vercel `dpl_4kMs1bMfCLxroXRW5RrVdmrEG2Gn` READY。44件のVitestと本番ビルドは成功。
+- Playwright E2Eで、実マウス・タッチのパン/ズーム→このエリアを検索、サジェストのキーボード操作、ボトムシートのスワイプ、ピンとの連動を検証。
+- PCの各幅とiPhone Safari/Android Chromeで実際の地図表示・スクロール干渉・シート位置・タップ領域・Leaflet操作を視覚検証。未実施を成功として記録しない。
+- 施設の追加は管理画面で実在・出典・休憩条件を確認して行う。Googleデータの無断取得や有料APIの導入は行わない。

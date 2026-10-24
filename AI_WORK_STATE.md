@@ -64,3 +64,11 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - Google固有のロゴ・地図素材・レビュー・ストリートビュー・経路エンジンは複製しない。既存の国土地理院＋Leaflet／Upstash Redis API／Vercel Blob設定は維持。
 - 本番アプリ実装Commit `0ee4bf916251252c867b70182e0e3221ad11fc43` はVercel `dpl_ESPq55ySbNAuPVAmco32LfHp6CWX`でREADY。TypeScript/ESLint/Prettier、Vitest40/40、Vite build成功。
 - 公開URLのHTML/JS/CSS/`GET /api/spots`をHTTP 200で確認、Redisスポット2件。今回のPlaywright E2E/実ブラウザスクリーンショット/実iOS・AndroidテストはNOT_RUN。
+
+## 2026-10-24 地図操作改善（Map gestures / DB suggestions）
+
+- フル画面地図を維持したまま、パン・ホイールズーム・ズームボタン操作後に「このエリアを検索」を表示。クリック後は画面表示範囲内に存在するRedis管理スポットを検索。絞り込みだけで地図カメラがリセットされないよう調整。
+- 検索欄でDB内スポット名・住所を最大5件候補表示。キーボードのArrowDown/Enter/Escapeと候補選択→地図移動/詳細表示に対応。外部ジオコーディングやGoogle Places APIは使用していない。
+- モバイルの検索結果シートはpeek/half/fullの3状態を持ち、ドラッグハンドル操作に対応。選択スポットの詳細はスワイプ上で展開、下で縮小/閉じる。ハンドルはキーボード操作可能。
+- ソースCommit `17b60e617b89dee8d6e57b68ec444b6d5f493bed` / Vercel Production `dpl_4kMs1bMfCLxroXRW5RrVdmrEG2Gn` READY。型/Lint/Prettier、Vitest44件（8ファイル）、Viteビルド成功。HTML、`GET /api/spots`、管理画面HTTP 200、公開DBの実スポット2件取得を確認。
+- 現行UIのPlaywright E2E、実ブラウザ画面比較、iOS/Android実機、地図範囲検索の実ジェスチャーQAはNOT_RUN。単体テスト成功と混同しない。認証なし管理APIは認証拒否の対象（HTTP 401）。
