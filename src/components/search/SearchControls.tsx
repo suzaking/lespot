@@ -95,59 +95,59 @@ export function SearchControls({
       <details className={styles.advanced}>
         <summary>詳細な絞り込み</summary>
         <div className={styles.filters}>
-        <label>
-          カテゴリ
-          <select
-            value={filters.category}
-            onChange={(event) =>
-              setFilters({
-                ...filters,
-                category: event.target.value as Filters['category'],
-              })
-            }
-          >
-            <option value="all">すべて</option>
-            {Object.entries(categories).map(([value, label]) => (
-              <option value={value} key={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          料金
-          <select
-            value={filters.cost}
-            onChange={(event) =>
-              setFilters({
-                ...filters,
-                cost: event.target.value as Filters['cost'],
-              })
-            }
-          >
-            <option value="all">すべて</option>
-            {Object.entries(costs).map(([value, label]) => (
-              <option value={value} key={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          直線距離
-          <select
-            value={filters.radius}
-            onChange={(event) =>
-              setFilters({ ...filters, radius: Number(event.target.value) })
-            }
-          >
-            {[500, 1000, 3000, 10000].map((radius) => (
-              <option key={radius} value={radius}>
-                {radius < 1000 ? `${radius}m` : `${radius / 1000}km`}以内
-              </option>
-            ))}
-          </select>
-        </label>
+          <label>
+            カテゴリ
+            <select
+              value={filters.category}
+              onChange={(event) =>
+                setFilters({
+                  ...filters,
+                  category: event.target.value as Filters['category'],
+                })
+              }
+            >
+              <option value="all">すべて</option>
+              {Object.entries(categories).map(([value, label]) => (
+                <option value={value} key={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            料金
+            <select
+              value={filters.cost}
+              onChange={(event) =>
+                setFilters({
+                  ...filters,
+                  cost: event.target.value as Filters['cost'],
+                })
+              }
+            >
+              <option value="all">すべて</option>
+              {Object.entries(costs).map(([value, label]) => (
+                <option value={value} key={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            直線距離
+            <select
+              value={filters.radius}
+              onChange={(event) =>
+                setFilters({ ...filters, radius: Number(event.target.value) })
+              }
+            >
+              {[500, 1000, 3000, 10000].map((radius) => (
+                <option key={radius} value={radius}>
+                  {radius < 1000 ? `${radius}m` : `${radius / 1000}km`}以内
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
       </details>
     </section>

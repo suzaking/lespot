@@ -1,15 +1,20 @@
 import bootstrap from '../data/bootstrap-spots.json';
-import { datasetSchema, parseDataset, type Dataset } from '../src/lib/validation';
+import {
+  datasetSchema,
+  parseDataset,
+  type Dataset,
+} from '../src/lib/validation';
 
 const KEY = 'lespot:spots:v1';
-const SCRIPT = "if redis.call('GET', KEYS[1]) == ARGV[1] then redis.call('SET', KEYS[1], ARGV[2]); return 1 else return 0 end";
+const SCRIPT =
+  "if redis.call('GET', KEYS[1]) == ARGV[1] then redis.call('SET', KEYS[1], ARGV[2]); return 1 else return 0 end";
 
 export type Stored = { revision: number; data: Dataset };
 
 function credentials(readOnly: boolean) {
   const url = process.env.KV_REST_API_URL;
   const token = readOnly
-    ? process.env.KV_REST_API_READ_ONLY_TOKEN ?? process.env.KV_REST_API_TOKEN
+    ? (process.env.KV_REST_API_READ_ONLY_TOKEN ?? process.env.KV_REST_API_TOKEN)
     : process.env.KV_REST_API_TOKEN;
   if (!url || !token || !url.startsWith('https://')) {
     throw new Error('Redis接続設定がありません');
@@ -17,7 +22,10 @@ function credentials(readOnly: boolean) {
   return { url, token };
 }
 
-async function command<T>(args: (string | number)[], readOnly = false): Promise<T> {
+async function command<T>(
+  args: (string | number)[],
+  readOnly = false,
+): Promise<T> {
   const { url, token } = credentials(readOnly);
   const response = await fetch(url, {
     method: 'POST',
@@ -50,7 +58,11 @@ function decode(value: unknown): Stored {
   }
   const candidate = raw as Record<string, unknown>;
   const revision = candidate.revision;
-  if (typeof revision !== 'number' || !Number.isSafeInteger(revision) || revision < 1) {
+  if (
+    typeof revision !== 'number' ||
+    !Number.isSafeInteger(revision) ||
+    revision < 1
+  ) {
     throw new Error('DBリビジョンが不正です');
   }
   return { revision, data: parseDataset(candidate.data) };
@@ -76,13 +88,23 @@ export async function loadStored(): Promise<Stored> {
   return decode(await loadRaw());
 }
 
-export async function replaceStored(expectedRevision: number, input: unknown): Promise<Stored | null> {
+export async function replaceStored(
+  expectedRevision: number,
+  input: unknown,
+): Promise<Stored | null> {
   const previousRaw = await loadRaw();
   const previous = decode(previousRaw);
   if (previous.revision !== expectedRevision) return null;
   const data = datasetSchema.parse(input);
   const normalized = parseDataset(data);
   const next = { revision: previous.revision + 1, data: normalized };
-  const changed = await command<number>(['EVAL', SCRIPT, 1, KEY, previousRaw, JSON.stringify(next)]);
+  const changed = await command<number>([
+    'EVAL',
+    SCRIPT,
+    1,
+    KEY,
+    previousRaw,
+    JSON.stringify(next),
+  ]);
   return changed === 1 ? next : null;
 }
