@@ -4,10 +4,6 @@ import type { Dataset, Spot } from '../lib/validation';
 import styles from './Admin.module.css';
 
 type Stored = { revision: number; data: Dataset };
-type Field = 'name' | 'id' | 'category' | 'cost' | 'address' | 'lat' | 'lon' |
-  'conditions' | 'facilities' | 'sourceUrl' | 'sourceLabel' | 'rights' |
-  'verifiedAt' | 'validUntil';
-
 function blank(): Spot {
   const today = new Date().toISOString().slice(0, 10);
   return {
@@ -97,8 +93,8 @@ export default function Admin() {
         data: { schemaVersion: 1, spots: nextSpots },
       });
       setRecord(result);
-      setMessage('DBへ保存しました。公開地図にも反映されます。');
       startAdd();
+      setMessage('DBへ保存しました。公開地図にも反映されます。');
     } catch (error) {
       setMessage(error instanceof Error ? error.message : '保存できませんでした');
     } finally {
