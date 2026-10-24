@@ -36,7 +36,7 @@ it('supports filtering and safe walking links in contextual panels', async () =>
     expect.stringContaining('travelmode=walking'),
   );
   await userEvent.click(
-    screen.getByRole('button', { name: '詳細を見る', exact: true }),
+    screen.getByRole('button', { name: '詳細を見る' }),
   );
   expect(screen.getByText('出典・確認日')).toBeInTheDocument();
   await userEvent.click(
@@ -80,7 +80,7 @@ it('supports quick filters without claiming expired prices as free', async () =>
   vi.mocked(loadSpots).mockResolvedValue({ schemaVersion: 1, spots });
   render(<App />);
   await userEvent.click(screen.getByRole('button', { name: '検索条件を開く' }));
-  const freeChip = screen.getByRole('button', { name: '無料', exact: true });
+  const freeChip = screen.getByRole('button', { name: '無料' });
   await userEvent.click(freeChip);
   expect(freeChip).toHaveAttribute('aria-pressed', 'true');
   expect(screen.getAllByRole('article')).toHaveLength(1);
