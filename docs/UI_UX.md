@@ -1,17 +1,7 @@
 # LeSpot UI/UX
 
-**現在の設計正本：** [design.md](../design.md)
+The current specification is [design.md](../design.md).
 
-2026-10-24にLP型デザインからMap-firstワークスペースへ刷新しました。
+2026-10-24: refactored the app as an edge-to-edge map canvas inspired by Google Maps interaction patterns, not its brand, API or map imagery. Removed the former header and permanent list panel. The floating search field stays available; list, detailed filters, selected places and information open only in context. Desktop uses left floating panels and mobile uses bottom sheets.
 
-- デスクトップ：検索・一覧の左サイドバーと、右側に常時確保した地図領域。
-- モバイル：一覧/地図切替、マーカー選択時の地点プレビューと詳細移動。
-- シンプルな見出しとリスト行、少数の意味のあるフィルターチップ。
-- 写真、レビュー、空席状況、営業中の推測を表示しない。
-- 国土地理院の地図タイルは利用者の明示操作後に読み込む。
-- 現在地は許可時のみ取得し、永続化せず外部ルートの起点に送信しない。
-- HTMLフォーム標準機能、キーボード対応、明確なフォーカス表示を優先。
-
-過去のv2/v3設計はGit履歴に保持しています。現在のトークンは`src/styles/tokens.css`、ページレイアウトは`src/app/App.module.css`、部品スタイルは各CSS Modulesを参照してください。
-
-最新版の検証・未検証項目は[VERIFICATION.md](VERIFICATION.md)に記録します。
+DB management and its authenticated console are unchanged. Updated visual and interaction QA remains separately tracked in [VERIFICATION.md](VERIFICATION.md).
