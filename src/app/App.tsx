@@ -78,6 +78,10 @@ export default function App() {
     setPanel('results');
     setExpanded(false);
   }
+  function retrySpots(): void {
+    setPanel('results');
+    data.retry();
+  }
   function closePanel(): void {
     setPanel('closed');
     setSelected(null);
@@ -220,7 +224,7 @@ export default function App() {
             {data.status === 'error' && (
               <StatusPanel error title="スポットを読み込めませんでした">
                 <p>通信環境を確認し、再試行してください。</p>
-                <button onClick={data.retry}>再試行</button>
+                <button onClick={retrySpots}>再試行</button>
               </StatusPanel>
             )}
             {data.status === 'ready' &&
