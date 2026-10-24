@@ -19,3 +19,11 @@ Sheetsは非公開CSV編集で運用可能。直接同期・Actionsは無料条�
 Vercel MCP接続とHobbyチーム認証は済み。既存Project `zaki-7fc3/lespot`（`prj_x8SleXqg0siwHMQwPPkHfiKBaOtT`）は`suzaking/lespot`へ誤接続状態で、Deployments 0件。正本`Shota-Zaki/lespot` / mainへのVercel Gitアクセスはなく、preview要求は`incorrect_git_source_info`。既存プロジェクトから誤Repositoryを本番配信しない。
 
 次の作業はユーザーがGitHub `Shota-Zaki`でVercel GitHub Appの`lespot`単独アクセスを承認後、Vercel git_namespaces/search_repoで対象の表示を確認し、既存プロジェクトのGit接続を正本へ修正（UI操作が必要なら案内）してからデプロイする。Hobby/private repoのコミット作者制約も確認。公開意向は承認済みで再質問しない。Node 24、Vite、既存vercel.json、静的配信、課金不可は維持する。
+
+## 2026-10-24 公開後の次作業
+
+- 公開URL: https://lespot-lac.vercel.app/。本番deployment READY、HTML/JSON HTTP 200、静的2件を確認。
+- `suzaking/lespot` mainの `1cc5f7e` に本番ビルド修正を反映。元文書内の `Shota-Zaki/lespot` 正本記述は現行Vercel/GitHub実体と相違するため、今後Repository移転の要否を別途確認（無断移転しない）。
+- 本番Chromeの操作E2E・iPhone Safari・Android・GPS/地図外部アプリ・スクリーンリーダー・現地確認はNOT_RUN。
+- BlobはVercelの `BLOB_READ_WRITE_TOKEN` 接続済み、アプリコードは未使用。UpstashのRedisリソースは環境変数未登録で未使用。静的JSONは従来通り正常配信。両ストレージは用途/無料枠を確認し、ユーザーデータを保存しない設計で採用可否を決める。
+- 公開後の実行時エラー確認、データ更新/ロールバック検証、運用連絡先整備を進める。
