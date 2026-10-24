@@ -52,7 +52,7 @@ it('offers working quick filters without fabricating cost information', async ()
   vi.mocked(loadSpots).mockResolvedValue({ schemaVersion: 1, spots });
   render(<App />);
   await screen.findAllByRole('article');
-  const freeChip = screen.getByRole('button', { name: '無料', exact: true });
+  const freeChip = screen.getByRole('button', { name: '無料' });
   await userEvent.click(freeChip);
   expect(freeChip).toHaveAttribute('aria-pressed', 'true');
   expect(screen.getAllByRole('article')).toHaveLength(1);
