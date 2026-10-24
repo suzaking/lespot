@@ -57,6 +57,14 @@ export default function App() {
     if (id) setSelected(id);
     setMapEnabled(true);
     setView('map');
+    if (window.matchMedia('(max-width: 799px)').matches) {
+      requestAnimationFrame(() => {
+        document.getElementById('spot-map')?.scrollIntoView({
+          block: 'start',
+          behavior: 'instant',
+        });
+      });
+    }
   }
 
   function focusSelectedCard(id: string): void {
@@ -210,6 +218,7 @@ export default function App() {
         </div>
 
         <section
+          id="spot-map"
           className={`${styles.mapStage} ${view === 'list' ? styles.mapHiddenOnMobile : ''}`}
           aria-label="地図表示"
         >

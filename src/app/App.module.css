@@ -123,6 +123,7 @@
 
 .mapStage {
   position: relative;
+  scroll-margin-top: 56px;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
