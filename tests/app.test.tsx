@@ -86,3 +86,16 @@ it('supports quick filters without claiming expired prices as free', async () =>
   expect(freeChip).toHaveAttribute('aria-pressed', 'false');
   expect(screen.getAllByRole('article')).toHaveLength(3);
 });
+
+it('suggests verified DB places and opens their details from search', async () => {
+  vi.mocked(loadSpots).mockResolvedValue({ schemaVersion: 1, spots });
+  render(<App />);
+  await screen.findByRole('button', { name: 'スポット一覧を開く' });
+  const search = screen.getByRole('searchbox', { name: 'スポット名・場所' });
+  await userEvent.type(search, 'カフェB');
+  const option = screen.getByRole('option', { name: /架空テスト用のカフェB/ });
+  await userEvent.click(option);
+  expect(
+    screen.getByRole('heading', { name: spots[1]!.name }),
+  ).toBeInTheDocument();
+});
