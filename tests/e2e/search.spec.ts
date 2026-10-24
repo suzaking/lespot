@@ -1,87 +1,49 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { spots } from '../fixtures';
-// E2E data validation is bypassed only by converting flags/names in the intercepted test response.
-// No fixture is stored in public/ or bundled by Vite.
+
 const data = {
   schemaVersion: 1,
-  spots: spots.map((s, i) => ({
-    ...s,
-    id: `e2e-${i}`,
-    name: `検証専用スポット${i + 1}`,
-    fixture: false,
+  spots: spots.map((spot, i) => ({
+    ...spot, id: `e2e-${i}`, name: `検証専用スポット${i + 1}`, fixture: false,
   })),
 };
+
 test.beforeEach(async ({ page }) => {
   await page.route('**/api/spots', (r) => r.fulfill({ json: data }));
   await page.route('https://cyberjapandata.gsi.go.jp/**', (r) => r.abort());
 });
-test('search, card selection, links, map fallback and accessibility', async ({
-  page,
-  isMobile,
-}) => {
+
+test('filters, spot selection, map and accessibility', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('article')).toHaveCount(3);
-  await page
-    .getByRole('combobox', { name: '料金', exact: true })
-    .selectOption('free');
+  await page.getByRole('button', { name: '検索条件を開く' }).click();
+  await page.getByRole('combobox', { name: '料金', exact: true }).selectOption('free');
   await expect(page.getByRole('article')).toHaveCount(1);
-  await page
-    .getByRole('button', { name: '検証専用スポット1', exact: true })
-    .click();
-  await expect(
-    page.getByRole('button', { name: '検証専用スポット1', exact: true }),
-  ).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.getByRole('link', { name: /徒歩ルート/ })).toHaveAttribute(
-    'href',
-    /travelmode=walking/,
-  );
-  const before = await new AxeBuilder({ page }).analyze();
-  expect(before.violations).toEqual([]);
-  await page
-    .getByRole('button', {
-      name: isMobile ? '地図' : '地図を読み込む',
-      exact: true,
-    })
-    .click();
-  await expect(
-    page.getByRole('button', { name: '1 検証専用スポット1を選択' }),
-  ).toBeVisible();
-  await page.getByRole('button', { name: '1 検証専用スポット1を選択' }).click();
-  if (isMobile) {
-    await expect(
-      page.getByRole('button', { name: '一覧で詳細を見る' }),
-    ).toBeVisible();
-    await page.getByRole('button', { name: '一覧で詳細を見る' }).click();
-  }
-  await expect(page.getByRole('article')).toBeVisible();
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= window.innerWidth,
-    ),
-  ).toBe(true);
+  await page.getByRole('button', { name: '地図で見る' }).click();
+  await expect(page.getByRole('heading', { name: '検証専用スポット1' })).toBeVisible();
+  await page.getByRole('button', { name: '一覧で詳細を見る' }).click();
+  await expect(page.getByRole('button', { name: '検証専用スポット1', exact: true })).toBeFocused();
+  await page.getByRole('button', { name: '結果一覧を閉じる' }).click();
+  await expect(page.getByRole('article')).toHaveCount(0);
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
-test('keyboard, denied location, empty and retry', async ({ page }) => {
+
+test('keyboard, location denial, empty and retry', async ({ page }) => {
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'geolocation', {
-      value: {
-        getCurrentPosition: (_s: unknown, e: (v: { code: number }) => void) =>
-          e({ code: 1 }),
-      },
+      value: { getCurrentPosition: (_s: unknown, e: (v: { code: number }) => void) => e({ code: 1 }) },
     });
   });
   await page.goto('/');
   await page.keyboard.press('Tab');
-  await expect(
-    page.getByRole('link', { name: '検索結果へスキップ' }),
-  ).toBeFocused();
-  await page.getByRole('button', { name: /現在地から探す/ }).click();
+  await expect(page.getByRole('link', { name: '地図へスキップ' })).toBeFocused();
+  await page.getByRole('button', { name: '現在地から探す' }).click();
   await expect(page.getByText(/位置情報が許可されていません/)).toBeVisible();
+  await page.getByRole('button', { name: '検索条件を開く' }).click();
   await page.getByLabel('検索する地域').selectOption('yaba');
   await page.getByLabel('スポット名・場所').fill('存在しない');
-  await expect(
-    page.getByText('条件に合うスポットが見つかりません'),
-  ).toBeVisible();
+  await expect(page.getByText('条件に合うスポットが見つかりません')).toBeVisible();
   await page.route('**/api/spots', (r) => r.fulfill({ status: 500 }));
   await page.reload();
   await expect(page.getByRole('alert')).toBeVisible();
