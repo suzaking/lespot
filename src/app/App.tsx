@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useMemo, useState } from 'react';
 import { areas, categories, defaultFilters } from '../lib/config';
 import { searchSpots, formatDistance, type Filters } from '../lib/search';
 import { mapLinks } from '../lib/mapLinks';
@@ -52,9 +52,7 @@ export default function App() {
       )
     : undefined;
 
-  useEffect(() => {
-    if (data.status === 'error') setPanel('results');
-  }, [data.status]);
+  const activePanel = data.status === 'error' && panel === 'closed' ? 'results' : panel;
 
   function chooseArea(id: string): void {
     const next = areas.find((item) => item.id === id);
@@ -132,8 +130,8 @@ export default function App() {
           className={styles.utilityButton}
           type="button"
           aria-label="掲載情報について"
-          aria-pressed={panel === 'info'}
-          onClick={() => setPanel(panel === 'info' ? 'closed' : 'info')}
+          aria-pressed={activePanel === 'info'}
+          onClick={() => setPanel(activePanel === 'info' ? 'closed' : 'info')}
         >
           i
         </button>
@@ -165,7 +163,7 @@ export default function App() {
         )}
       </div>
 
-      {panel === 'closed' && (
+      {activePanel === 'closed' && (
         <button
           className={styles.exploreButton}
           type="button"
@@ -177,7 +175,7 @@ export default function App() {
         </button>
       )}
 
-      {panel === 'results' && (
+      {activePanel === 'results' && (
         <section
           id="results"
           className={`${styles.overlayPanel} ${styles.resultsPanel}`}
@@ -253,7 +251,7 @@ export default function App() {
         </section>
       )}
 
-      {panel === 'place' && selectedResult && (
+      {activePanel === 'place' && selectedResult && (
         <section
           className={`${styles.overlayPanel} ${styles.placePanel} ${expanded ? styles.placeExpanded : ''}`}
           aria-labelledby="selected-place-title"
@@ -310,7 +308,7 @@ export default function App() {
         </section>
       )}
 
-      {panel === 'info' && (
+      {activePanel === 'info' && (
         <aside
           className={`${styles.overlayPanel} ${styles.infoPanel}`}
           aria-labelledby="info-title"
