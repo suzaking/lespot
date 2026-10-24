@@ -14,9 +14,13 @@ it('starts with the map, without an open information sheet', async () => {
   expect(
     screen.queryByRole('heading', { name: /休憩スポット.*件/ }),
   ).not.toBeInTheDocument();
-  await userEvent.click(screen.getByRole('button', { name: 'スポット一覧を開く' }));
+  await userEvent.click(
+    screen.getByRole('button', { name: 'スポット一覧を開く' }),
+  );
   expect(screen.getAllByRole('article')).toHaveLength(3);
-  await userEvent.click(screen.getByRole('button', { name: '結果一覧を閉じる' }));
+  await userEvent.click(
+    screen.getByRole('button', { name: '結果一覧を閉じる' }),
+  );
   expect(screen.queryByRole('article')).not.toBeInTheDocument();
 });
 
@@ -33,9 +37,15 @@ it('supports filtering and safe walking links in contextual panels', async () =>
   );
   await userEvent.click(screen.getByRole('button', { name: '詳細を見る' }));
   expect(screen.getByText('出典・確認日')).toBeInTheDocument();
-  await userEvent.click(screen.getByRole('button', { name: 'スポット詳細を閉じる' }));
-  await userEvent.click(screen.getByRole('button', { name: 'スポット一覧を開く' }));
-  await userEvent.click(screen.getByRole('button', { name: '絞り込みをリセット' }));
+  await userEvent.click(
+    screen.getByRole('button', { name: 'スポット詳細を閉じる' }),
+  );
+  await userEvent.click(
+    screen.getByRole('button', { name: 'スポット一覧を開く' }),
+  );
+  await userEvent.click(
+    screen.getByRole('button', { name: '絞り込みをリセット' }),
+  );
   expect(screen.getAllByRole('article')).toHaveLength(3);
 });
 
