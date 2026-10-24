@@ -1,36 +1,48 @@
 .wrapper {
   position: relative;
 }
+
 .map {
-  height: min(65vh, 620px);
-  min-height: 330px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: #e9ede7;
+  height: min(68vh, 680px);
+  min-height: 470px;
+  border-radius: 12px;
+  border: 1px solid #d6e4d8;
+  background: #e9f1e9;
   z-index: 0;
 }
+
 .pin {
-  border-radius: 50% 50% 50% 0;
+  border-radius: 50% 50% 50% 8px;
   transform-origin: center;
-  background: #245b46;
-  border: 2px solid white;
+  background: #276f51;
+  border: 3px solid white;
   color: white;
   text-align: center;
-  line-height: 40px;
-  font: bold 14px/40px sans-serif;
-  box-shadow: 0 2px 7px #0004;
+  font: bold 14px/38px sans-serif;
+  box-shadow: 0 3px 11px #133c2470;
 }
+
 .active {
-  background: #934420;
-  outline: 3px solid #934420;
+  background: #dc8a59;
+  outline: 3px solid #cc885e;
 }
+
 .warning {
   background: #fff4db;
   color: #533b08;
   padding: var(--space);
   border-radius: 8px;
 }
+
 .caption {
-  font-size: 0.8rem;
   color: var(--muted);
+  margin: 9px 3px 0;
+  font-size: 0.73rem;
+}
+
+@media (max-width: 760px) {
+  .map {
+    min-height: 420px;
+    height: min(60vh, 570px);
+  }
 }

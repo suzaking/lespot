@@ -1,9 +1,13 @@
 .panel {
-  padding: var(--space-lg);
-  border: 1px dashed var(--border);
+  padding: clamp(24px, 4vw, 36px);
+  border: 1px dashed #b8d5bd;
   border-radius: var(--radius);
-  background: var(--surface);
+  background: #f7fbf6;
+  color: #56705c;
 }
+
 .panel h3 {
   margin-top: 0;
+  color: #2b4f38;
+  font-size: 1rem;
 }

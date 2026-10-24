@@ -1,69 +1,87 @@
 @import './tokens.css';
+
 * {
   box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
+
 body {
   margin: 0;
   background: var(--background);
   color: var(--text);
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif;
-  line-height: 1.65;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
+
 a {
   color: var(--accent);
   text-underline-offset: 4px;
 }
+
 button,
 input,
 select {
   font: inherit;
 }
+
 button,
 select,
 input {
   min-height: 44px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--surface);
   color: var(--text);
   padding: 0.55rem 0.8rem;
   max-width: 100%;
 }
+
 button {
   cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
+
 button:hover {
   background: var(--accent-soft);
 }
+
 button:disabled {
-  cursor: wait;
-  opacity: 0.65;
+  cursor: default;
+  opacity: 0.58;
 }
-button[aria-pressed='true'] {
-  color: var(--accent);
-  font-weight: 700;
-}
+
 label {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 650;
   min-width: 0;
 }
+
 :focus-visible {
-  outline: 3px solid #a45416;
+  outline: 3px solid #e99857;
   outline-offset: 3px;
 }
+
 .primary {
+  border-color: var(--accent);
   background: var(--accent);
   color: white;
-  border-color: var(--accent);
+  font-weight: 750;
 }
+
 .primary:hover {
-  background: #194431;
+  background: #1e513f;
+  border-color: #1e513f;
 }
+
 .srOnly {
   position: absolute;
   width: 1px;
@@ -75,6 +93,7 @@ label {
   white-space: nowrap;
   border: 0;
 }
+
 .skipLink {
   position: fixed;
   top: -100px;
@@ -83,19 +102,24 @@ label {
   background: white;
   z-index: 9999;
 }
+
 .skipLink:focus {
   top: 10px;
 }
+
 summary {
   cursor: pointer;
 }
+
 p {
   overflow-wrap: anywhere;
 }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     scroll-behavior: auto;
+    transition: none !important;
   }
 }
