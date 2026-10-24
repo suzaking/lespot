@@ -22,6 +22,7 @@ export default function MapView({
   cameraKey?: number;
 }) {
   const container = useRef<HTMLDivElement>(null);
+  const initialOrigin = useRef(origin);
   const map = useRef<L.Map | null>(null);
   const markers = useRef(new Map<string, L.Marker>());
   const onSelectRef = useRef(onSelect);
@@ -42,7 +43,7 @@ export default function MapView({
       scrollWheelZoom: true,
       zoomControl: false,
       attributionControl: true,
-    }).setView([origin.lat, origin.lon], 13);
+    }).setView([initialOrigin.current.lat, initialOrigin.current.lon], 13);
     map.current = m;
     L.control
       .zoom({ position: 'bottomright', zoomInTitle: '拡大', zoomOutTitle: '縮小' })

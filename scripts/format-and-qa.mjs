@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, unlink } from 'node:fs/promises';
 import prettier from 'prettier';
 
 const paths = ["src/lib/mapViewport.ts","src/components/map/MapView.tsx","src/components/ui/SheetGrip.tsx","src/app/App.tsx","src/components/search/SearchControls.tsx","src/components/search/SearchControls.module.css","src/app/App.module.css","src/styles/global.css","tests/mapViewport.test.ts","tests/SheetGrip.test.tsx","tests/app.test.tsx","design.md"];
@@ -18,3 +18,4 @@ for (const path of paths) {
   }
 }
 console.log('FMT_COMPLETE');
+await unlink(new URL(import.meta.url));
