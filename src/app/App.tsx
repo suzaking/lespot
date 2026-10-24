@@ -47,7 +47,9 @@ export default function App() {
     filters.cost !== defaultFilters.cost ||
     filters.radius !== defaultFilters.radius;
   const walking = selectedResult
-    ? mapLinks(selectedResult.spot).find((link) => link.label.includes('徒歩ルート'))
+    ? mapLinks(selectedResult.spot).find((link) =>
+        link.label.includes('徒歩ルート'),
+      )
     : undefined;
 
   useEffect(() => {
@@ -94,12 +96,23 @@ export default function App() {
 
   return (
     <main className={styles.shell}>
-      <a className="skipLink" href="#spot-map">地図へスキップ</a>
+      <a className="skipLink" href="#spot-map">
+        地図へスキップ
+      </a>
       <h1 className="srOnly">LeSpot — 名古屋の休憩スポットマップ</h1>
-      <section className={styles.mapStage} id="spot-map" aria-label="休憩スポットの地図">
+      <section
+        className={styles.mapStage}
+        id="spot-map"
+        aria-label="休憩スポットの地図"
+      >
         <MapBoundary>
           <Suspense fallback={<StatusPanel title="地図を準備しています…" />}>
-            <MapView results={results} origin={origin} selected={selectedId} onSelect={selectSpot} />
+            <MapView
+              results={results}
+              origin={origin}
+              selected={selectedId}
+              onSelect={selectSpot}
+            />
           </Suspense>
         </MapBoundary>
       </section>
@@ -121,7 +134,9 @@ export default function App() {
           aria-label="掲載情報について"
           aria-pressed={panel === 'info'}
           onClick={() => setPanel(panel === 'info' ? 'closed' : 'info')}
-        >i</button>
+        >
+          i
+        </button>
         <button
           className={styles.utilityButton}
           type="button"
@@ -129,75 +144,153 @@ export default function App() {
           disabled={geo.pending}
           onClick={geo.locate}
         >
-          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <svg
+            width="23"
+            height="23"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            aria-hidden="true"
+          >
             <circle cx="12" cy="12" r="6" />
             <circle cx="12" cy="12" r="2" />
             <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
           </svg>
         </button>
-        {geo.message && <p role="status" className={styles.geoMessage}>{geo.message}</p>}
+        {geo.message && (
+          <p role="status" className={styles.geoMessage}>
+            {geo.message}
+          </p>
+        )}
       </div>
 
       {panel === 'closed' && (
-        <button className={styles.exploreButton} type="button" onClick={openResults} aria-label="スポット一覧を開く">
-          スポットを見る{data.status === 'ready' ? ` · ${results.length}件` : ''}
+        <button
+          className={styles.exploreButton}
+          type="button"
+          onClick={openResults}
+          aria-label="スポット一覧を開く"
+        >
+          スポットを見る
+          {data.status === 'ready' ? ` · ${results.length}件` : ''}
         </button>
       )}
 
       {panel === 'results' && (
-        <section id="results" className={`${styles.overlayPanel} ${styles.resultsPanel}`} aria-labelledby="results-title">
+        <section
+          id="results"
+          className={`${styles.overlayPanel} ${styles.resultsPanel}`}
+          aria-labelledby="results-title"
+        >
           <div className={styles.sheetHandle} aria-hidden="true" />
           <header className={styles.panelHeader}>
             <div>
-              <h2 id="results-title">休憩スポット <span aria-live="polite">{data.status === 'ready' ? `${results.length}件` : ''}</span></h2>
+              <h2 id="results-title">
+                休憩スポット{' '}
+                <span aria-live="polite">
+                  {data.status === 'ready' ? `${results.length}件` : ''}
+                </span>
+              </h2>
               <p>{areaName}から近い順 · 直線距離</p>
             </div>
-            <button className={styles.closeButton} onClick={closePanel} aria-label="結果一覧を閉じる">×</button>
+            <button
+              className={styles.closeButton}
+              onClick={closePanel}
+              aria-label="結果一覧を閉じる"
+            >
+              ×
+            </button>
           </header>
           {filtered && (
             <div className={styles.resetBar}>
-              <button onClick={() => { setFilters({ ...defaultFilters }); setSelected(null); }}>絞り込みをリセット</button>
+              <button
+                onClick={() => {
+                  setFilters({ ...defaultFilters });
+                  setSelected(null);
+                }}
+              >
+                絞り込みをリセット
+              </button>
             </div>
           )}
           <div className={styles.scrollBody}>
-            {data.status === 'loading' && <StatusPanel title="スポットを読み込んでいます…" />}
+            {data.status === 'loading' && (
+              <StatusPanel title="スポットを読み込んでいます…" />
+            )}
             {data.status === 'error' && (
               <StatusPanel error title="スポットを読み込めませんでした">
                 <p>通信環境を確認し、再試行してください。</p>
                 <button onClick={data.retry}>再試行</button>
               </StatusPanel>
             )}
-            {data.status === 'ready' && (
-              results.length ? (
-                <SpotList results={results} selected={selectedId} onSelect={selectSpot} onShowMap={selectSpot} today={today} />
+            {data.status === 'ready' &&
+              (results.length ? (
+                <SpotList
+                  results={results}
+                  selected={selectedId}
+                  onSelect={selectSpot}
+                  onShowMap={selectSpot}
+                  today={today}
+                />
               ) : (
-                <StatusPanel title={data.spots.length === 0 ? '掲載スポットを確認中です' : '条件に合うスポットが見つかりません'}>
+                <StatusPanel
+                  title={
+                    data.spots.length === 0
+                      ? '掲載スポットを確認中です'
+                      : '条件に合うスポットが見つかりません'
+                  }
+                >
                   <p>地域や検索条件を変更してみてください。</p>
-                  {filtered && <button onClick={() => setFilters({ ...defaultFilters })}>条件をクリア</button>}
+                  {filtered && (
+                    <button onClick={() => setFilters({ ...defaultFilters })}>
+                      条件をクリア
+                    </button>
+                  )}
                 </StatusPanel>
-              )
-            )}
+              ))}
           </div>
         </section>
       )}
 
       {panel === 'place' && selectedResult && (
-        <section className={`${styles.overlayPanel} ${styles.placePanel} ${expanded ? styles.placeExpanded : ''}`} aria-labelledby="selected-place-title">
+        <section
+          className={`${styles.overlayPanel} ${styles.placePanel} ${expanded ? styles.placeExpanded : ''}`}
+          aria-labelledby="selected-place-title"
+        >
           <div className={styles.sheetHandle} aria-hidden="true" />
           <header className={styles.placeHeader}>
             <div>
               <h2 id="selected-place-title">{selectedResult.spot.name}</h2>
-              <p>{categories[selectedResult.spot.category]} · {formatDistance(selectedResult.distance)}</p>
+              <p>
+                {categories[selectedResult.spot.category]} ·{' '}
+                {formatDistance(selectedResult.distance)}
+              </p>
             </div>
-            <button className={styles.closeButton} onClick={closePanel} aria-label="スポット詳細を閉じる">×</button>
+            <button
+              className={styles.closeButton}
+              onClick={closePanel}
+              aria-label="スポット詳細を閉じる"
+            >
+              ×
+            </button>
           </header>
           <div className={styles.placeActions}>
             {walking && (
-              <a className={styles.directions} href={walking.href} target="_blank" rel="noopener noreferrer">
-                {walking.label}<span className="srOnly">（新しいタブ）</span>
+              <a
+                className={styles.directions}
+                href={walking.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {walking.label}
+                <span className="srOnly">（新しいタブ）</span>
               </a>
             )}
-            <button onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
+            <button
+              onClick={() => setExpanded(!expanded)}
+              aria-expanded={expanded}
+            >
               {expanded ? '詳細を閉じる' : '詳細を見る'}
             </button>
             <button onClick={openSelectedInList}>一覧で詳細を見る</button>
@@ -218,14 +311,27 @@ export default function App() {
       )}
 
       {panel === 'info' && (
-        <aside className={`${styles.overlayPanel} ${styles.infoPanel}`} aria-labelledby="info-title">
+        <aside
+          className={`${styles.overlayPanel} ${styles.infoPanel}`}
+          aria-labelledby="info-title"
+        >
           <header className={styles.panelHeader}>
             <h2 id="info-title">LeSpotについて</h2>
-            <button className={styles.closeButton} onClick={closePanel} aria-label="情報を閉じる">×</button>
+            <button
+              className={styles.closeButton}
+              onClick={closePanel}
+              aria-label="情報を閉じる"
+            >
+              ×
+            </button>
           </header>
           <p>名古屋の確認済み休憩スポットを地図から探せます。</p>
-          <p>距離は直線距離、ピンは施設の代表位置です。入口・休憩席・空席・営業状況を保証しません。出典・確認日は各スポットの詳細で確認できます。</p>
-          <p>現在地は許可した場合だけ取得し、保存しません。地図表示で国土地理院にIPアドレスと表示範囲が伝わります。</p>
+          <p>
+            距離は直線距離、ピンは施設の代表位置です。入口・休憩席・空席・営業状況を保証しません。出典・確認日は各スポットの詳細で確認できます。
+          </p>
+          <p>
+            現在地は許可した場合だけ取得し、保存しません。地図表示で国土地理院にIPアドレスと表示範囲が伝わります。
+          </p>
           <a href="/admin.html">運営者向け管理</a>
         </aside>
       )}
