@@ -17,6 +17,7 @@ No star ratings, photographs, fabricated opening status, popularity, walking tim
 ## External patterns and boundaries
 
 Reference **patterns, not brand assets**:
+
 - [Mapbox Store Locator](https://www.mapbox.com/blog/best-practices-for-custom-store-locators): persistently visible search/list and map on desktop; quick list↔marker selection; filter proximity; responsive layouts.
 - [Google Maps Places UI documentation](https://developers.google.com/codelabs/maps-platform/maps-platform-ui-kit-js?hl=ja): selecting a result and selecting a marker should address the same place; detail disclosure does not destroy map context.
 - [Google Maps mobile sheet redesign](https://9to5google.com/2025/03/07/google-maps-iphone-sheet-redesign/): small map-overlaid location preview before opening complete details, avoiding unnecessary full-screen transitions.
@@ -55,6 +56,7 @@ Mobile < 800px
 ## Visual system
 
 UI is **content-first, compact, neutral**:
+
 - Page and map background: `#f3f5f5`; panels white.
 - Text `#20282b`; secondary `#667278`; lines `#e2e7e8`.
 - A single functional teal `#08796f` for selection, focus cues and primary actions. Do not apply unrelated gradient palettes.

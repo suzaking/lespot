@@ -10,7 +10,8 @@ export function SpotActions({ spot }: { spot: Spot }) {
     <div className={styles.actions} aria-label={`${spot.name}の外部リンク`}>
       {walking && (
         <a href={walking.href} target="_blank" rel="noopener noreferrer">
-          {walking.label}<span className="srOnly">（新しいタブ）</span>
+          {walking.label}
+          <span className="srOnly">（新しいタブ）</span>
         </a>
       )}
       <details className={styles.moreLinks}>
@@ -23,7 +24,8 @@ export function SpotActions({ spot }: { spot: Spot }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {link.label}<span className="srOnly">（新しいタブ）</span>
+              {link.label}
+              <span className="srOnly">（新しいタブ）</span>
             </a>
           ))}
         </div>

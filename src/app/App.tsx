@@ -89,11 +89,15 @@ export default function App() {
       </a>
       <header className={styles.topbar}>
         <a className={styles.brand} href="./" aria-label="LeSpot ホーム">
-          <span className={styles.brandIcon} aria-hidden="true">L</span>
+          <span className={styles.brandIcon} aria-hidden="true">
+            L
+          </span>
           LeSpot
         </a>
         <span className={styles.appName}>名古屋の休憩スポット検索</span>
-        <a className={styles.infoLink} href="#about">掲載情報について</a>
+        <a className={styles.infoLink} href="#about">
+          掲載情報について
+        </a>
       </header>
 
       <main className={styles.layout}>
@@ -105,7 +109,11 @@ export default function App() {
             setFilters={setFilters}
             geo={geo}
           />
-          <section id="results" className={styles.results} aria-labelledby="results-title">
+          <section
+            id="results"
+            className={styles.results}
+            aria-labelledby="results-title"
+          >
             <div className={styles.resultsHeader}>
               <div>
                 <h1 id="results-title">
@@ -129,7 +137,10 @@ export default function App() {
             </div>
 
             <div className={styles.tabs} role="group" aria-label="表示切替">
-              <button aria-pressed={view === 'list'} onClick={() => setView('list')}>
+              <button
+                aria-pressed={view === 'list'}
+                onClick={() => setView('list')}
+              >
                 一覧
               </button>
               <button aria-pressed={view === 'map'} onClick={() => showMap()}>
@@ -179,7 +190,11 @@ export default function App() {
               </div>
             )}
           </section>
-          <section id="about" className={styles.notes} aria-label="掲載情報と位置情報">
+          <section
+            id="about"
+            className={styles.notes}
+            aria-label="掲載情報と位置情報"
+          >
             <details>
               <summary>掲載情報と位置情報について</summary>
               <p>
@@ -200,7 +215,9 @@ export default function App() {
         >
           {mapEnabled ? (
             <MapBoundary>
-              <Suspense fallback={<StatusPanel title="地図を準備しています…" />}>
+              <Suspense
+                fallback={<StatusPanel title="地図を準備しています…" />}
+              >
                 <MapView
                   results={results}
                   origin={origin}
@@ -228,7 +245,8 @@ export default function App() {
               <div className={styles.sheetText}>
                 <strong>{selectedResult.spot.name}</strong>
                 <span>
-                  {formatDistance(selectedResult.distance)} · {selectedResult.spot.address}
+                  {formatDistance(selectedResult.distance)} ·{' '}
+                  {selectedResult.spot.address}
                 </span>
               </div>
               <button onClick={openSelectedDetails}>一覧で詳細を見る</button>

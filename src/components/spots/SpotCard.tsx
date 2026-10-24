@@ -28,10 +28,16 @@ export function SpotCard({
       aria-label={spot.name}
     >
       <div className={styles.row}>
-        <span aria-hidden="true" className={styles.number}>{index + 1}</span>
+        <span aria-hidden="true" className={styles.number}>
+          {index + 1}
+        </span>
         <div className={styles.content}>
           <h2>
-            <button className={styles.title} aria-pressed={selected} onClick={onSelect}>
+            <button
+              className={styles.title}
+              aria-pressed={selected}
+              onClick={onSelect}
+            >
               {spot.name}
             </button>
           </h2>
@@ -65,9 +71,13 @@ export function SpotCard({
             <a href={spot.sourceUrl} target="_blank" rel="noopener noreferrer">
               {spot.sourceLabel}（新しいタブ）
             </a>
-            <p>確認：{spot.verifiedAt} ／ 確認期限：{spot.validUntil}</p>
+            <p>
+              確認：{spot.verifiedAt} ／ 確認期限：{spot.validUntil}
+            </p>
             <p>{spot.rights}</p>
-            <p>座標：{spot.lat}, {spot.lon}</p>
+            <p>
+              座標：{spot.lat}, {spot.lon}
+            </p>
           </details>
         </div>
       </div>

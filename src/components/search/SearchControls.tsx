@@ -25,16 +25,23 @@ export function SearchControls({
           type="search"
           placeholder="場所や施設名を検索"
           value={filters.query}
-          onChange={(event) => setFilters({ ...filters, query: event.target.value })}
+          onChange={(event) =>
+            setFilters({ ...filters, query: event.target.value })
+          }
         />
       </label>
       <div className={styles.location}>
         <label>
           検索する地域
-          <select value={area} onChange={(event) => chooseArea(event.target.value)}>
+          <select
+            value={area}
+            onChange={(event) => chooseArea(event.target.value)}
+          >
             {area === 'current' && <option value="current">現在地</option>}
             {areas.map((item) => (
-              <option key={item.id} value={item.id}>{item.name}</option>
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
             ))}
           </select>
         </label>
@@ -46,24 +53,41 @@ export function SearchControls({
           {geo.pending ? '現在地を取得中…' : '現在地から探す'}
         </button>
       </div>
-      <p className={styles.message} role="status">{geo.message}</p>
+      <p className={styles.message} role="status">
+        {geo.message}
+      </p>
 
       <div className={styles.chips} aria-label="クイックフィルター">
         <button
           aria-pressed={filters.cost === 'free'}
-          onClick={() => setFilters({ ...filters, cost: filters.cost === 'free' ? 'all' : 'free' })}
+          onClick={() =>
+            setFilters({
+              ...filters,
+              cost: filters.cost === 'free' ? 'all' : 'free',
+            })
+          }
         >
           無料
         </button>
         <button
           aria-pressed={filters.category === 'park'}
-          onClick={() => setFilters({ ...filters, category: filters.category === 'park' ? 'all' : 'park' })}
+          onClick={() =>
+            setFilters({
+              ...filters,
+              category: filters.category === 'park' ? 'all' : 'park',
+            })
+          }
         >
           公園・広場
         </button>
         <button
           aria-pressed={filters.radius === 1000}
-          onClick={() => setFilters({ ...filters, radius: filters.radius === 1000 ? 3000 : 1000 })}
+          onClick={() =>
+            setFilters({
+              ...filters,
+              radius: filters.radius === 1000 ? 3000 : 1000,
+            })
+          }
         >
           1km以内
         </button>
@@ -74,12 +98,17 @@ export function SearchControls({
           <select
             value={filters.category}
             onChange={(event) =>
-              setFilters({ ...filters, category: event.target.value as Filters['category'] })
+              setFilters({
+                ...filters,
+                category: event.target.value as Filters['category'],
+              })
             }
           >
             <option value="all">すべて</option>
             {Object.entries(categories).map(([value, label]) => (
-              <option value={value} key={value}>{label}</option>
+              <option value={value} key={value}>
+                {label}
+              </option>
             ))}
           </select>
         </label>
@@ -88,12 +117,17 @@ export function SearchControls({
           <select
             value={filters.cost}
             onChange={(event) =>
-              setFilters({ ...filters, cost: event.target.value as Filters['cost'] })
+              setFilters({
+                ...filters,
+                cost: event.target.value as Filters['cost'],
+              })
             }
           >
             <option value="all">すべて</option>
             {Object.entries(costs).map(([value, label]) => (
-              <option value={value} key={value}>{label}</option>
+              <option value={value} key={value}>
+                {label}
+              </option>
             ))}
           </select>
         </label>
