@@ -33,7 +33,7 @@ export default function MapView({
       attributionControl: true,
     }).setView([35.1709, 136.9084], 15);
     map.current = m;
-    L.control.zoom({ zoomInTitle: '拡大', zoomOutTitle: '縮小' }).addTo(m);
+    L.control.zoom({ position: 'bottomright', zoomInTitle: '拡大', zoomOutTitle: '縮小' }).addTo(m);
     const tiles = L.tileLayer(
       'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
       {
