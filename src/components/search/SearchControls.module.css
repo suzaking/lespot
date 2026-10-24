@@ -1,26 +1,83 @@
 .controls {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  background: #fff;
+  background: white;
+  border-radius: 13px;
+  box-shadow: 0 2px 12px #24333229;
+  overflow: hidden;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 7px 5px 14px;
+  min-height: 54px;
+}
+
+.brandMark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  height: 27px;
+  width: 27px;
+  border-radius: 8px;
+  background: #08796f;
+  color: white;
+  font-size: 0.87rem;
+  font-weight: 800;
 }
 
 .query {
+  min-width: 0;
+  flex: 1;
   display: block;
-  margin: 0 0 12px;
 }
 
 .query input {
+  display: block;
   width: 100%;
-  min-height: 46px;
-  border-radius: 9px;
-  background: #f7f9f9;
-  padding: 10px 13px;
-  border: 1px solid #cdd6d8;
+  border: none;
+  outline: none;
+  min-height: 43px;
+  padding: 5px 0;
+  background: transparent;
+  color: #293538;
   font-size: 0.88rem;
+  font-weight: 450;
 }
 
-.query input::placeholder {
-  color: #829096;
+.query input:focus-visible {
+  outline: none;
+}
+
+.searchBar:focus-within {
+  outline: 2px solid #08796f;
+  outline-offset: -2px;
+  border-radius: 13px;
+}
+
+.searchAction {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  min-height: 43px;
+  border: none;
+  border-radius: 50%;
+  color: #526366;
+  background: white;
+  padding: 0;
+}
+
+.searchAction:hover {
+  background: #eaf4f2;
+}
+
+.filterPanel {
+  padding: 12px 16px 16px;
+  border-top: 1px solid #eef0f0;
+  max-height: min(55dvh, 400px);
+  overflow-y: auto;
 }
 
 .location {
@@ -36,62 +93,43 @@
 
 .location select {
   width: 100%;
-  background: white;
 }
 
 .locate {
-  flex: 0 0 auto;
-  min-height: 44px;
-  color: var(--accent);
+  flex: none;
+  font-size: 0.76rem;
+  font-weight: 650;
+  color: #08796f;
   background: #eef7f5;
-  border-color: #b8d7d2;
-  padding: 7px 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.locate:hover {
-  background: var(--accent-soft);
-}
-
-.message {
-  margin: 0;
-  color: #925c2c;
-  font-size: 0.74rem;
-}
-
-.message:not(:empty) {
-  padding-top: 7px;
+  border-color: #a8d4cb;
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin-top: 14px;
+  margin: 12px 0;
 }
 
 .chips button {
   min-height: 36px;
-  border-radius: 18px;
-  background: white;
-  padding: 6px 13px;
-  color: #526168;
-  font-size: 0.78rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f8faf9;
+  color: #556164;
+  font-size: 0.76rem;
 }
 
 .chips button[aria-pressed='true'] {
-  background: var(--accent-soft);
-  color: #08685f;
-  border-color: #70b9b0;
-  font-weight: 700;
+  background: #dcefeb;
+  border-color: #4a9c92;
+  color: #08796f;
 }
 
 .filters {
   display: grid;
-  grid-template-columns: 1fr 0.95fr 0.92fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 7px;
-  margin-top: 15px;
 }
 
 .filters label {
@@ -101,25 +139,19 @@
 .filters select {
   width: 100%;
   min-width: 0;
-  padding: 7px 22px 7px 7px;
-  font-size: 0.75rem;
-  background: white;
+  padding: 7px 16px 7px 7px;
+  font-size: 0.72rem;
 }
 
-@media (max-width: 799px) {
-  .controls {
-    padding: 12px 16px 15px;
-  }
-
-  .filters {
-    margin-top: 11px;
-  }
+.message {
+  margin: 10px 0 0;
+  color: #885a31;
+  font-size: 0.76rem;
 }
 
 @media (max-width: 359px) {
   .location {
-    align-items: stretch;
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .locate {
@@ -131,33 +163,6 @@
   }
 
   .filters label:last-child {
-    grid-column: span 2;
-  }
-}
-
-.advanced {
-  margin-top: 10px;
-}
-.advanced > summary {
-  display: none;
-}
-@media (min-width: 800px) {
-  .advanced > .filters {
-    display: grid;
-  }
-}
-@media (max-width: 799px) {
-  .advanced > summary {
-    display: flex;
-    align-items: center;
-    min-height: 36px;
-    font-size: 0.76rem;
-    color: var(--accent);
-  }
-  .advanced:not([open]) > .filters {
-    display: none;
-  }
-  .advanced > .filters {
-    margin-top: 0;
+    grid-column: 1 / -1;
   }
 }
