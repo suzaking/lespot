@@ -164,7 +164,7 @@ export default function App() {
                 </span>
               </h2>
               <p className={styles.resultsSummary}>
-                {areaName}を基準に、直線距離が近い順に表示
+                {areaName}から近い順 · 直線距離
               </p>
             </div>
             <button
