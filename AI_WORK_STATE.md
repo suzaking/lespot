@@ -72,3 +72,12 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - モバイルの検索結果シートはpeek/half/fullの3状態を持ち、ドラッグハンドル操作に対応。選択スポットの詳細はスワイプ上で展開、下で縮小/閉じる。ハンドルはキーボード操作可能。
 - ソースCommit `17b60e617b89dee8d6e57b68ec444b6d5f493bed` / Vercel Production `dpl_4kMs1bMfCLxroXRW5RrVdmrEG2Gn` READY。型/Lint/Prettier、Vitest44件（8ファイル）、Viteビルド成功。HTML、`GET /api/spots`、管理画面HTTP 200、公開DBの実スポット2件取得を確認。
 - 現行UIのPlaywright E2E、実ブラウザ画面比較、iOS/Android実機、地図範囲検索の実ジェスチャーQAはNOT_RUN。単体テスト成功と混同しない。認証なし管理APIは認証拒否の対象（HTTP 401）。
+
+
+## 2026-10-26 街なかベンチ追加（この節が最新）
+
+- 調査で選んだ実地点：白川公園・科学館南側のOpenStreetMap node 6344772944（35.1644352, 136.9000397）。個別ベンチ地点として地図上で確認し、名古屋市公式ページで公園名・所在地と一般利用原則を照合。
+- `data/bootstrap-spots.json`に1件を追加し、`docs/DATA_EVIDENCE.md`へ出典、ODbL帰属、調査方法、未確認事項を記録。料金・現在の設置状況・空席・設備は推定していない。Google画像・写真・口コミは保存・転載せず、2016年Street Viewは古いため現況根拠に使用しない。
+- 公開API `https://lespot-lac.vercel.app/api/spots` の読み取りでは既存2件。アプリの正本はUpstash Redisで、初回デプロイ後のbootstrap変更はRedisを上書きしない。今回の地点はコード側に準備済みだが、公開DBへの登録は未完了。
+- 管理APIは`LESPOT_ADMIN_TOKEN`を要求する。環境やこの実行には管理キーがなく、秘密情報を取得・再設定していない。管理者による安全なキー入力後にバックアップを取り、管理画面から1件を追加して公開APIで再検証する必要がある。
+- 検証：ローカルの型・Lint・整形・Vitest35件・Vite本番ビルドに成功。新規bootstrapは共通Zodスキーマで3件として検証済み。ローカルスナップショットは公開JSON2件の静的構成で、現在のGitHub/Redisアプリと異なるため、そのcheckはリポジトリ全体の最新動作を保証しない。

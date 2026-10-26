@@ -15,6 +15,7 @@
 | I-09 | 本番ビルドE2E                            | DONE：PC/390px/320px、9件成功                  |
 | I-10 | Vercel Hobby設定・公開                   | DONE：2026-10-24 READY / HTTP 200、本番URL確認 |
 | I-11 | 実iOS/Android・実GPS・読み上げ・現地検証 | NOT_RUN：端末/現地アクセスなし                 |
+| I-12 | 街なかのベンチ地点を追加 | STAGED：白川公園1地点をbootstrapへ追加。公開DBへの反映待ち |
 
 次はNEXT_WORK参照。ローカル実装完了。本番公開や実機試験まで完了したとはしない。
 
@@ -50,3 +51,12 @@
 - [x] Googleマップ風UXを`design.md`に定義し、Googleの商標・素材は複製しない
 - [x] TypeScript/ESLint/Prettier、Vitest40件、Viteビルド、本番HTTP配信検証
 - [ ] 最新版Playwright E2E・PC/スマホ実ブラウザレイアウト・操作検証
+
+
+## 2026-10-26 街なかベンチ調査
+
+- [x] OpenStreetMapの個別ベンチ地点と地図を照合し、白川公園・科学館南側の1地点を選定
+- [x] 公園の所在地と一般利用原則を名古屋市公式案内で確認。ODbL帰属・未確認事項を記録
+- [x] Street Viewの撮影年を確認し、現況の根拠として扱わない制約を記録
+- [x] 型付きデータとしてbootstrapへ追加。料金区分はunknown、利用条件・空席・現況は未確認
+- [ ] 認証付き管理画面からUpstash Redis本番データへ反映。管理キーは運営者が安全に入力する必要あり

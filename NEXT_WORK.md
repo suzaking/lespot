@@ -32,3 +32,10 @@ Design authority: [design.md](design.md).
 - Playwright E2Eで、実マウス・タッチのパン/ズーム→このエリアを検索、サジェストのキーボード操作、ボトムシートのスワイプ、ピンとの連動を検証。
 - PCの各幅とiPhone Safari/Android Chromeで実際の地図表示・スクロール干渉・シート位置・タップ領域・Leaflet操作を視覚検証。未実施を成功として記録しない。
 - 施設の追加は管理画面で実在・出典・休憩条件を確認して行う。Googleデータの無断取得や有料APIの導入は行わない。
+
+
+## 2026-10-26 街なかベンチの追加
+
+- 白川公園・科学館南側のベンチ1地点を、OpenStreetMap node 6344772944の座標と名古屋市公式案内で根拠付けし、`data/bootstrap-spots.json`へ追加。料金区分はunknown、現況・空席・個別利用条件は未確認としている。
+- 証跡と限界は`docs/DATA_EVIDENCE.md`。Street Viewは2016年撮影のため現況保証に使わない。
+- 本番の正本はUpstash Redis。bootstrap更新は既存DBを上書きしないため、公開APIは未更新。次は運営者が管理画面へ認証キーを入力し、バックアップ後にこの1件を追加してGET `/api/spots`で反映を確認する。キーはチャットやRepositoryに書かない。
