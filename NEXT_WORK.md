@@ -54,5 +54,13 @@ Design authority: [design.md](design.md).
 
 ## Gemini共同作業と公開反映 — 2026-10-27
 
-- `GEMINI.md`を共同作業の入口にする。`docs/README.md`に設計・データ・運用・検証文書を役割別に整理。
-- 標準/淡色の地図切替コードはCommit `26faaad916045e93e95dc70608a3a947da7fa44c`。Vercel本番ビルドはPrettierで9ファイルに失敗したため、整形済みCommitを作成して再デプロイする。
+- `GEMINI.md`を共同作業の入口にし、`docs/README.md`へ設計・データ・運用・検証文書を役割別に整理。AGENTS.mdとの優先順位とブランチ/PRの流れを明記。
+- 地図切替の実装、Prettier整形、公開データ7件に合わせたテスト修正をCommit `1c9a34736dd0ea46121c8393a27a9c574fe9d4c6`まで反映。
+- Vercel production `dpl_56pr9uXam7Z6nxBscXgaX32U8TA9` READY。公開URLは https://lespot-lac.vercel.app/ 。
+- 次の品質作業は最新版Playwright E2E、実端末での地図タイル・ボタン・レスポンシブ/読み上げ確認。Redisの本番データを編集する場合は管理者のバックアップと安全なキー入力が必要。
+
+## 次の作業 — 2026-10-27
+
+1. 最新UIに対するPlaywright E2Eを実行し、PC/スマホの地図切替、外部リンク、検索操作を確認する。
+2. 実iOS/Android、スクリーンリーダー、実GPS、GSIタイルの読込と操作を確認する。未実施のまま完了扱いにしない。
+3. ベンチデータを本番Redisへ追加するときは、運営者が管理画面で安全に認証し、先にバックアップ、反映後に公開APIを確認する。

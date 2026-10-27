@@ -87,10 +87,19 @@ release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E
 ## 2026-10-27 地図種類切替の実装
 
 - MapViewの初期タイルをGSI標準地図に変更し、GSI淡色地図と切り替えるボタンを追加。両方ともGSI公式の標準/淡色タイルURLと出典リンクを使用。
-- `tests/map.test.tsx`に切替操作テストを追加。テスト・型検査・build・E2EはGitHub API経由の作業環境にcheckoutと依存がないためNOT_RUN。GitHub Actions/Vercel結果はCommit後に確認する。
+- `tests/map.test.tsx`に標準/淡色切替の操作テストを追加。初回はPrettier不通過と旧2件期待値のテスト失敗を検出し、公開データ7件と検索距離順を反映するよう修正した。
 
 ## 2026-10-27 GSI地図種類切替ビルド
 
 - 本番デプロイ `dpl_E1kXWngKCmduvUgbNH89DuxAVpGt` はCommit `26faaad` から開始したが、`prettier --check .` が対象9ファイルを報告してbuildがERROR。アプリは公開されていない。
 - Prettier 3.9.10で対象9ファイルをローカル整形し、再確認では9ファイルすべて通過。変更をCommit後、Vercelの本番buildと公開URLを再検証する。
-- GitHub API中心の実行環境ではアプリ全体のnpm test/E2Eを直接実行できない。Vercel buildでは`npm run check`を実行して判定する。
+- Repositoryチェックアウトがないためこの作業環境ではnpmを直接実行できない。Vercel buildの`npm run check`結果をリリース検証に使用。
+
+## 2026-10-27 最終確認：地図種類切替とGemini共同作業
+
+- Commit `1c9a34736dd0ea46121c8393a27a9c574fe9d4c6`をVercel production Deployment `dpl_56pr9uXam7Z6nxBscXgaX32U8TA9`として配信。状態READY、`https://lespot-lac.vercel.app/`を本番Aliasとして確認。
+- Vercelの`npm run check`が成功：TypeScript、ESLint、Prettier、Vitest45件、データ検証（bootstrap 7件）、Vite production build。
+- 公開HTMLと遅延地図JavaScriptをHTTP取得し、GSI標準`/xyz/std`・淡色`/xyz/pale`タイルURLを確認。地図種類切替テストを含む単体テストはCIで成功。
+- Gemini向け`GEMINI.md`、文書索引`docs/README.md`、共通ルール`AGENTS.md`をGitHub mainへ反映。
+- Playwright E2Eと実端末での視覚/操作、実GPS、スクリーンリーダー、現地照合は今回未実施。実地理院タイルへの実ブラウザ通信も確認範囲外。
+- このデプロイ作業ではUpstash RedisおよびVercel Blobのデータを変更していない。

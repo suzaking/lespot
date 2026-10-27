@@ -73,10 +73,19 @@
 - [x] ボタン操作で淡色地図へ切替・標準地図へ復帰できるよう実装
 - [x] GSIの2タイルのみを使用し、追加サービス・APIキー・依存を増やさない
 - [x] 単体操作テストを追加
-- [ ] npm run check / E2E / 画面実機確認（この環境では未実行）
+- [x] Vercel本番のnpm run check（TypeScript・ESLint・Prettier・Vitest45件・データ検証・Vite build）成功。Deployment `dpl_56pr9uXam7Z6nxBscXgaX32U8TA9` READY。
+- [ ] 最新版のPlaywright E2E、実機・スクリーンリーダー・地図タイルの操作視認確認
 
 ## 2026-10-27 Geminiとの共同作業準備
 
 - [x] Repositoryルール・設計・データ・運用文書の一覧を作成
 - [x] Gemini向け入口ガイドを追加し、共通ルールと優先順位を明記
-- [ ] Vercelビルド整形エラーを解消し、本番反映を確認
+- [x] Vercelビルド整形エラーと公開データ期待値の古さを修正し、最新本番反映を確認（Commit `1c9a347`）。
+
+## 2026-10-27 最終反映
+
+- [x] Geminiとの共同作業ガイドと文書フォルダ索引を整備
+- [x] 地図初期表示を標準地図にし、ボタンで淡色地図へ切替
+- [x] Vercel本番ビルドでVitest45件、静的解析、データ検証、本番build成功を確認
+- [x] 公開URLに切替済みコードの本番Aliasを確認
+- [ ] Playwright E2E、実端末・実地図タイル・実GPS・スクリーンリーダー確認

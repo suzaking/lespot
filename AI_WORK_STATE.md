@@ -99,6 +99,8 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 
 ## 2026-10-27 Gemini共同作業・地図切替の最新状況
 
-- `GEMINI.md`を共同作業の入口として新設し、`docs/README.md`に既存設計・運用ドキュメントの索引を追加。
-- READMEとAGENTSから共同作業ガイドへリンク。競合時はAGENTSを共通正本とし、並行編集はファイルを分担してfeature branch/PRで統合。
-- 地図切替の本番ビルドCommit `26faaad` はPrettierが9ファイルで失敗。Prettier 3.9.10で該当ファイルをローカル整形済み。再CommitとVercel再検証が必要。
+- `GEMINI.md`を共同作業の入口として新設し、`docs/README.md`に設計・データ・運用文書の索引を追加。READMEとAGENTSからリンクし、AGENTS.mdを共通ルールの正本、Geminiガイドを利用開始の入口とした。
+- 地図種類切替、Prettier整形、公開データ7件に合わせたテスト修正までCommit `1c9a34736dd0ea46121c8393a27a9c574fe9d4c6`に反映。
+- Vercel production Deployment `dpl_56pr9uXam7Z6nxBscXgaX32U8TA9` がREADYで、`https://lespot-lac.vercel.app/`へ割当済み。
+- Vercel build上のTypeScript、ESLint、Prettier、Vitest45件、データ検証7件、Vite production buildが成功。公開HTMLおよび遅延ロード地図JSを読み取り、GSI標準/淡色タイルURLを確認。
+- Playwright E2E、実端末、実GPS、スクリーンリーダー、実地図タイルのパン/ズームと切替視認はNOT_RUN。Redis本番データは変更していない。
