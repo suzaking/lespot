@@ -1,6 +1,6 @@
 # LeSpot
 
-**公開URL：** https://lespot-lac.vercel.app/
+**公開URL：** [LeSpotを開く](https://lespot-lac.vercel.app/)
 
 名古屋周辺の休憩スポットを地図から探すWebアプリです。
 施設情報は**Upstash Redis**で管理し、CSVを介さず管理画面で編集できます。
