@@ -90,11 +90,13 @@
 - [x] 公開URLに切替済みコードの本番Aliasを確認
 - [ ] Playwright E2E、実端末・実地図タイル・実GPS・スクリーンリーダー確認
 
-## 2026-10-28 地図を道路表示へ変更
+## 2026-10-27 地図を道路表示へ変更
 
 - [x] 地理院の地図記号・地名を含むタイルを、MapLibre GL JS + OpenFreeMapのベクタータイルへ変更
 - [x] 地名・施設記号・建物等を取り除き、背景と道路線のみを描画。LeSpotの地点ピンは維持
 - [x] Leaflet依存の削除、地図遅延読込、OpenFreeMap等の帰属表示、CSPとタイル遮断E2Eの更新
 - [x] README・共同作業ガイド・設計・運用・決定記録を更新
 - [x] 最終check（typecheck・lint・format・Vitest45件・データ検証7件・build）
-- [ ] E2E（Chromium未導入で起動不可）、GitHub反映、Vercel本番配信確認
+- [x] GitHub main反映 Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`
+- [x] Vercel本番 READY（`dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq`）、公開URL HTTP 200とCSP/地図JSを確認
+- [ ] E2E（Chromium未導入で起動不可）、実機タイル表示・操作確認

@@ -1,6 +1,6 @@
 # LeSpot UI Design — Google Maps-style map experience
 
-Updated 2026-10-28. This document is the UI source of truth.
+Updated 2026-10-27. This document is the UI source of truth.
 
 ## Goal
 
@@ -74,7 +74,7 @@ The handle at the top of results and place panels supports vertical drag via poi
 
 This is a functional approximation of familiar map interaction patterns, not Google Maps itself. No Google imagery, proprietary listings, transit, traffic, routing engine, offline downloads or reviews. MapLibre GL JS + OpenFreeMap public tiles keep the road-only style keyless; Spot CRUD remains on the existing Upstash Redis API.
 
-## 2026-10-28 road-only map
+## 2026-10-27 road-only map
 
 - Use MapLibre GL JS with the public OpenFreeMap Positron vector style, transformed at runtime to retain only the neutral background and road lines.
 - Remove map labels, POI symbols, buildings, boundaries, parks, water and transit layers. LeSpot spot markers remain available.
