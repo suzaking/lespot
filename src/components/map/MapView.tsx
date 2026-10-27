@@ -6,6 +6,8 @@ import type { SearchResult } from '../../lib/search';
 import type { MapViewport } from '../../lib/mapViewport';
 import styles from './MapView.module.css';
 
+type MapType = 'standard' | 'pale';
+
 export default function MapView({
   results,
   origin,
@@ -29,6 +31,8 @@ export default function MapView({
   const onViewportRef = useRef(onViewportChange);
   const oldCameraKey = useRef(cameraKey);
   const [tileError, setTileError] = useState(false);
+  const [mapType, setMapType] = useState<MapType>('standard');
+  const baseLayers = useRef<Record<MapType, L.TileLayer> | null>(null);
 
   useEffect(() => {
     onSelectRef.current = onSelect;
@@ -53,17 +57,27 @@ export default function MapView({
       })
       .addTo(m);
 
-    const tiles = L.tileLayer(
-      'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
-      {
-        minZoom: 10,
-        maxZoom: 18,
-        attribution:
-          '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">地理院タイル</a>',
-      },
-    );
-    tiles.on('tileerror', () => setTileError(true));
-    tiles.addTo(m);
+    const tileOptions: L.TileLayerOptions = {
+      minZoom: 10,
+      maxZoom: 18,
+      attribution:
+        '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">地理院タイル</a>',
+    };
+    const layers: Record<MapType, L.TileLayer> = {
+      standard: L.tileLayer(
+        'https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+        tileOptions,
+      ),
+      pale: L.tileLayer(
+        'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
+        tileOptions,
+      ),
+    };
+    baseLayers.current = layers;
+    Object.values(layers).forEach((tiles) => {
+      tiles.on('tileerror', () => setTileError(true));
+      tiles.on('tileload', () => setTileError(false));
+    });
 
     let userMovePending = false;
     const markUserMove = () => {
@@ -111,8 +125,17 @@ export default function MapView({
       m.remove();
       map.current = null;
       markerStore.clear();
+      baseLayers.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    const m = map.current;
+    const layers = baseLayers.current;
+    if (!m || !layers) return;
+    Object.values(layers).forEach((layer) => layer.remove());
+    layers[mapType].addTo(m);
+  }, [mapType]);
 
   useEffect(() => {
     const m = map.current;
@@ -176,6 +199,17 @@ export default function MapView({
           地図の一部を読み込めません。一覧と外部地図リンクをご利用ください。
         </p>
       )}
+      <button
+        className={styles.mapTypeButton}
+        type="button"
+        aria-label={`${mapType === 'standard' ? '淡色地図' : '標準地図'}に切り替え`}
+        title="地図の種類を切り替え"
+        onClick={() =>
+          setMapType((current) => (current === 'standard' ? 'pale' : 'standard'))
+        }
+      >
+        {mapType === 'standard' ? '標準地図' : '淡色地図'}
+      </button>
       <p className={styles.caption}>
         番号は一覧と共通です。ピンを選ぶとカードを表示します。
       </p>

@@ -36,3 +36,26 @@ it('names markers and supports click/space and selected state', () => {
   );
   expect(marker).toHaveAttribute('aria-pressed', 'true');
 });
+
+
+it('switches between the standard and pale GSI maps', () => {
+  vi.stubGlobal(
+    'ResizeObserver',
+    class {
+      observe() {}
+      disconnect() {}
+    },
+  );
+  render(
+    <MapView
+      results={[]}
+      origin={spot}
+      selected={null}
+      onSelect={vi.fn()}
+    />,
+  );
+  fireEvent.click(screen.getByRole('button', { name: '淡色地図に切り替え' }));
+  expect(
+    screen.getByRole('button', { name: '標準地図に切り替え' }),
+  ).toBeInTheDocument();
+});

@@ -11,9 +11,9 @@ Feature parity with all of Google Maps (global POI index, turn-by-turn navigatio
 ## Initial viewport
 
 - Map takes 100% of viewport width and height, edge-to-edge, no header, footer, left dock, or permanent white sidebar.
-- The only always-present controls are a compact search field at top left, information + opt-in geolocation at top right, native map zoom controls and GSI attribution.
+- The only always-present controls are a compact search field at top left, information + opt-in geolocation at top right, a map type switcher above the bottom-right zoom controls, and GSI attribution.
 - An unobtrusive "スポットを見る · N件" action appears near the bottom only when no other panel is open.
-- The map is interactive immediately and requests GSI pale map tiles. User location permission is requested **only** on an explicit control click, never automatically.
+- The map is interactive immediately and requests GSI standard map tiles by default. The map type button switches between standard and pale tiles without recreating the Leaflet map. User location permission is requested **only** on an explicit control click, never automatically.
 - White background overlays are not framed in permanent surrounding containers; all surfaces float above the same map. Use subtle depth only for legibility.
 
 ## Search experience
@@ -73,3 +73,10 @@ The handle at the top of results and place panels supports vertical drag via poi
 ### Limitations
 
 This is a functional approximation of familiar map interaction patterns, not Google Maps itself. No Google imagery, proprietary listings, transit, traffic, routing engine, offline downloads or reviews. Leaflet + GSI remains free to operate within provider terms, and Spot CRUD stays in Upstash Redis.
+
+
+## 2026-10-27 map type switch
+
+- Default to GSI standard map and let users switch to the existing GSI pale map with one keyboard-accessible control above the zoom buttons.
+- Keep both base styles on the same GSI tile service. This changes the visual map style without adding another provider, API key, billing path, or dependency.
+- Official GSI tile list: https://maps.gsi.go.jp/help/use.html. Both layers keep the linked GSI attribution.

@@ -46,3 +46,10 @@ Design authority: [design.md](design.md).
 - This data is staged for an empty Redis database only. The production API uses Upstash Redis as its sole source; bootstrap commits do not update an initialized database.
 - Four new points were checked against OSM amenity=bench nodes, park boundaries, and Nagoya City’s public park list. Each has OSM attribution and cost=unknown. Street View was contextual research only, not evidence of an individual bench’s current status.
 - Before treating these points as live, back up Redis, add the four records through `/admin.html` using the authorized admin key, then verify `GET /api/spots`. Do not put the key in chat, URL, or repository.
+
+
+## 2026-10-27 地図種類の変更
+
+- 標準地図を初期表示にし、MapView右下に地理院標準地図／淡色地図の切替ボタンを追加。Leafletインスタンスは再生成しない。
+- GSIの公式標準・淡色タイル一覧に沿い、既存の地理院タイル利用を維持。外部地図タイル提供者は追加していない。
+- テストを追加したが、GitHub API経由の作業環境にRepository checkout/依存がないため実行はNOT_RUN。Vercel/GitHubのビルド結果は未確認。
