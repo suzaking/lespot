@@ -52,11 +52,11 @@ afterEach(() => {
 });
 
 describe('Redis-backed spot service', () => {
-  it('seeds the two real places once without overwriting stored data', async () => {
+  it('seeds all published spots once without overwriting stored data', async () => {
     const first = await publicGET();
     expect(first.status).toBe(200);
     const json = await first.json();
-    expect(json.spots).toHaveLength(2);
+    expect(json.spots).toHaveLength(7);
     expect(writes).toBe(1);
     expect((await publicGET()).status).toBe(200);
     expect(writes).toBe(1);

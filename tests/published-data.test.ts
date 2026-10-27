@@ -32,7 +32,7 @@ describe('published dataset', () => {
     ).toThrow(/数式/);
   });
 
-  it('finds the initial places from the default area and radius', () => {
+  it('finds published spots from the default area and radius', () => {
     const result = searchSpots(
       data.spots,
       areas[0],
@@ -42,6 +42,11 @@ describe('published dataset', () => {
     expect(result.map(({ spot }) => spot.id)).toEqual([
       'tsuruma-park',
       'noritake-garden',
+      'shirakawa-science-museum-bench',
+      'shimozono-park-bench-west',
+      'shimozono-park-bench-northwest',
+      'shimozono-park-bench-east',
+      'nishi-osu-park-bench-east',
     ]);
   });
 });
