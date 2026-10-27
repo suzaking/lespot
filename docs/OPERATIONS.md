@@ -4,7 +4,7 @@
 
 Vercel Hobby（Vite静的配信＋Node.js Functions）、
 Upstash Redis（施設DB）、
-Leaflet＋国土地理院タイルで運用します。
+MapLibre GL JS＋OpenFreeMapで運用します。表示は道路レイヤー中心で、地名・施設記号・建物を表示しません。
 管理画面は`/admin.html`、地図・検索は`/`です。
 
 DB管理、秘密情報、バックアップおよび復旧は

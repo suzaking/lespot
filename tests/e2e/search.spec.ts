@@ -14,7 +14,7 @@ const data = {
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/api/spots', (r) => r.fulfill({ json: data }));
-  await page.route('https://cyberjapandata.gsi.go.jp/**', (r) => r.abort());
+  await page.route('https://tiles.openfreemap.org/**', (r) => r.abort());
 });
 
 test('filters, spot selection, map and accessibility', async ({ page }) => {

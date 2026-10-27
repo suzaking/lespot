@@ -103,3 +103,11 @@ release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E
 - Gemini向け`GEMINI.md`、文書索引`docs/README.md`、共通ルール`AGENTS.md`をGitHub mainへ反映。
 - Playwright E2Eと実端末での視覚/操作、実GPS、スクリーンリーダー、現地照合は今回未実施。実地理院タイルへの実ブラウザ通信も確認範囲外。
 - このデプロイ作業ではUpstash RedisおよびVercel Blobのデータを変更していない。
+
+## 2026-10-28 道路のみの地図プロバイダー変更
+
+- MapLibre GL JS 6.16.0とOpenFreeMapの公開ベクタータイルへ変更。ベーススタイルを変換し、背景と道路線だけを残して地名ラベル・POI記号・建物等を除去。LeSpotのスポットピンは維持。
+- Leafletおよび型定義を依存から削除し、地図コンポーネントは遅延ロード。Vercel CSPをOpenFreeMapホストに限定して更新し、地図タイル遮断E2Eのホスト参照も更新。
+- `npm run check`成功：TypeScript、ESLint、Prettier、Vitest 45/45、データ検証7件、Vite production build。
+- `npm run test:e2e`は9件すべてがPlaywright Chromium未インストールで起動できず。E2E成功とは扱わない。ブラウザ配布物のインストール後に再実行する。
+- Vite buildは遅延ロードMapView JS 1,072.92 kB（gzip 292.10 kB）、MapLibre worker 518.98 kBを出力し、500 kB超過警告あり。地図を開くまでロードしないが、初回地図表示時の転送量は増えている。実ブラウザでのタイル描画・CSP・モバイル実機は未確認。

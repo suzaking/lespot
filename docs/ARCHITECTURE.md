@@ -7,7 +7,7 @@ flowchart TD
  U[利用者ブラウザ] -->|ページ| V[Vercel 静的配信]
  U -->|GET /api/spots| R[Vercel Node.js Function]
  R -->|Upstash REST| DB[(Upstash Redis)]
- U -->|地図タイル| G[国土地理院]
+ U -->|地図スタイル・ベクタータイル| G[OpenFreeMap]
  U -->|外部地図| M[Google / Apple Maps]
  O[運営者] -->|認証付き管理画面| A[Vercel Admin Function]
  A -->|認証 + 比較更新| DB
@@ -33,7 +33,10 @@ Redis上の楽観的比較更新（Lua EVAL）。
 ### 地図と検索
 
 `src/app/App.tsx`が検索条件と選択中のスポットを保持し、
-Leafletの`MapView`に渡します。初回表示から地図が主役です。
+MapLibre GL JSの`MapView`に渡します。OpenFreeMap Positronスタイルを読み込み、
+`roadOnlyMapStyle`で背景と道路レイヤー以外を描画前に除外します。
+APIキー・アカウントは不要で、タイルリクエストはブラウザから直接送信します。
+初回表示から地図が主役です。
 PCは一覧＋地図、スマホは地図＋検索/結果シートです。
 GPSは許可制で、DBに送信しません。
 

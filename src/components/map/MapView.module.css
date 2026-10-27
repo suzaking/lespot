@@ -7,7 +7,7 @@
 .map {
   position: absolute;
   inset: 0;
-  background: #e7ecea;
+  background: #f2f3f0;
   z-index: 0;
 }
 
@@ -63,27 +63,33 @@
   }
 }
 
-.mapTypeButton {
+.zoomControls {
   position: absolute;
   right: 12px;
   bottom: 94px;
   z-index: 800;
-  min-height: 44px;
-  padding: 0 14px;
-  border: 0;
-  border-radius: 22px;
+  display: grid;
+  gap: 8px;
+}
+
+.zoomButton {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #d8dedb;
+  border-radius: 50%;
   background: #fff;
   color: #354144;
   box-shadow: 0 2px 9px #26323833;
-  font-size: 0.75rem;
+  font-size: 1.25rem;
   font-weight: 700;
 }
 
-.mapTypeButton:hover {
+.zoomButton:hover {
   background: #f2f5f4;
 }
 
-.mapTypeButton:focus-visible {
+.zoomButton:focus-visible {
   outline: 3px solid #1764bb;
   outline-offset: 2px;
 }

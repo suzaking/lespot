@@ -6,7 +6,7 @@ Design authority: [design.md](design.md).
 
 ## 2026-10-24 Google Maps-style map refinement
 
-- Main screen is a full-viewport, edge-to-edge GSI/Leaflet map without any header or persistent results panel.
+- Main screen is a full-viewport, edge-to-edge road-only OpenFreeMap/MapLibre map without any header or persistent results panel.
 - Floating search top left, minimal information/geolocation controls top right.
 - Search/filters open contextual results; clicking a pin or row opens a place peek with optional detailed sheet.
 - Upstash Redis remains the only live data source; management remains `/admin.html`. Vercel Blob connected for future binary storage but unused. No additional paid map APIs.
@@ -14,7 +14,7 @@ Design authority: [design.md](design.md).
 ## Next verification
 
 1. Run `npm run check` and current Playwright E2E. Review desktop/mobile screen captures, keyboard and no-overflow behavior.
-2. Test iOS Safari/Android Chrome, denied/accepted GPS, GSI tile/network failures and selected marker navigation.
+2. Test iOS Safari/Android Chrome, denied/accepted GPS, OpenFreeMap tile/network failures and selected marker navigation.
 3. Confirm production `/`, `/api/spots`, `/admin.html`, request headers and no secret leakage.
 4. Validate admin create/update/delete on production with authorized test record and safe cleanup only after confirming owner access; do not fabricate success.
 5. Keep source/evidence freshness (the 2 current seed places need review by 2026-11-21).
@@ -30,7 +30,7 @@ Design authority: [design.md](design.md).
 
 - リリースコード: `17b60e6`、Vercel `dpl_4kMs1bMfCLxroXRW5RrVdmrEG2Gn` READY。44件のVitestと本番ビルドは成功。
 - Playwright E2Eで、実マウス・タッチのパン/ズーム→このエリアを検索、サジェストのキーボード操作、ボトムシートのスワイプ、ピンとの連動を検証。
-- PCの各幅とiPhone Safari/Android Chromeで実際の地図表示・スクロール干渉・シート位置・タップ領域・Leaflet操作を視覚検証。未実施を成功として記録しない。
+- PCの各幅とiPhone Safari/Android Chromeで実際の地図表示・スクロール干渉・シート位置・タップ領域・MapLibre操作を視覚検証。未実施を成功として記録しない。
 - 施設の追加は管理画面で実在・出典・休憩条件を確認して行う。Googleデータの無断取得や有料APIの導入は行わない。
 
 ## 2026-10-26 街なかベンチの追加
@@ -62,5 +62,11 @@ Design authority: [design.md](design.md).
 ## 次の作業 — 2026-10-27
 
 1. 最新UIに対するPlaywright E2Eを実行し、PC/スマホの地図切替、外部リンク、検索操作を確認する。
-2. 実iOS/Android、スクリーンリーダー、実GPS、GSIタイルの読込と操作を確認する。未実施のまま完了扱いにしない。
+2. 実iOS/Android、スクリーンリーダー、実GPS、OpenFreeMapタイルの読込と操作を確認する。未実施のまま完了扱いにしない。
 3. ベンチデータを本番Redisへ追加するときは、運営者が管理画面で安全に認証し、先にバックアップ、反映後に公開APIを確認する。
+
+## 2026-10-28 道路のみの地図
+
+- OpenFreeMapのベクタータイルから背景と道路線だけを描画。地名ラベル、施設記号、建物等を除去。
+- APIキーやアカウント不要の公開タイルを利用。地図表示時にのみ読み込み、失敗時も一覧/外部リンクを維持。
+- 次はGitHub反映後にVercel本番で地図描画とCSPを確認し、実端末で文字/記号がない道路表示、ピン操作、帰属の視認性を確認する。公開タイルにはSLA保証がなく、閲覧時にIPアドレスと地図範囲が提供元へ送信される。

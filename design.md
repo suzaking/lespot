@@ -1,6 +1,6 @@
 # LeSpot UI Design — Google Maps-style map experience
 
-Updated 2026-10-27. This document is the UI source of truth.
+Updated 2026-10-28. This document is the UI source of truth.
 
 ## Goal
 
@@ -11,9 +11,9 @@ Feature parity with all of Google Maps (global POI index, turn-by-turn navigatio
 ## Initial viewport
 
 - Map takes 100% of viewport width and height, edge-to-edge, no header, footer, left dock, or permanent white sidebar.
-- The only always-present controls are a compact search field at top left, information + opt-in geolocation at top right, a map type switcher above the bottom-right zoom controls, and GSI attribution.
+- The only always-present controls are a compact search field at top left, information + opt-in geolocation at top right, accessible zoom controls, and OpenFreeMap/OpenMapTiles/OpenStreetMap attribution.
 - An unobtrusive "スポットを見る · N件" action appears near the bottom only when no other panel is open.
-- The map is interactive immediately and requests GSI standard map tiles by default. The map type button switches between standard and pale tiles without recreating the Leaflet map. User location permission is requested **only** on an explicit control click, never automatically.
+- The map is interactive immediately and requests OpenFreeMap vector tiles after the user opens the map. Render only a quiet background and road layers; remove place labels, POI symbols, buildings, and non-road features. User location permission is requested **only** on an explicit control click, never automatically.
 - White background overlays are not framed in permanent surrounding containers; all surfaces float above the same map. Use subtle depth only for legibility.
 
 ## Search experience
@@ -35,7 +35,7 @@ Feature parity with all of Google Maps (global POI index, turn-by-turn navigatio
 
 ## Design tokens and motion
 
-- Functional teal #08796f; white overlay surfaces; dark #20282b text; subdued #667278 metadata; warm-neutral GSI map base.
+- Functional teal #08796f; white overlay surfaces; dark #20282b text; subdued #667278 metadata; light neutral road-only map base.
 - System Japanese typography, 14-16px UI and 16-18px titles. Controls >=44px touch targets.
 - Floating search: corner radius ~13px, 54px height. Sheets: 12px desktop, 18px upper mobile corners. Tiny soft shadows only for map readability.
 - No marketing hero, no badges for decorative emphasis, no fake cartographic background, no bento layout, no large ornamental text, no fixed white frame.
@@ -43,10 +43,10 @@ Feature parity with all of Google Maps (global POI index, turn-by-turn navigatio
 
 ## Technology and privacy
 
-- Keep existing React + Vite, Leaflet, GSI tiles and Upstash Redis backend through validated server-only Vercel Functions. No Google Maps JS API bills or photo API are introduced.
+- Keep React + Vite and Upstash Redis through validated server-only Vercel Functions. Use MapLibre GL JS with OpenFreeMap's public no-key vector tiles; do not add a Google Maps JS API or photo API.
 - DB is the only live facility source via GET /api/spots. Admin writes use authenticated server endpoints; public browsing never receives DB credentials.
 - GPS coordinates are volatile state only. Do not transmit them to Redis, analytics or external directions URL as the start location.
-- In the information panel, explain GSI requests, data accuracy limits, privacy and administrative access.
+- In the information panel, explain OpenFreeMap requests, data accuracy limits, privacy and administrative access.
 
 ## Verification
 
@@ -72,10 +72,10 @@ The handle at the top of results and place panels supports vertical drag via poi
 
 ### Limitations
 
-This is a functional approximation of familiar map interaction patterns, not Google Maps itself. No Google imagery, proprietary listings, transit, traffic, routing engine, offline downloads or reviews. Leaflet + GSI remains free to operate within provider terms, and Spot CRUD stays in Upstash Redis.
+This is a functional approximation of familiar map interaction patterns, not Google Maps itself. No Google imagery, proprietary listings, transit, traffic, routing engine, offline downloads or reviews. MapLibre GL JS + OpenFreeMap public tiles keep the road-only style keyless; Spot CRUD remains on the existing Upstash Redis API.
 
-## 2026-10-27 map type switch
+## 2026-10-28 road-only map
 
-- Default to GSI standard map and let users switch to the existing GSI pale map with one keyboard-accessible control above the zoom buttons.
-- Keep both base styles on the same GSI tile service. This changes the visual map style without adding another provider, API key, billing path, or dependency.
-- Official GSI tile list: https://maps.gsi.go.jp/help/use.html. Both layers keep the linked GSI attribution.
+- Use MapLibre GL JS with the public OpenFreeMap Positron vector style, transformed at runtime to retain only the neutral background and road lines.
+- Remove map labels, POI symbols, buildings, boundaries, parks, water and transit layers. LeSpot spot markers remain available.
+- Show OpenFreeMap, OpenMapTiles and OpenStreetMap attribution. Keep zoom buttons accessible. No provider API key or account is required.

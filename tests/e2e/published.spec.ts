@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 test('map-first verified places and navigation', async ({ page, context }) => {
-  await page.route('https://cyberjapandata.gsi.go.jp/**', (r) => r.abort());
+  await page.route('https://tiles.openfreemap.org/**', (r) => r.abort());
   const data = JSON.parse(readFileSync('data/bootstrap-spots.json', 'utf8'));
   await page.route('**/api/spots', (r) => r.fulfill({ json: data }));
   await page.goto('/');

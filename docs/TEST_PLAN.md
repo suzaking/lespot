@@ -16,4 +16,6 @@ Playwrightのネットワークfixtureはtestsからの合成データのみ。�
 
 published.spec.tsはspots.jsonを差し替えず、初期実データの読込・検索・ピン到達・カードfocus・出典展開・axe・横幅を確認する。タイル失敗は意図的に再現する。Vitestは実データのCSV書出し→再取込一致と数式セル拒否も検証する。
 
+地図単体テストではOpenFreeMap styleからbackgroundとtransportation roadレイヤーだけを残し、symbol/POI/building/未使用source/glyph/spriteを除くこと、地図マーカーのクリック・キーボードと拡大縮小操作を確認する。
+
 `npm run check` はE2Eを含まない。`npm run release:check` は実データ0件/期限切れを拒否した後、checkとE2Eを順に実行する。実績はVERIFICATION。

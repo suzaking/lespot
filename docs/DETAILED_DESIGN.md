@@ -16,7 +16,7 @@ Appが選択IDを保持。絞込で消えたIDは選択表示しない。カー�
 
 ## 地図
 
-Leaflet本体はlazy import。MapViewのmountで地図作成、unmountでremove。検索結果変更はmarkerだけ更新。選択変更で地図を作り直さない。ResizeObserverで表示切替・幅変更を反映。React Error Boundaryとタイルエラー表示で一覧へ縮退。同座標の複数ピンは重なるが全カードから個別選択できる。密集時の専用クラスタリングは未実装。
+MapLibre GL JSはMapViewごと遅延読込。MapViewのmountで地図作成、unmountでremove。OpenFreeMap Positronのスタイルから背景・道路線だけを残し、ラベル/施設記号/建物と未使用sourceを除外。検索結果変更はmarkerだけ更新。選択変更で地図を作り直さない。React Error Boundaryとタイルエラー表示で一覧へ縮退。同座標の複数ピンは重なるが全カードから個別選択できる。密集時の専用クラスタリングは未実装。
 
 検索起点と全結果をboundsに含め、ピンが欠けない余白・最大zoom15で表示。幅変更時も再調整する。可視番号をピンの読み上げ名に含め、音声操作と読み上げを一致させる。施設代表位置と入口/席の違いを画面に明示。
 

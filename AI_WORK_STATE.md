@@ -104,3 +104,11 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - Vercel production Deployment `dpl_56pr9uXam7Z6nxBscXgaX32U8TA9` がREADYで、`https://lespot-lac.vercel.app/`へ割当済み。
 - Vercel build上のTypeScript、ESLint、Prettier、Vitest45件、データ検証7件、Vite production buildが成功。公開HTMLおよび遅延ロード地図JSを読み取り、GSI標準/淡色タイルURLを確認。
 - Playwright E2E、実端末、実GPS、スクリーンリーダー、実地図タイルのパン/ズームと切替視認はNOT_RUN。Redis本番データは変更していない。
+
+## 最新状態 — 2026-10-28 道路のみの地図
+
+- 現在の実装構成はLeaflet/GSIではなく、遅延ロードされるMapLibre GL JS 6.16.0とOpenFreeMap公開ベクタータイル。Positronスタイルから背景・道路線以外の記号/ラベル/建物等を除く変換を追加。LeSpotの番号付きスポットピンを維持。
+- Leaflet依存を削除。OpenFreeMapタイル向けCSP、帰属表示、地図読込失敗時の案内、更新済みE2Eタイル遮断設定と設計書を反映。
+- `npm run check`: 型検査、ESLint、Prettier、Vitest 45件、データ検証7件、本番build成功。
+- Playwright 9件はChromiumが未インストールのため起動不可。成功とは扱わない。buildにMapLibreの遅延チャンク(gzip 292 kB)とworker(519 kB)、500kB超過警告あり。
+- GitHub mainへの反映とVercel公開はこれから。公開完了後にSHA・Deployment・本番HTTPと配信コードを追記する。
