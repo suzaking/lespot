@@ -39,3 +39,10 @@ Design authority: [design.md](design.md).
 - 白川公園・科学館南側のベンチ1地点を、OpenStreetMap node 6344772944の座標と名古屋市公式案内で根拠付けし、`data/bootstrap-spots.json`へ追加。料金区分はunknown、現況・空席・個別利用条件は未確認としている。
 - 証跡と限界は`docs/DATA_EVIDENCE.md`。Street Viewは2016年撮影のため現況保証に使わない。
 - 本番の正本はUpstash Redis。bootstrap更新は既存DBを上書きしないため、公開APIは未更新。次は運営者が管理画面へ認証キーを入力し、バックアップ後にこの1件を追加してGET `/api/spots`で反映を確認する。キーはチャットやRepositoryに書かない。
+
+## Current state — 2026-10-27
+
+- `data/bootstrap-spots.json` now has 7 records: the original two parks, Shirakawa Park bench, three mapped points in Shimozono Park, and one mapped point in Nishi-Osu Park.
+- This data is staged for an empty Redis database only. The production API uses Upstash Redis as its sole source; bootstrap commits do not update an initialized database.
+- Four new points were checked against OSM amenity=bench nodes, park boundaries, and Nagoya City’s public park list. Each has OSM attribution and cost=unknown. Street View was contextual research only, not evidence of an individual bench’s current status.
+- Before treating these points as live, back up Redis, add the four records through `/admin.html` using the authorized admin key, then verify `GET /api/spots`. Do not put the key in chat, URL, or repository.

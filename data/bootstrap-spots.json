@@ -58,6 +58,86 @@
       "validUntil": "2026-11-09",
       "published": true,
       "fixture": false
+    },
+    {
+      "id": "shimozono-park-bench-west",
+      "name": "下園公園のベンチ（西寄り）",
+      "category": "park",
+      "lat": 35.1695524,
+      "lon": 136.8950256,
+      "address": "名古屋市中区錦一丁目12（下園公園内）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapでベンチとして記録された地点（node 925634396）です。名古屋市の都市公園一覧に公園名・所在地を確認しています。ベンチ個体の現在の設置状況、利用制限、料金、空席は未確認です。現地表示を優先してください。",
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/925634396",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 925634396）",
+      "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 925634396を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。公園名・所在地は名古屋市都市公園一覧：https://www.city.nagoya.jp/kurashi/douro/1014853/1014871.html。公園の一般利用原則は名古屋市公園利用Q&A：https://www.city.nagoya.jp/kurashi/douro/1014853/1014872/1014876.html。Googleの写真・口コミ・施設データは転載・保存していません。",
+      "verifiedAt": "2026-10-27",
+      "validUntil": "2026-11-10",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "shimozono-park-bench-northwest",
+      "name": "下園公園のベンチ（北西寄り）",
+      "category": "park",
+      "lat": 35.1697919,
+      "lon": 136.8948557,
+      "address": "名古屋市中区錦一丁目12（下園公園内）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapでベンチとして記録された地点（node 925634408）です。名古屋市の都市公園一覧に公園名・所在地を確認しています。ベンチ個体の現在の設置状況、利用制限、料金、空席は未確認です。現地表示を優先してください。",
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/925634408",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 925634408）",
+      "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 925634408を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。公園名・所在地は名古屋市都市公園一覧：https://www.city.nagoya.jp/kurashi/douro/1014853/1014871.html。公園の一般利用原則は名古屋市公園利用Q&A：https://www.city.nagoya.jp/kurashi/douro/1014853/1014872/1014876.html。Googleの写真・口コミ・施設データは転載・保存していません。",
+      "verifiedAt": "2026-10-27",
+      "validUntil": "2026-11-10",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "shimozono-park-bench-east",
+      "name": "下園公園のベンチ（東寄り）",
+      "category": "park",
+      "lat": 35.1697716,
+      "lon": 136.895514,
+      "address": "名古屋市中区錦一丁目12（下園公園内）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapでベンチとして記録された地点（node 925634510）です。名古屋市の都市公園一覧に公園名・所在地を確認しています。ベンチ個体の現在の設置状況、利用制限、料金、空席は未確認です。現地表示を優先してください。",
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/925634510",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 925634510）",
+      "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 925634510を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。公園名・所在地は名古屋市都市公園一覧：https://www.city.nagoya.jp/kurashi/douro/1014853/1014871.html。公園の一般利用原則は名古屋市公園利用Q&A：https://www.city.nagoya.jp/kurashi/douro/1014853/1014872/1014876.html。Googleの写真・口コミ・施設データは転載・保存していません。",
+      "verifiedAt": "2026-10-27",
+      "validUntil": "2026-11-10",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "nishi-osu-park-bench-east",
+      "name": "西大須公園のベンチ（東側）",
+      "category": "park",
+      "lat": 35.1597714,
+      "lon": 136.8955947,
+      "address": "名古屋市中区大須一丁目30（西大須公園内）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapでベンチとして記録された地点（node 2536280378）です。名古屋市の都市公園一覧に公園名・所在地を確認しています。ベンチ個体の現在の設置状況、利用制限、料金、空席は未確認です。現地表示を優先してください。",
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/2536280378",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 2536280378）",
+      "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 2536280378を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。公園名・所在地は名古屋市都市公園一覧：https://www.city.nagoya.jp/kurashi/douro/1014853/1014871.html。公園の一般利用原則は名古屋市公園利用Q&A：https://www.city.nagoya.jp/kurashi/douro/1014853/1014872/1014876.html。Googleの写真・口コミ・施設データは転載・保存していません。",
+      "verifiedAt": "2026-10-27",
+      "validUntil": "2026-11-10",
+      "published": true,
+      "fixture": false
     }
   ]
 }
