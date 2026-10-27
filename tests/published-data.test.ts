@@ -40,13 +40,13 @@ describe('published dataset', () => {
       '2026-10-21',
     );
     expect(result.map(({ spot }) => spot.id)).toEqual([
-      'tsuruma-park',
-      'noritake-garden',
       'shirakawa-science-museum-bench',
+      'shimozono-park-bench-east',
       'shimozono-park-bench-west',
       'shimozono-park-bench-northwest',
-      'shimozono-park-bench-east',
       'nishi-osu-park-bench-east',
+      'tsuruma-park',
+      'noritake-garden',
     ]);
   });
 });
