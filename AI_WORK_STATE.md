@@ -73,7 +73,6 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - ソースCommit `17b60e617b89dee8d6e57b68ec444b6d5f493bed` / Vercel Production `dpl_4kMs1bMfCLxroXRW5RrVdmrEG2Gn` READY。型/Lint/Prettier、Vitest44件（8ファイル）、Viteビルド成功。HTML、`GET /api/spots`、管理画面HTTP 200、公開DBの実スポット2件取得を確認。
 - 現行UIのPlaywright E2E、実ブラウザ画面比較、iOS/Android実機、地図範囲検索の実ジェスチャーQAはNOT_RUN。単体テスト成功と混同しない。認証なし管理APIは認証拒否の対象（HTTP 401）。
 
-
 ## 2026-10-26 街なかベンチ追加（この節が最新）
 
 - 調査で選んだ実地点：白川公園・科学館南側のOpenStreetMap node 6344772944（35.1644352, 136.9000397）。個別ベンチ地点として地図上で確認し、名古屋市公式ページで公園名・所在地と一般利用原則を照合。
@@ -91,10 +90,15 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - 管理キーをチャットやRepositoryへ出さない。Redisバックアップ後、管理画面へ安全に登録し、公開APIで確認する作業が残る。
 - この実行環境にGitチェックアウトと依存がなく、2026-10-27変更の`npm run check`/E2EはNOT_RUN。JSONは手動で構造、7件・ID一意性、HTTPS出典、座標範囲、日付を検査した。前日の35件/build成功はこの変更のテストではない。
 
-
 ## 2026-10-27 地図種類変更（最新）
 
 - MapViewは地理院タイル標準地図を初期表示し、ボタンで淡色地図へ切替可能。Leaflet地図・スポットピンは維持され、切替時に地図を再生成しない。
 - GSIの標準/淡色タイルのみを使うため、外部提供者やAPIキー・課金経路は増えていない。出典表示は従来通り地理院タイル一覧へリンク。
 - キーボード操作可能な切替ボタンと単体テストを追加。テスト実行、ビルド、実機視認確認は未実施。
 - 正本: `design.md`。最新UI変更Commit後にGitHub Actions/Vercelのビルド状態を確認する。
+
+## 2026-10-27 Gemini共同作業・地図切替の最新状況
+
+- `GEMINI.md`を共同作業の入口として新設し、`docs/README.md`に既存設計・運用ドキュメントの索引を追加。
+- READMEとAGENTSから共同作業ガイドへリンク。競合時はAGENTSを共通正本とし、並行編集はファイルを分担してfeature branch/PRで統合。
+- 地図切替の本番ビルドCommit `26faaad` はPrettierが9ファイルで失敗。Prettier 3.9.10で該当ファイルをローカル整形済み。再CommitとVercel再検証が必要。

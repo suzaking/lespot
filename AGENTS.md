@@ -6,7 +6,7 @@
 
 最新ユーザー指示 > 承認済み決定 > docsの対象仕様 > タスク。2026-10-21に実装・ローカル検証・GitHub反映が許可された。以前の設計のみという制限は終了。本番公開・サービス接続・課金は別承認。
 
-AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開始時にWork Unit、変更対象、検証、承認ゲートを短く宣言。完了・未検証・次作業を正本へ記録する。
+AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開始時にWork Unit、変更対象、検証、承認ゲートを短く宣言。完了・未検証・次作業を正本へ記録する。GeminiなどのAI協働者はGEMINI.mdを入口として読む。内容が異なる場合はAGENTS.mdを優先する。
 
 ## 実装・データ
 
@@ -21,7 +21,7 @@ AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開�
 
 ## GitHub・引継ぎ
 
-読み取りはGitHub、書き込みは書き込み可能なGitHubプラグインを優先。head SHA確認 → tree/commit → expected_sha付きforce=falseのref更新 → 再取得検証。競合は取得し直して解消する。
+読み取りはGitHub、書き込みは書き込み可能なGitHubプラグインを優先。head SHA確認 → tree/commit → expected_sha付きforce=falseのref更新 → 再取得検証。競合は取得し直して解消する。複数AIが同時作業する間は同一ファイルを並行編集しない。独立作業は`gemini/<topic>`など専用ブランチとPull Requestを使い、force pushしない。
 
 公開、Repository公開化、Paid化、新サービス接続を無断で行わない。可逆な実装・テスト・文書更新は継続する。
 

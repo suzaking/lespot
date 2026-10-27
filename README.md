@@ -62,6 +62,8 @@ npm run release:check
 [データ根拠](docs/DATA_EVIDENCE.md) /
 [アーキテクチャ](docs/ARCHITECTURE.md) /
 [次の作業](NEXT_WORK.md)
+[AI共同作業ガイド](GEMINI.md)
+[ドキュメント一覧](docs/README.md)
 
 ## 地図操作（2026-10-24更新）
 

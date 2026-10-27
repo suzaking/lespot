@@ -205,7 +205,9 @@ export default function MapView({
         aria-label={`${mapType === 'standard' ? '淡色地図' : '標準地図'}に切り替え`}
         title="地図の種類を切り替え"
         onClick={() =>
-          setMapType((current) => (current === 'standard' ? 'pale' : 'standard'))
+          setMapType((current) =>
+            current === 'standard' ? 'pale' : 'standard',
+          )
         }
       >
         {mapType === 'standard' ? '標準地図' : '淡色地図'}

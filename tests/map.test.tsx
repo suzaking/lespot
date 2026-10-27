@@ -37,7 +37,6 @@ it('names markers and supports click/space and selected state', () => {
   expect(marker).toHaveAttribute('aria-pressed', 'true');
 });
 
-
 it('switches between the standard and pale GSI maps', () => {
   vi.stubGlobal(
     'ResizeObserver',
@@ -47,12 +46,7 @@ it('switches between the standard and pale GSI maps', () => {
     },
   );
   render(
-    <MapView
-      results={[]}
-      origin={spot}
-      selected={null}
-      onSelect={vi.fn()}
-    />,
+    <MapView results={[]} origin={spot} selected={null} onSelect={vi.fn()} />,
   );
   fireEvent.click(screen.getByRole('button', { name: '淡色地図に切り替え' }));
   expect(

@@ -84,8 +84,13 @@ release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E
 - ソースCommit `17b60e617b89dee8d6e57b68ec444b6d5f493bed` / Vercel Production `dpl_4kMs1bMfCLxroXRW5RrVdmrEG2Gn` READY。型/Lint/Prettier、Vitest44件（8ファイル）、Viteビルド成功。HTML、`GET /api/spots`、管理画面HTTP 200、公開DBの実スポット2件取得を確認。
 - 現行UIのPlaywright E2E、実ブラウザ画面比較、iOS/Android実機、地図範囲検索の実ジェスチャーQAはNOT_RUN。単体テスト成功と混同しない。認証なし管理APIは認証拒否の対象（HTTP 401）。
 
-
 ## 2026-10-27 地図種類切替の実装
 
 - MapViewの初期タイルをGSI標準地図に変更し、GSI淡色地図と切り替えるボタンを追加。両方ともGSI公式の標準/淡色タイルURLと出典リンクを使用。
 - `tests/map.test.tsx`に切替操作テストを追加。テスト・型検査・build・E2EはGitHub API経由の作業環境にcheckoutと依存がないためNOT_RUN。GitHub Actions/Vercel結果はCommit後に確認する。
+
+## 2026-10-27 GSI地図種類切替ビルド
+
+- 本番デプロイ `dpl_E1kXWngKCmduvUgbNH89DuxAVpGt` はCommit `26faaad` から開始したが、`prettier --check .` が対象9ファイルを報告してbuildがERROR。アプリは公開されていない。
+- Prettier 3.9.10で対象9ファイルをローカル整形し、再確認では9ファイルすべて通過。変更をCommit後、Vercelの本番buildと公開URLを再検証する。
+- GitHub API中心の実行環境ではアプリ全体のnpm test/E2Eを直接実行できない。Vercel buildでは`npm run check`を実行して判定する。

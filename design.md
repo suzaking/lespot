@@ -1,6 +1,6 @@
 # LeSpot UI Design — Google Maps-style map experience
 
-Updated 2026-10-24. This document is the UI source of truth.
+Updated 2026-10-27. This document is the UI source of truth.
 
 ## Goal
 
@@ -73,7 +73,6 @@ The handle at the top of results and place panels supports vertical drag via poi
 ### Limitations
 
 This is a functional approximation of familiar map interaction patterns, not Google Maps itself. No Google imagery, proprietary listings, transit, traffic, routing engine, offline downloads or reviews. Leaflet + GSI remains free to operate within provider terms, and Spot CRUD stays in Upstash Redis.
-
 
 ## 2026-10-27 map type switch
 

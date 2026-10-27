@@ -33,7 +33,6 @@ Design authority: [design.md](design.md).
 - PCの各幅とiPhone Safari/Android Chromeで実際の地図表示・スクロール干渉・シート位置・タップ領域・Leaflet操作を視覚検証。未実施を成功として記録しない。
 - 施設の追加は管理画面で実在・出典・休憩条件を確認して行う。Googleデータの無断取得や有料APIの導入は行わない。
 
-
 ## 2026-10-26 街なかベンチの追加
 
 - 白川公園・科学館南側のベンチ1地点を、OpenStreetMap node 6344772944の座標と名古屋市公式案内で根拠付けし、`data/bootstrap-spots.json`へ追加。料金区分はunknown、現況・空席・個別利用条件は未確認としている。
@@ -47,9 +46,13 @@ Design authority: [design.md](design.md).
 - Four new points were checked against OSM amenity=bench nodes, park boundaries, and Nagoya City’s public park list. Each has OSM attribution and cost=unknown. Street View was contextual research only, not evidence of an individual bench’s current status.
 - Before treating these points as live, back up Redis, add the four records through `/admin.html` using the authorized admin key, then verify `GET /api/spots`. Do not put the key in chat, URL, or repository.
 
-
 ## 2026-10-27 地図種類の変更
 
 - 標準地図を初期表示にし、MapView右下に地理院標準地図／淡色地図の切替ボタンを追加。Leafletインスタンスは再生成しない。
 - GSIの公式標準・淡色タイル一覧に沿い、既存の地理院タイル利用を維持。外部地図タイル提供者は追加していない。
 - テストを追加したが、GitHub API経由の作業環境にRepository checkout/依存がないため実行はNOT_RUN。Vercel/GitHubのビルド結果は未確認。
+
+## Gemini共同作業と公開反映 — 2026-10-27
+
+- `GEMINI.md`を共同作業の入口にする。`docs/README.md`に設計・データ・運用・検証文書を役割別に整理。
+- 標準/淡色の地図切替コードはCommit `26faaad916045e93e95dc70608a3a947da7fa44c`。Vercel本番ビルドはPrettierで9ファイルに失敗したため、整形済みCommitを作成して再デプロイする。
