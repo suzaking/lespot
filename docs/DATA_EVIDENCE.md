@@ -66,3 +66,29 @@
 - 出典と権利：名古屋市交通局ページの事実を独自に記述し、文章・画像は転載しない。駅代表座標の参照元を`rights`に明記。地図記号のない道路ベースマップと連動するが、地下鉄構内の具体的な場所は公式の案内を優先する。
 - **公開状況**：2026-11-14に公開`GET /api/spots`で確認できたのは既存2地点。今回の3件と以前のベンチ5件は`data/bootstrap-spots.json`へ準備するだけで、初期化済みUpstash Redisへは反映されない。公開用DB更新には運営者認証・バックアップ・revision比較が必要。
 
+## 2026-11-14 名古屋市のOpenStreetMap旧データから抽出したベンチ15地点
+
+- **データ元**：Mobility Sim Labの名古屋市切り出しOSM PBF（ https://www.mobilitysimlab.com/nagoya-maps/ 、配布ファイル https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf ）。2026-11-14に取得し、HTTP Last-Modifiedが**2025-06-30**であることを確認。**最新のOpenStreetMap現況を確認したデータではなく、約1年5か月前の旧スナップショット**。元データ © OpenStreetMap contributors（ODbL 1.0） https://www.openstreetmap.org/copyright
+- **抽出方法**：PBFの`node`のみから`amenity=bench`を選択。緯度35.14〜35.195・経度136.87〜136.935の範囲で164個の候補を確認し、`access=private/no/customers/permit`等を除外、名駅・伏見・丸の内・栄・大須・鶴舞付近から既存5ノードと45m以内の地点を除外、選択ノード間はおおむね93m以上の間隔を維持して15件抽出（厳密な公道隣接判定ではない）。
+- **位置精度**：各`sourceUrl`は元OSM nodeへの直接リンク。座標はOSM個別ベンチノードの点位置であり、駅代表位置で登録した別の親子ベンチ3件とは区別する。ただし実測値かどうか・設置状態・現地での利用は未確認。
+- **公開判断**：`cost=unknown`・`category=other`・現況未確認の注意を付与。`verifiedAt=2026-11-14`は**旧配布データを読んだ日**でありベンチの現況検証日ではない。`validUntil=2026-11-21`は一次資料を再点検すべき短い期限で、利用可を保証しない。個別の現況を確かめるまでは本番Redisへ自動反映しない。
+- **氏名・写真・権利**：OpenStreetMapのノード番号と座標/タグにODbL帰属を表示。Googleの画像・施設データ・口コミ、他サイトの説明文の転載はしない。各レコードにも配布元・権利・不確実性を保持する。
+
+| OSM node | 便宜的な地区 | 緯度 | 経度 |
+| --- | --- | ---: | ---: |
+| [12898367449](https://www.openstreetmap.org/node/12898367449) | 名駅 | 35.1711545 | 136.875775 |
+| [10015239515](https://www.openstreetmap.org/node/10015239515) | 伏見・丸の内 | 35.1677683 | 136.8921877 |
+| [9945170721](https://www.openstreetmap.org/node/9945170721) | 伏見・丸の内 | 35.1683072 | 136.8971229 |
+| [5291422930](https://www.openstreetmap.org/node/5291422930) | 伏見・丸の内 | 35.1712966 | 136.8993418 |
+| [5291422940](https://www.openstreetmap.org/node/5291422940) | 伏見・丸の内 | 35.172395 | 136.8995286 |
+| [10559301646](https://www.openstreetmap.org/node/10559301646) | 伏見・丸の内 | 35.178325 | 136.9023972 |
+| [5745085309](https://www.openstreetmap.org/node/5745085309) | 伏見・丸の内 | 35.1773239 | 136.8946156 |
+| [6344772940](https://www.openstreetmap.org/node/6344772940) | 伏見・丸の内 | 35.1643171 | 136.8991224 |
+| [12135386086](https://www.openstreetmap.org/node/12135386086) | 栄・久屋大通 | 35.1809949 | 136.9097194 |
+| [10559301648](https://www.openstreetmap.org/node/10559301648) | 栄・久屋大通 | 35.1784219 | 136.9042682 |
+| [10031292808](https://www.openstreetmap.org/node/10031292808) | 大須 | 35.1572734 | 136.8929253 |
+| [8979383664](https://www.openstreetmap.org/node/8979383664) | 大須 | 35.1564857 | 136.9093817 |
+| [3029248602](https://www.openstreetmap.org/node/3029248602) | 鶴舞 | 35.1573977 | 136.9257428 |
+| [6398525641](https://www.openstreetmap.org/node/6398525641) | 鶴舞 | 35.1557448 | 136.9206425 |
+| [6944805811](https://www.openstreetmap.org/node/6944805811) | 鶴舞 | 35.1595768 | 136.9242103 |
+

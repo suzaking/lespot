@@ -1,5 +1,13 @@
 # 作業状態 — 2026-10-24
 
+## 2026-11-14 OSM個別ベンチ15件追加／bootstrap 25件
+
+- `suzaking/lespot` / `main` で名古屋市中心部の個別ベンチ15件を初期登録候補へ追加。データ元Mobility Sim Labの都市別OSM PBF（2025-06-30更新、2026-11-14取得）、`amenity=bench`ノード164件から位置間隔・重複・アクセス制限タグを基準に選別。出典/ODbL/ノード一覧は`docs/DATA_EVIDENCE.md`。ユーザー指定の「スポットを増やす」を優先したWork Unit。
+- 変更後の`data/bootstrap-spots.json`は25件（旧7件＋公式駅ベンチ3件＋OSM個別15件）。ID/必須キー/住所形式/座標範囲/期限/出典URLの静的検証済み。値はすべて`cost=unknown`、15件の現況・利用可否は未検証、地図元が約17か月前のため2026年の事実とは断定しない。
+- 現在の本番Upstash Redisは今回変更していない。2026-11-14時点の公開APIは2件。OSM15件、駅ベンチ3件、旧ベンチ5件の本番反映は管理者のバックアップ・出典再検証・差分照合/明示的操作待ち。
+- GitHub API経由で`data/bootstrap-spots.json`、`docs/DATA_EVIDENCE.md`、`TASKS.md`、`NEXT_WORK.md`、`AI_WORK_STATE.md`を更新。Vercelデプロイ、Redis書込み、依存、課金は変更なし。npm run check/Playwrightは実行していない（NOT_RUN）。
+- 次：2026年現況確認を満たしたノードから運営者がRedis本番へ追加。別途最新OSM読取サービスを用い名古屋の道路沿いベンチを増やす。
+
 ## 2026-11-14 スポット拡充（公式駅ベンチ3地点）
 
 - 最新ユーザー指示に従い、`suzaking/lespot` / `main` で新スポットデータ登録を開始。名古屋市交通局公式ページの一次情報に基づく親子ベンチ3件を登録（駅改札外）。個別位置の座標は不明なので駅代表座標の概略ピンとして正直に表示。既存7件を維持しbootstrap計10件。

@@ -198,6 +198,306 @@
       "validUntil": "2026-12-12",
       "published": true,
       "fixture": false
+    },
+    {
+      "id": "osm-bench-12898367449",
+      "name": "名駅周辺のベンチ（01）",
+      "category": "other",
+      "lat": 35.1711545,
+      "lon": 136.875775,
+      "address": "名古屋市・名駅周辺（OSM記録座標 35.1711545, 136.875775。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/12898367449",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 12898367449、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/12898367449。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-10015239515",
+      "name": "伏見・丸の内周辺のベンチ（01）",
+      "category": "other",
+      "lat": 35.1677683,
+      "lon": 136.8921877,
+      "address": "名古屋市・伏見・丸の内周辺（OSM記録座標 35.1677683, 136.8921877。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/10015239515",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 10015239515、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/10015239515。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-9945170721",
+      "name": "伏見・丸の内周辺のベンチ（02）",
+      "category": "other",
+      "lat": 35.1683072,
+      "lon": 136.8971229,
+      "address": "名古屋市・伏見・丸の内周辺（OSM記録座標 35.1683072, 136.8971229。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/9945170721",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 9945170721、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/9945170721。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-5291422930",
+      "name": "伏見・丸の内周辺のベンチ（03）",
+      "category": "other",
+      "lat": 35.1712966,
+      "lon": 136.8993418,
+      "address": "名古屋市・伏見・丸の内周辺（OSM記録座標 35.1712966, 136.8993418。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/5291422930",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 5291422930、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/5291422930。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-5291422940",
+      "name": "伏見・丸の内周辺のベンチ（04）",
+      "category": "other",
+      "lat": 35.172395,
+      "lon": 136.8995286,
+      "address": "名古屋市・伏見・丸の内周辺（OSM記録座標 35.172395, 136.8995286。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/5291422940",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 5291422940、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/5291422940。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-10559301646",
+      "name": "伏見・丸の内周辺のベンチ（05）",
+      "category": "other",
+      "lat": 35.178325,
+      "lon": 136.9023972,
+      "address": "名古屋市・伏見・丸の内周辺（OSM記録座標 35.178325, 136.9023972。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/10559301646",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 10559301646、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/10559301646。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-5745085309",
+      "name": "伏見・丸の内周辺のベンチ（06）",
+      "category": "other",
+      "lat": 35.1773239,
+      "lon": 136.8946156,
+      "address": "名古屋市・伏見・丸の内周辺（OSM記録座標 35.1773239, 136.8946156。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/5745085309",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 5745085309、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/5745085309。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-6344772940",
+      "name": "伏見・丸の内周辺のベンチ（07）",
+      "category": "other",
+      "lat": 35.1643171,
+      "lon": 136.8991224,
+      "address": "名古屋市・伏見・丸の内周辺（OSM記録座標 35.1643171, 136.8991224。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/6344772940",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 6344772940、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/6344772940。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-12135386086",
+      "name": "栄・久屋大通周辺のベンチ（01）",
+      "category": "other",
+      "lat": 35.1809949,
+      "lon": 136.9097194,
+      "address": "名古屋市・栄・久屋大通周辺（OSM記録座標 35.1809949, 136.9097194。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/12135386086",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 12135386086、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/12135386086。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-10559301648",
+      "name": "栄・久屋大通周辺のベンチ（02）",
+      "category": "other",
+      "lat": 35.1784219,
+      "lon": 136.9042682,
+      "address": "名古屋市・栄・久屋大通周辺（OSM記録座標 35.1784219, 136.9042682。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/10559301648",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 10559301648、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/10559301648。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-10031292808",
+      "name": "大須周辺のベンチ（01）",
+      "category": "other",
+      "lat": 35.1572734,
+      "lon": 136.8929253,
+      "address": "名古屋市・大須周辺（OSM記録座標 35.1572734, 136.8929253。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/10031292808",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 10031292808、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/10031292808。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-8979383664",
+      "name": "大須周辺のベンチ（02）",
+      "category": "other",
+      "lat": 35.1564857,
+      "lon": 136.9093817,
+      "address": "名古屋市・大須周辺（OSM記録座標 35.1564857, 136.9093817。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/8979383664",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 8979383664、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/8979383664。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-3029248602",
+      "name": "鶴舞周辺のベンチ（01）",
+      "category": "other",
+      "lat": 35.1573977,
+      "lon": 136.9257428,
+      "address": "名古屋市・鶴舞周辺（OSM記録座標 35.1573977, 136.9257428。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/3029248602",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 3029248602、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/3029248602。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-6398525641",
+      "name": "鶴舞周辺のベンチ（02）",
+      "category": "other",
+      "lat": 35.1557448,
+      "lon": 136.9206425,
+      "address": "名古屋市・鶴舞周辺（OSM記録座標 35.1557448, 136.9206425。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/6398525641",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 6398525641、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/6398525641。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "osm-bench-6944805811",
+      "name": "鶴舞周辺のベンチ（03）",
+      "category": "other",
+      "lat": 35.1595768,
+      "lon": 136.9242103,
+      "address": "名古屋市・鶴舞周辺（OSM記録座標 35.1595768, 136.9242103。正確な住所は未確認）",
+      "cost": "unknown",
+      "conditions": "OpenStreetMapのベンチノードとして記録された地点です。参照した名古屋市の抽出ファイルは2025年6月30日更新の旧データであり、2026年現在の設置状況・公衆利用可否・料金・空席・設備は確認できていません。現地で位置と利用条件を確認してください。",
+      "facilities": [
+        "ベンチ（旧OSMデータ上の記録。現物・空席は未確認）"
+      ],
+      "sourceUrl": "https://www.openstreetmap.org/node/6944805811",
+      "sourceLabel": "OpenStreetMap：ベンチ地点（node 6944805811、旧データ）",
+      "rights": "位置・amenity=benchタグ：© OpenStreetMap contributors / ODbL 1.0（https://www.openstreetmap.org/copyright）。元ノード https://www.openstreetmap.org/node/6944805811。2025-06-30更新のMobility Sim Lab名古屋市OSM配布ファイル（https://mobilitysimlabcom.b-cdn.net/asia/2-nagoya/2-nagoya.osm.pbf）から抽出。現況・利用許可は別途未確認。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-11-21",
+      "published": true,
+      "fixture": false
     }
   ]
 }
