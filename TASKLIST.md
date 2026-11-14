@@ -37,4 +37,3 @@
 - [次の作業・引き継ぎ](NEXT_WORK.md)
 - [最新の作業記録](AI_WORK_STATE.md)
 - [検証記録](docs/VERIFICATION.md)
-
