@@ -101,7 +101,11 @@ ${stagedBenchTask && /staged bench records/i.test(handoff) ? '2. **I-12 — ベ�
 - [検証記録](docs/VERIFICATION.md)
 `;
 
-const formattedOutput = await prettier.format(output, { filepath: fileURLToPath(outputPath) });
+const formattedOutput = (await prettier.format(output, { filepath: fileURLToPath(outputPath) })).replace(
+  /\r\n/g,
+  '\n',
+);
 writeFileSync(outputPath, formattedOutput, 'utf8');
 console.log(`TASKLIST.mdを更新しました（${doneCount}/${taskRows.length}件完了）。`);
+
 
