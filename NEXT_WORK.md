@@ -4,6 +4,16 @@ Current production source: `suzaking/lespot`, branch `main`.
 Live: https://lespot-lac.vercel.app/
 Design authority: [design.md](design.md).
 
+## 追加改善タスクの引継ぎ — 2026-11-14
+
+- タスク正本`TASKS.md`にI-14〜I-23の10件（P0=2 / P1=6 / P2=2）を追加。既存I-11実機QA、I-12ベンチ5地点の本番反映は引き続き未完了。I-13の45件Vitest・9件E2E成功は既存のローカル検証記録であり、新改善タスクの実装・テスト完了ではない。
+- 調査時点の`data/bootstrap-spots.json`は7件。ベンチ5件の`validUntil`が2026-11-09/10で期限切れ、元の2地点は2026-11-21が期限。現時点の本番Redis件数は改めて公開APIで確認する必要がある。
+- **次のWork Unit 1（P0）：I-15**。出典・座標・rights・現況の確認可能な範囲を調査し、確認した事実だけで`docs/DATA_EVIDENCE.md`とデータを更新する。期限を自動延長しない。
+- **Work Unit 2（P0）：I-14 → I-12**。公開APIとbootstrapの差分を読み取り専用で可視化し、管理者がバックアップ・revision検証・プレビュー後に本番反映する。認証情報がなくても報告側は進められる。本番Redisの変更は管理者の明示操作が前提。
+- **並行検証：I-11**。iOS Safari/Android Chrome、実GPS許可/拒否、道路のみの実タイル・帰属、ピン・タッチ・読み上げを実機で確認。モックE2Eの成功をもって代替しない。
+- **次段階：I-16/I-17** ベンチ絞り込みと実地点拡充。**品質・運用：I-18〜I-21** 障害耐性・速度・CI・稼働/コスト点検。**後続：I-22/I-23** 共有URL・文書整合。
+- 本タスク登録で変更するのはタスク/引継ぎ文書のみ。アプリコード、Vercelデプロイ、Redis、依存、課金設定は未変更。GitHub APIからの文書更新のみなので`npm run check`・E2EはNOT_RUNと記録する。
+
 ## Current handoff — 2026-11-14
 
 The latest main UI browser pass is complete. `npm run check` passed, followed by 9 Playwright tests on desktop, 390px mobile, and 320px narrow viewports. The tests verify map/list flows, search and filters, denied geolocation, retry, axe on sampled states, and horizontal overflow. Map tiles and the spots API were deliberately stubbed/blocked in these tests; they do not verify live tile rendering or production API behavior. Desktop and narrow screenshots were reviewed.

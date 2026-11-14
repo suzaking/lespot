@@ -1,5 +1,14 @@
 # 作業状態 — 2026-10-24
 
+## 最新作業状態 — 2026-11-14（改善バックログ登録）
+
+- 対象：`suzaking/lespot` / `main`。登録前Git HEAD：`130cf500811b5319fd8df6867bc2b02d179d417c`。開発・データ・共同作業ルールを`AGENTS.md`と`GEMINI.md`で確認し、TASKS/NEXT_WORK/AI_WORK_STATE・コード・データを読み取った。
+- 既存タスクI-01〜I-13とGitHub Issues（既存0件）の重複を避け、改善バックログI-14〜I-23（P0=2/P1=6/P2=2）を`TASKS.md`に追加。既存タスクI-11（実機）とI-12（Redis公開反映）は未完了のまま継続。
+- 追加理由：bootstrap 7件のうちベンチ5件は2026-11-14時点で確認期限切れ、元の2件は2026-11-21期限。公開Redisへの段階的反映と出典再確認が未完了。公開APIの現時点の実データ件数・実タイル描画はこのWork Unitで検証できていない。
+- 次：I-15の出典再検証を最優先、並行してI-14の読み取り専用差分。反映前にバックアップと管理者操作が必要。I-11の端末/現地QAは別途実施。
+- 作業範囲：`TASKS.md`、`NEXT_WORK.md`、`AI_WORK_STATE.md`の文書のみ。本番データ、デプロイ、コード、依存、設定は変更しない。GitHub API操作のためローカル`npm run check`/Playwright E2EはNOT_RUN（文書のみ変更）。
+- 反映確認：新CommitとHEAD、3ファイルをGitHubから再取得して照合する。次回`/continue suzaking/lespot`時は本節・`NEXT_WORK.md`・`TASKS.md`から復元する。
+
 ## 最新作業状態 — 2026-11-14
 
 - 対象：`suzaking/lespot` / `main`。開始時のremote HEADは`1a7b055b000fcf35c05ddf1eb488914df5e3b53e`。
