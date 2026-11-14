@@ -29,6 +29,9 @@ AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開�
 
 TASKS、NEXT_WORK、AI_WORK_STATEに検証済み範囲と未完了を残し、`/continue suzaking/lespot` で復元可能にする。
 
+`TASKLIST.md`は`TASKS.md`と`NEXT_WORK.md`から生成する閲覧用一覧。手で編集せず、状態文書を更新したら`npm run tasklist:update`を実行して最新内容を反映する。通常の`npm run check`でも自動更新される。READMEから一覧を開けるように保つ。
+
 ## UI設計の正本（2026-10-24更新）
 
 デザイン、レイアウト、インタラクションはリポジトリ直下の`design.md`を正本とする。地図は道路中心のラベル・施設記号なし表示。GPSは許可制・非永続化。施設の唯一の正本はUpstash Redisとし、更新時にDBを初期スナップショットで上書きしない。管理APIの認証・入力検証を維持する。
+
