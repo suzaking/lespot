@@ -95,4 +95,3 @@ it('suggests verified DB places and opens their details from search', async () =
     screen.getByRole('heading', { name: spots[1]!.name }),
   ).toBeInTheDocument();
 });
-

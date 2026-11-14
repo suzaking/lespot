@@ -122,4 +122,3 @@ release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E
 - Vite buildは遅延ロードMapView JS 1,072.92 kB（gzip 292.10 kB）、MapLibre worker 518.98 kBを出力し、500 kB超過警告あり。地図を開くまでロードしないが、初回地図表示時の転送量は増えている。実ブラウザでのタイル描画・CSP・モバイル実機は未確認。
 
 - GitHub `main` Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`、Vercel production Deployment `dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq` READY。公開Alias `https://lespot-lac.vercel.app/`をHTTP 200で確認し、CSPと遅延地図JSにOpenFreeMap URL・道路レイヤー処理が含まれ、GSI/Leafletの参照がないことを確認。
-

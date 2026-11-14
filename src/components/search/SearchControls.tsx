@@ -287,4 +287,3 @@ export function SearchControls({
     </section>
   );
 }
-

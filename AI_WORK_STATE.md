@@ -122,4 +122,3 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - `npm run check`: 型検査、ESLint、Prettier、Vitest 45件、データ検証7件、本番build成功。
 - Playwright 9件はChromiumが未インストールのため起動不可。成功とは扱わない。buildにMapLibreの遅延チャンク(gzip 292 kB)とworker(519 kB)、500kB超過警告あり。
 - GitHub `main` Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`へ反映し、Vercel production `dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq` READY。`https://lespot-lac.vercel.app/` HTTP 200、CSPにtiles.openfreemap.orgを確認。配信JSにはOpenFreeMap/transportation style変換を含み、GSI/Leaflet参照なし。
-

@@ -48,4 +48,3 @@ test('map-first verified places and navigation', async ({ page, context }) => {
   ).toBe(true);
   await page.screenshot({ path: test.info().outputPath('map-first.png') });
 });
-

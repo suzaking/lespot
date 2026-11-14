@@ -111,4 +111,3 @@
 - [x] GitHub main反映 Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`
 - [x] Vercel本番 READY（`dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq`）、公開URL HTTP 200とCSP/地図JSを確認
 - [ ] E2E（Chromium未導入で起動不可）、実機タイル表示・操作確認
-

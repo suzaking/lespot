@@ -84,4 +84,3 @@ Next work is manual device QA: iOS Safari and Android Chrome, allowed/denied rea
 - 道路だけのMapLibre/OpenFreeMap地図を本番公開済み。Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`、Deployment `dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq` READY。
 - 公開HTMLはHTTP 200、CSPはOpenFreeMap hostを許可し、配信された遅延地図JSに新しい地図提供元・スタイル変換を確認。
 - Playwrightは環境にChromiumがなく未検証。ブラウザ導入後、PC/モバイルで実タイル描画、文字/記号が出ないこと、ピン・検索・外部リンク、CSPを再検証する。
-
