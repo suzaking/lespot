@@ -29,7 +29,7 @@ AGENTS → AI_WORK_STATE → NEXT_WORK → TASKSと対象設計を読む。開�
 
 TASKS、NEXT_WORK、AI_WORK_STATEに検証済み範囲と未完了を残し、`/continue suzaking/lespot` で復元可能にする。
 
-`TASKLIST.md`は`TASKS.md`と`NEXT_WORK.md`から生成する閲覧用一覧。手で編集せず、状態文書を更新したら`npm run tasklist:update`を実行して最新内容を反映する。通常の`npm run check`でも自動更新される。READMEから一覧を開けるように保つ。
+進捗の確認・表示を頼まれたら、毎回`TASKS.md`と`NEXT_WORK.md`を直接読み、必要に応じて`AI_WORK_STATE.md`も参照して回答する。これらは正本として保ち、進捗を表示するためだけに変更したり、`TASKLIST.md`などの別コピーを作成・維持したりしない。このルールはGemini／Google AIなど他の協働AIにも適用する。
 
 ## UI設計の正本（2026-10-24更新）
 

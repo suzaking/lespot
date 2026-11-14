@@ -1,6 +1,6 @@
-# Gemini・AI共同作業ガイド
+# AI共同作業ガイド（Gemini・Google AIを含む全AI共通）
 
-このファイルはGemini CLIなどの協働AI向けの入口です。共通ルールの正本は[AGENTS.md](AGENTS.md)です。両者の内容が食い違う場合はAGENTS.mdを優先してください。
+このRepositoryでは、[AGENTS.md](AGENTS.md)の全ルールをCodex、Gemini、Google AI、その他すべてのAI協働者に同じように適用します。AIごとの例外は設けません。このファイルは共通ルールへの入口と補足だけを記載し、内容が異なる場合は常にAGENTS.mdを正本とします。
 
 ## 作業を始める順番
 
@@ -8,6 +8,8 @@
 2. `AI_WORK_STATE.md`、`NEXT_WORK.md`、`TASKS.md`で最新の進捗と未完了事項を読む。
 3. UI・操作の正本である`design.md`と[docs一覧](docs/README.md)を確認し、担当範囲の設計書・コード・テストを読む。
 4. 最新のmain SHAと作業中の差分を確認してから、担当Work Unitの変更範囲を決める。
+
+進捗の確認・表示を頼まれた場合は、毎回`TASKS.md`と`NEXT_WORK.md`を直接読み、必要に応じて`AI_WORK_STATE.md`も参照してください。これらの正本は閲覧のためだけに変更せず、`TASKLIST.md`などの別コピーも作成・維持しないでください。このルールはGemini、Google AIを含むすべての協働AIに適用します。
 
 ## 協働の進め方
 

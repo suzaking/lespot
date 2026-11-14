@@ -15,10 +15,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "tasklist:update": "node scripts/update-tasklist.mjs",
     "test:e2e": "playwright test",
     "data:validate": "node --import tsx scripts/validate-data.ts",
-    "check": "npm run tasklist:update && npm run typecheck && npm run lint && npm run format:check && npm test && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run build",
     "release:check": "node --import tsx scripts/prepare-release.ts && npm run check && npm run test:e2e"
   },
   "dependencies": {

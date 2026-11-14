@@ -16,10 +16,6 @@
 
 画面デザインの正本は[design.md](design.md)です。
 
-## 開発タスクの進捗
-
-[全体タスクリストを開く](TASKLIST.md)。完了状況と次に行う作業を一覧できます。TASKS.mdとNEXT_WORK.mdから生成され、`npm run check`時にも更新されます。
-
 ## 施設情報のDB管理
 
 - 管理画面：**https://lespot-lac.vercel.app/admin.html**
