@@ -39,7 +39,7 @@ if (!handoff) {
   throw new Error('NEXT_WORK.mdからCurrent handoffを読み取れませんでした。');
 }
 
-const nextAction = handoff.match(/^Next work is manual device QA: ([^.]+)\./m)?.[1];
+const nextAction = handoff.match(/^Next work is ([^.]+)\./m)?.[1];
 if (!nextAction) {
   throw new Error('NEXT_WORK.mdのCurrent handoffから次の作業を読み取れませんでした。');
 }
@@ -47,17 +47,23 @@ if (!nextAction) {
 const browserPass = handoff.match(
   /(\d+) Playwright tests on desktop, (\d+px) mobile, and (\d+px) narrow viewports/,
 );
-if (!browserPass) {
-  throw new Error('NEXT_WORK.mdのCurrent handoffから最新のブラウザ確認を読み取れませんでした。');
-}
+const latestUiTask = taskRows.find((task) => task.id === 'I-13');
+const stagedBenchTask = taskRows.find((task) => task.id === 'I-12' && task.label === '🟡 登録待ち');
 
 const nextActionJa = nextAction
-  .replace(/^manual device QA: /, '')
+  .replace(/^manual device QA:\s*/i, '')
   .replace('iOS Safari and Android Chrome', 'iOS Safari／Android Chrome')
   .replace('allowed/denied real GPS', '実GPSの許可／拒否')
   .replace('real OpenFreeMap roads-only rendering and attribution', 'OpenFreeMap道路のみの実表示と出典')
   .replace('touch/keyboard/screen-reader behavior', 'タッチ／キーボード／読み上げ操作')
   .replaceAll(', ', '、');
+
+const currentStatus = browserPass
+  ? `最新UIのブラウザ確認は${browserPass[1]}件成功（PC、幅${browserPass[2]}、幅${browserPass[3]}）。`
+  : `最新UIの確認状況：${latestUiTask?.status ?? 'TASKS.mdを参照'}。`;
+const liveCheckNote = /deliberately stubbed\/blocked/i.test(handoff)
+  ? 'タイルとスポットAPIはテスト内で置き換えているため、実タイル・本番APIの動作確認は含みません。'
+  : '';
 
 const table = [
   '| ID | 作業 | 状態 | 詳細 |',
@@ -80,12 +86,12 @@ ${table}
 
 ## 現在の状態
 
-最新UIのブラウザ確認は${browserPass[1]}件成功（PC、幅${browserPass[2]}、幅${browserPass[3]}）。タイルとスポットAPIはテスト内で置き換えているため、実タイル・本番APIの動作確認は含みません。
+${currentStatus}${liveCheckNote ? ` ${liveCheckNote}` : ''}
 
 ## 次にやること
 
-1. **I-11 — 実機確認（次の優先作業）：** ${nextActionJa}。未実施の項目は完了扱いにしません。
-2. **I-12 — ベンチ情報を本番へ登録：** 管理者によるRedisバックアップと安全な管理キー入力後に反映し、公開APIで確認します。それまでは本番Redisを変更しません。
+1. **次の作業：** ${nextActionJa}。
+${stagedBenchTask && /staged bench records/i.test(handoff) ? '2. **I-12 — ベンチ情報を本番へ登録：** 管理者によるRedisバックアップと安全な管理キー入力後に反映し、公開APIで確認します。それまでは本番Redisを変更しません。\n' : ''}
 
 ## 詳細
 
