@@ -1,6 +1,6 @@
 # LeSpot 実装タスク
 
-更新：2026-10-27。旧タスクはGit履歴へ保存。ローカル実装・公開・実機は別管理。
+更新：2026-11-14。旧タスクはGit履歴へ保存。ローカル実装・公開・実機は別管理。
 
 | ID   | 作業                                     | 状態                                           |
 | ---- | ---------------------------------------- | ---------------------------------------------- |
@@ -16,8 +16,19 @@
 | I-10 | Vercel Hobby設定・公開                   | DONE：2026-10-24 READY / HTTP 200、本番URL確認 |
 | I-11 | 実iOS/Android・実GPS・読み上げ・現地検証 | NOT_RUN：端末/現地アクセスなし                 |
 | I-12 | 街なかのベンチ地点を追加                 | STAGED：bootstrap計5地点。公開DBへの反映待ち   |
+| I-13 | 最新UIのPlaywright E2Eと発見事項の修正   | DONE：PC/390px/320px、9件成功・axe 0件         |
 
-次はNEXT_WORK参照。ローカル実装完了。本番公開や実機試験まで完了したとはしない。
+次はNEXT_WORK参照。I-13はローカル本番ビルドを使ったブラウザ確認。実端末・GPS・実タイルの公開環境確認は未完了。
+
+## 2026-11-14 最新UIブラウザ検証
+
+- [x] E2Eの公開スポット件数をbootstrap JSONから読むよう修正（2件固定の古い期待値を解消）
+- [x] 結果シートと検索/地図操作の重なりで操作が妨げられる問題を修正
+- [x] 検索候補入力のARIA combobox指定、クイックフィルターの文字コントラスト、一覧ボタンの可視名を修正
+- [x] WindowsのCRLF checkoutでも同一コードのPrettier検査が通るよう`endOfLine: auto`を設定
+- [x] `npm run check`成功：typecheck、ESLint、Prettier、Vitest 45件、bootstrap 7件検証、Vite build
+- [x] Playwright E2E 9件成功：desktop、mobile 390px、narrow 320px。テスト対象画面のaxe違反0件、横はみ出しなし
+- [ ] 実iOS Safari/Android Chrome・GPS・実タイル表示と操作、読み上げ確認
 
 ## 2026-10-24 本番公開実績
 
@@ -100,3 +111,4 @@
 - [x] GitHub main反映 Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`
 - [x] Vercel本番 READY（`dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq`）、公開URL HTTP 200とCSP/地図JSを確認
 - [ ] E2E（Chromium未導入で起動不可）、実機タイル表示・操作確認
+

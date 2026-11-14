@@ -123,7 +123,7 @@
 .chips button[aria-pressed='true'] {
   background: #dcefeb;
   border-color: #4a9c92;
-  color: #08796f;
+  color: #076d64;
 }
 
 .filters {
@@ -205,3 +205,4 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+

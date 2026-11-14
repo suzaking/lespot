@@ -250,7 +250,6 @@ export default function App() {
           className={styles.exploreButton}
           type="button"
           onClick={openResults}
-          aria-label="スポット一覧を開く"
         >
           スポットを見る
           {data.status === 'ready' ? ` · ${results.length}件` : ''}
@@ -418,3 +417,4 @@ export default function App() {
     </main>
   );
 }
+

@@ -2,6 +2,15 @@
 
 最終実施：2026-10-22。Node24.19.0、固定依存。本番公開前のローカル検証。
 
+## 2026-11-14 最新mainのブラウザ検証
+
+- 基点：GitHub `main`の`1a7b055b000fcf35c05ddf1eb488914df5e3b53e`。Node.js 24.18.1、`npm ci`でlockfileから264 packagesを導入。npmは9件のmoderate advisoryを報告したが、このWork Unitでは依存を変更していない。
+- `npm run check`成功：TypeScript、ESLint、Prettier、Vitest45/45、bootstrap JSON検証7件、Vite production build。MapView遅延チャンク1,072.93 kB（gzip 292.10 kB）とworker 518.98 kBの既存500 kB警告あり。
+- `E2E_CHROMIUM_PATH`に端末のGoogle Chromeを指定し`npm run test:e2e`を実行。Playwright 9/9成功：desktop、390px mobile、320px narrow。検索/絞込、一覧/地点詳細、徒歩リンク、GPS拒否、API失敗と再試行を確認。テスト対象状態でaxe violations 0、水平overflowなし。desktopとnarrowのスクリーンショットを確認。
+- E2EはVite previewを使い、`/api/spots`はfixtureに置換、OpenFreeMap tile requestは遮断。実タイルの描画、production API、iOS/Android実機、実GPS、スクリーンリーダーは検証していない。
+- 検出して修正：live 7件に対する古い2件固定アサーション、overlayによる操作ブロック、検索入力のcombobox role、選択filterのコントラスト4.42:1、visible labelとaria-label不一致。PrettierのCRLF環境差は`endOfLine: auto`で解消。
+- production deployment・Redisの内容変更は行っていない。
+
 ## 合格
 
 - npm ci：前Work Unitで246パッケージをロックから再導入しbuild成功。今回、新しいアプリ依存は追加していない。
@@ -113,3 +122,4 @@ release:checkを再実行し、型/Lint/整形/Vitest35件/データ2件/build/E
 - Vite buildは遅延ロードMapView JS 1,072.92 kB（gzip 292.10 kB）、MapLibre worker 518.98 kBを出力し、500 kB超過警告あり。地図を開くまでロードしないが、初回地図表示時の転送量は増えている。実ブラウザでのタイル描画・CSP・モバイル実機は未確認。
 
 - GitHub `main` Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`、Vercel production Deployment `dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq` READY。公開Alias `https://lespot-lac.vercel.app/`をHTTP 200で確認し、CSPと遅延地図JSにOpenFreeMap URL・道路レイヤー処理が含まれ、GSI/Leafletの参照がないことを確認。
+

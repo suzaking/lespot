@@ -7,13 +7,15 @@ test('map-first verified places and navigation', async ({ page, context }) => {
   const data = JSON.parse(readFileSync('data/bootstrap-spots.json', 'utf8'));
   await page.route('**/api/spots', (r) => r.fulfill({ json: data }));
   await page.goto('/');
-  await expect(page.locator('[aria-label="休憩スポットの地図"]')).toBeVisible();
   await expect(
-    page.getByRole('button', { name: 'スポット一覧を開く' }),
+    page.getByRole('region', { name: '休憩スポットの地図' }).first(),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: /スポットを見る/ }),
   ).toBeVisible();
   await expect(page.getByRole('article')).toHaveCount(0);
-  await page.getByRole('button', { name: 'スポット一覧を開く' }).click();
-  await expect(page.getByRole('article')).toHaveCount(2);
+  await page.getByRole('button', { name: /スポットを見る/ }).click();
+  await expect(page.getByRole('article')).toHaveCount(data.spots.length);
   await page.getByLabel('スポット名・場所').fill('ノリタケ');
   await expect(page.getByRole('article')).toHaveCount(1);
   await page.getByRole('button', { name: '地図で見る' }).click();
@@ -46,3 +48,4 @@ test('map-first verified places and navigation', async ({ page, context }) => {
   ).toBe(true);
   await page.screenshot({ path: test.info().outputPath('map-first.png') });
 });
+

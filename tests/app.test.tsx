@@ -10,13 +10,11 @@ vi.mock('../src/data/spotRepository', () => ({ loadSpots: vi.fn() }));
 it('starts with the map, without an open information sheet', async () => {
   vi.mocked(loadSpots).mockResolvedValue({ schemaVersion: 1, spots });
   render(<App />);
-  await screen.findByRole('button', { name: 'スポット一覧を開く' });
+  await screen.findByRole('button', { name: /スポットを見る/ });
   expect(
     screen.queryByRole('heading', { name: /休憩スポット.*件/ }),
   ).not.toBeInTheDocument();
-  await userEvent.click(
-    screen.getByRole('button', { name: 'スポット一覧を開く' }),
-  );
+  await userEvent.click(screen.getByRole('button', { name: /スポットを見る/ }));
   expect(screen.getAllByRole('article')).toHaveLength(3);
   await userEvent.click(
     screen.getByRole('button', { name: '結果一覧を閉じる' }),
@@ -40,9 +38,7 @@ it('supports filtering and safe walking links in contextual panels', async () =>
   await userEvent.click(
     screen.getByRole('button', { name: 'スポット詳細を閉じる' }),
   );
-  await userEvent.click(
-    screen.getByRole('button', { name: 'スポット一覧を開く' }),
-  );
+  await userEvent.click(screen.getByRole('button', { name: /スポットを見る/ }));
   await userEvent.click(
     screen.getByRole('button', { name: '絞り込みをリセット' }),
   );
@@ -90,8 +86,8 @@ it('supports quick filters without claiming expired prices as free', async () =>
 it('suggests verified DB places and opens their details from search', async () => {
   vi.mocked(loadSpots).mockResolvedValue({ schemaVersion: 1, spots });
   render(<App />);
-  await screen.findByRole('button', { name: 'スポット一覧を開く' });
-  const search = screen.getByRole('searchbox', { name: 'スポット名・場所' });
+  await screen.findByRole('button', { name: /スポットを見る/ });
+  const search = screen.getByRole('combobox', { name: 'スポット名・場所' });
   await userEvent.type(search, 'カフェB');
   const option = screen.getByRole('option', { name: /架空テスト用のカフェB/ });
   await userEvent.click(option);
@@ -99,3 +95,4 @@ it('suggests verified DB places and opens their details from search', async () =
     screen.getByRole('heading', { name: spots[1]!.name }),
   ).toBeInTheDocument();
 });
+

@@ -4,6 +4,14 @@ Current production source: `suzaking/lespot`, branch `main`.
 Live: https://lespot-lac.vercel.app/
 Design authority: [design.md](design.md).
 
+## Current handoff — 2026-11-14
+
+The latest main UI browser pass is complete. `npm run check` passed, followed by 9 Playwright tests on desktop, 390px mobile, and 320px narrow viewports. The tests verify map/list flows, search and filters, denied geolocation, retry, axe on sampled states, and horizontal overflow. Map tiles and the spots API were deliberately stubbed/blocked in these tests; they do not verify live tile rendering or production API behavior. Desktop and narrow screenshots were reviewed.
+
+The run fixed stale two-spot expectations, blocked controls caused by overlay hit testing, the search input's combobox semantics, active filter contrast, and the browse button's accessible name. Prettier now uses `endOfLine: auto` so the check works with Windows CRLF checkouts.
+
+Next work is manual device QA: iOS Safari and Android Chrome, allowed/denied real GPS, real OpenFreeMap roads-only rendering and attribution, touch/keyboard/screen-reader behavior. Do not report these as complete until tested. Keep production Redis unchanged; its staged bench records still need the separately documented administrator backup/import step.
+
 ## 2026-10-24 Google Maps-style map refinement
 
 - Main screen is a full-viewport, edge-to-edge road-only OpenFreeMap/MapLibre map without any header or persistent results panel.
@@ -76,3 +84,4 @@ Design authority: [design.md](design.md).
 - 道路だけのMapLibre/OpenFreeMap地図を本番公開済み。Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`、Deployment `dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq` READY。
 - 公開HTMLはHTTP 200、CSPはOpenFreeMap hostを許可し、配信された遅延地図JSに新しい地図提供元・スタイル変換を確認。
 - Playwrightは環境にChromiumがなく未検証。ブラウザ導入後、PC/モバイルで実タイル描画、文字/記号が出ないこと、ピン・検索・外部リンク、CSPを再検証する。
+

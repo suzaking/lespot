@@ -1,5 +1,15 @@
 # 作業状態 — 2026-10-24
 
+## 最新作業状態 — 2026-11-14
+
+- 対象：`suzaking/lespot` / `main`。開始時のremote HEADは`1a7b055b000fcf35c05ddf1eb488914df5e3b53e`。
+- 次のWork Unitだった最新UIのブラウザ検証を実施し、発見した問題を修正。公開スポット数の固定期待値、操作を遮る重なったoverlay、検索入力のARIA role、選択フィルターのコントラスト、一覧ボタンの名前を更新。
+- `.prettierrc.json`に`endOfLine: auto`を追加。Windows CRLF checkoutでの`npm run format:check`不一致を解消。
+- `npm run check`成功：TypeScript、ESLint、Prettier、Vitest 45件、bootstrapデータ7件、本番build。Playwright E2Eは9件成功（desktop、390px mobile、320px narrow）。テスト対象状態のaxe違反0件、横はみ出しなし。desktop/narrow screenshotを目視確認。
+- E2EはVite preview上で公開APIをfixtureに置換し、OpenFreeMapタイル通信を遮断して実行。ライブAPI/タイル・実機・実GPS・読み上げは未確認。MapView遅延チャンク1,072.93 kB（gzip 292.10 kB）の既存警告は継続。
+- `npm ci`で264 package導入、9 moderate advisoryを表示。依存更新は未実施。production deployment、Redis変更、追加サービス/課金は未実施。
+- 次作業：実iOS/Androidでタイル描画、GPS、タッチ、読み上げを確認。引継ぎは`NEXT_WORK.md`。
+
 対象：Shota-Zaki/lespot / main。2026-10-24ユーザーがVercel公開を指定。Vercel Hobbyの静的公開を進める。公開の意向は確認済み。有料変更は未承認。
 
 ## 完了
@@ -112,3 +122,4 @@ Leaflet遅延読込、地図縮退、JSON境界検証・再試行。非公開She
 - `npm run check`: 型検査、ESLint、Prettier、Vitest 45件、データ検証7件、本番build成功。
 - Playwright 9件はChromiumが未インストールのため起動不可。成功とは扱わない。buildにMapLibreの遅延チャンク(gzip 292 kB)とworker(519 kB)、500kB超過警告あり。
 - GitHub `main` Commit `8030ee5918f64fa95b1ff433ac43021a7b81110d`へ反映し、Vercel production `dpl_EtxpyYbKXjVSGHb81zrj5FhSbjeq` READY。`https://lespot-lac.vercel.app/` HTTP 200、CSPにtiles.openfreemap.orgを確認。配信JSにはOpenFreeMap/transportation style変換を含み、GSI/Leaflet参照なし。
+

@@ -79,6 +79,7 @@ export function SearchControls({
           <input
             ref={inputRef}
             type="search"
+            role="combobox"
             aria-label="スポット名・場所"
             aria-autocomplete="list"
             aria-controls="place-suggestions"
@@ -286,3 +287,4 @@ export function SearchControls({
     </section>
   );
 }
+
