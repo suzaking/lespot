@@ -40,9 +40,12 @@ MapLibre GL JS、Zodを使用します。依存は`package-lock.json`で固定�
 ```bash
 npm ci
 npm run dev
+npm run task-progress
 npm run check
 npm run release:check
 ```
+
+`npm run task-progress` opens a local progress view. It reads `TASKS.md` and `NEXT_WORK.md` directly on open and refreshes them every minute; it does not create or edit task source files.
 
 ローカルのVite開発サーバーだけではVercel Functionsが起動しません。
 実DBを使う場合はVercelの開発環境を使ってください。
@@ -68,4 +71,3 @@ npm run release:check
 ## 地図操作（2026-10-24更新）
 
 地図のパン・ズーム後は「このエリアを検索」で可視範囲の登録スポットを絞り込めます。検索入力からDB登録済み施設の候補を選ぶと、その場所へ地図を移動して詳細を表示します。モバイルでは検索結果を上下ドラッグして拡大・縮小できます。Googleマップの操作モデルを参考にしたUIであり、Googleの地図データ・口コミ・交通/経路APIを複製したものではありません。
-

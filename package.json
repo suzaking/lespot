@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 4173",
+    "task-progress": "vite --host 127.0.0.1 --port 4173 --open /task-progress.html",
     "build": "npm run data:validate && tsc --noEmit && vite build",
     "preview": "vite preview --host 0.0.0.0 --port 4173",
     "typecheck": "tsc --noEmit",
@@ -49,4 +50,3 @@
     "vitest": "5.0.5"
   }
 }
-
