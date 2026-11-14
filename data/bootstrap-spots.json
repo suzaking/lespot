@@ -28,7 +28,9 @@
       "address": "名古屋市西区則武新町3-1-36",
       "cost": "free",
       "conditions": "入園無料。クラフトセンター入館や飲食店の利用は別料金です。持参の飲食物は噴水ひろば・せせらぎ周辺の椅子やベンチで、譲り合って利用してください。食べ歩き・芝生上での飲食は禁止。ゴミは持ち帰り、園内禁煙。開園状況は公式案内をご確認ください。",
-      "facilities": ["噴水ひろば・せせらぎ周辺に椅子・ベンチ（空席は未確認）"],
+      "facilities": [
+        "噴水ひろば・せせらぎ周辺に椅子・ベンチ（空席は未確認）"
+      ],
       "sourceUrl": "https://www.noritake.co.jp/mori/others/faq/",
       "sourceLabel": "ノリタケの森：よくあるご質問",
       "rights": "公式FAQの事実を独自に要約（写真・本文転載なし）。座標は愛知県「景観資源・名古屋市」フィーチャ13を丸めて利用。このデータは同資料を改変して利用しています。愛知県、CC BY 2.1 JP（https://creativecommons.org/licenses/by/2.1/jp/）。原資料：https://maps.pref.aichi.jp/map/files/opendata/c200538/c200538.csv",
@@ -46,7 +48,9 @@
       "address": "名古屋市中区栄二丁目1701（白川公園・科学館南側）",
       "cost": "unknown",
       "conditions": "OpenStreetMapでベンチとして記録された地点です。白川公園は名古屋市の案内で公園・緑地として掲載されています。個別ベンチの現在の設置状況、利用制限、空席は未確認です。現地表示を優先してください。",
-      "facilities": ["ベンチ（地図上の記録。現在の状態・空席は未確認）"],
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
       "sourceUrl": "https://www.openstreetmap.org/node/6344772944",
       "sourceLabel": "OpenStreetMap：ベンチ地点（node 6344772944）",
       "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 6344772944を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。所在地は名古屋市公式バリアフリー施設検索を参照：https://www.kaigo-wel.city.nagoya.jp/view/wel/barrierfree/424/。公園の一般利用原則：https://www.city.nagoya.jp/kurashi/douro/1015622/1015676/1015689/1015693.html。Googleの写真・口コミ・施設データは転載・保存していません。",
@@ -64,7 +68,9 @@
       "address": "名古屋市中区錦一丁目12（下園公園内）",
       "cost": "unknown",
       "conditions": "OpenStreetMapでベンチとして記録された地点（node 925634396）です。名古屋市の都市公園一覧に公園名・所在地を確認しています。ベンチ個体の現在の設置状況、利用制限、料金、空席は未確認です。現地表示を優先してください。",
-      "facilities": ["ベンチ（地図上の記録。現在の状態・空席は未確認）"],
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
       "sourceUrl": "https://www.openstreetmap.org/node/925634396",
       "sourceLabel": "OpenStreetMap：ベンチ地点（node 925634396）",
       "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 925634396を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。公園名・所在地は名古屋市都市公園一覧：https://www.city.nagoya.jp/kurashi/douro/1014853/1014871.html。公園の一般利用原則は名古屋市公園利用Q&A：https://www.city.nagoya.jp/kurashi/douro/1014853/1014872/1014876.html。Googleの写真・口コミ・施設データは転載・保存していません。",
@@ -82,7 +88,9 @@
       "address": "名古屋市中区錦一丁目12（下園公園内）",
       "cost": "unknown",
       "conditions": "OpenStreetMapでベンチとして記録された地点（node 925634408）です。名古屋市の都市公園一覧に公園名・所在地を確認しています。ベンチ個体の現在の設置状況、利用制限、料金、空席は未確認です。現地表示を優先してください。",
-      "facilities": ["ベンチ（地図上の記録。現在の状態・空席は未確認）"],
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
       "sourceUrl": "https://www.openstreetmap.org/node/925634408",
       "sourceLabel": "OpenStreetMap：ベンチ地点（node 925634408）",
       "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 925634408を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。公園名・所在地は名古屋市都市公園一覧：https://www.city.nagoya.jp/kurashi/douro/1014853/1014871.html。公園の一般利用原則は名古屋市公園利用Q&A：https://www.city.nagoya.jp/kurashi/douro/1014853/1014872/1014876.html。Googleの写真・口コミ・施設データは転載・保存していません。",
@@ -100,7 +108,9 @@
       "address": "名古屋市中区錦一丁目12（下園公園内）",
       "cost": "unknown",
       "conditions": "OpenStreetMapでベンチとして記録された地点（node 925634510）です。名古屋市の都市公園一覧に公園名・所在地を確認しています。ベンチ個体の現在の設置状況、利用制限、料金、空席は未確認です。現地表示を優先してください。",
-      "facilities": ["ベンチ（地図上の記録。現在の状態・空席は未確認）"],
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
       "sourceUrl": "https://www.openstreetmap.org/node/925634510",
       "sourceLabel": "OpenStreetMap：ベンチ地点（node 925634510）",
       "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 925634510を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。公園名・所在地は名古屋市都市公園一覧：https://www.city.nagoya.jp/kurashi/douro/1014853/1014871.html。公園の一般利用原則は名古屋市公園利用Q&A：https://www.city.nagoya.jp/kurashi/douro/1014853/1014872/1014876.html。Googleの写真・口コミ・施設データは転載・保存していません。",
@@ -118,12 +128,74 @@
       "address": "名古屋市中区大須一丁目30（西大須公園内）",
       "cost": "unknown",
       "conditions": "OpenStreetMapでベンチとして記録された地点（node 2536280378）です。名古屋市の都市公園一覧に公園名・所在地を確認しています。ベンチ個体の現在の設置状況、利用制限、料金、空席は未確認です。現地表示を優先してください。",
-      "facilities": ["ベンチ（地図上の記録。現在の状態・空席は未確認）"],
+      "facilities": [
+        "ベンチ（地図上の記録。現在の状態・空席は未確認）"
+      ],
       "sourceUrl": "https://www.openstreetmap.org/node/2536280378",
       "sourceLabel": "OpenStreetMap：ベンチ地点（node 2536280378）",
       "rights": "位置とベンチタグはOpenStreetMap contributorsのnode 2536280378を出典として利用（ODbL、© OpenStreetMap contributors：https://www.openstreetmap.org/copyright）。公園名・所在地は名古屋市都市公園一覧：https://www.city.nagoya.jp/kurashi/douro/1014853/1014871.html。公園の一般利用原則は名古屋市公園利用Q&A：https://www.city.nagoya.jp/kurashi/douro/1014853/1014872/1014876.html。Googleの写真・口コミ・施設データは転載・保存していません。",
       "verifiedAt": "2026-10-27",
       "validUntil": "2026-11-10",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "meijo-koen-station-support-bench",
+      "name": "名城公園駅・親子ベンチ（改札外）",
+      "category": "public",
+      "lat": 35.190528,
+      "lon": 136.904748,
+      "address": "名古屋市北区名城町（名城公園駅・改札外）",
+      "cost": "unknown",
+      "conditions": "名古屋市交通局が駅構内に設置した「子ども・子育てサポートベンチ」で、どなたでも利用できると案内しています。駅の代表座標です。構内ベンチそのものの位置ではありません。 現在の設置状態・空席・利用条件の変更・料金の有無は現地未確認です。駅の案内表示を優先してください。",
+      "facilities": [
+        "親子ベンチ（交通局の設置案内あり。現況・空席は未確認）"
+      ],
+      "sourceUrl": "https://kotsu.city.nagoya.jp/rp/subway/trp0005401.htm",
+      "sourceLabel": "名古屋市交通局：子ども・子育てサポートベンチ設置駅",
+      "rights": "公式サイトのベンチ設置場所と利用対象の事実を独自に要約（写真・原文転載なし）。座標は駅の概略位置として参照：https://www.koumei2.com/station/station/443。座標はベンチの実測値ではありません。第三者地図画像や口コミ等の転載は行っていません。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-12-12",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "aratamabashi-station-support-bench",
+      "name": "新瑞橋駅・親子ベンチ（西改札外）",
+      "category": "public",
+      "lat": 35.11778,
+      "lon": 136.93667,
+      "address": "名古屋市瑞穂区洲山町（新瑞橋駅・西改札外）",
+      "cost": "unknown",
+      "conditions": "名古屋市交通局が駅構内に設置した「子ども・子育てサポートベンチ」で、どなたでも利用できると案内しています。駅の代表座標です。構内ベンチそのものの位置ではありません。 現在の設置状態・空席・利用条件の変更・料金の有無は現地未確認です。駅の案内表示を優先してください。",
+      "facilities": [
+        "親子ベンチ（交通局の設置案内あり。現況・空席は未確認）"
+      ],
+      "sourceUrl": "https://kotsu.city.nagoya.jp/rp/subway/trp0005401.htm",
+      "sourceLabel": "名古屋市交通局：子ども・子育てサポートベンチ設置駅",
+      "rights": "公式サイトのベンチ設置場所と利用対象の事実を独自に要約（写真・原文転載なし）。座標は駅の概略位置として参照：https://www.wikipedia-is-dead.com/wiki/%E6%96%B0%E7%91%9E%E6%A9%8B%E9%A7%85。座標はベンチの実測値ではありません。第三者地図画像や口コミ等の転載は行っていません。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-12-12",
+      "published": true,
+      "fixture": false
+    },
+    {
+      "id": "nagoya-subway-station-support-bench",
+      "name": "地下鉄名古屋駅・親子ベンチ（東改札外）",
+      "category": "public",
+      "lat": 35.171166,
+      "lon": 136.88413,
+      "address": "名古屋市中村区名駅（地下鉄名古屋駅・東改札外）",
+      "cost": "unknown",
+      "conditions": "名古屋市交通局が駅構内に設置した「子ども・子育てサポートベンチ」で、どなたでも利用できると案内しています。桜通線名古屋駅の代表座標です。東改札外ベンチそのものの位置を示していません。 現在の設置状態・空席・利用条件の変更・料金の有無は現地未確認です。駅の案内表示を優先してください。",
+      "facilities": [
+        "親子ベンチ（交通局の設置案内あり。現況・空席は未確認）"
+      ],
+      "sourceUrl": "https://kotsu.city.nagoya.jp/rp/subway/trp0005401.htm",
+      "sourceLabel": "名古屋市交通局：子ども・子育てサポートベンチ設置駅",
+      "rights": "公式サイトのベンチ設置場所と利用対象の事実を独自に要約（写真・原文転載なし）。座標は駅の概略位置として参照：https://mapfan.com/spots/SCH%2CJ%2C5VT。座標はベンチの実測値ではありません。第三者地図画像や口コミ等の転載は行っていません。",
+      "verifiedAt": "2026-11-14",
+      "validUntil": "2026-12-12",
       "published": true,
       "fixture": false
     }

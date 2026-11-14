@@ -4,6 +4,14 @@ Current production source: `suzaking/lespot`, branch `main`.
 Live: https://lespot-lac.vercel.app/
 Design authority: [design.md](design.md).
 
+## 現行スポット追加 — 2026-11-14
+
+- ユーザーからスポット拡充を最優先する指示あり。名古屋市交通局の一次情報で設置を確認した駅の親子ベンチ（名城公園駅・新瑞橋駅・名古屋駅）3件を`data/bootstrap-spots.json`へ新規登録。既存7件と合わせ**10件**。いずれも**ベンチ実位置ではなく駅の概略座標**で、現況・空席・料金は不明、出典は`docs/DATA_EVIDENCE.md`を参照。
+- 公開`https://lespot-lac.vercel.app/api/spots`は2026-11-14時点で既存の鶴舞公園とノリタケの森の**2件**。bootstrapの更新は初期化済みRedisに反映されない。運営者の認証付き管理画面からバックアップを取得した後、差分/重複/期限を確認して追加する（元データ全上書き厳禁）。
+- 既存ベンチ5件は`validUntil`が11月9日/10日で期限切れ。期限を延長していないので再点検が必要。
+- 街中の個別ベンチ10件追加目標 I-17 は**部分完了（3件）**。次Work Unitはread-only OSMデータソースから再調査し、確度を記録して地図上の実座標を持つベンチを追加。今回Overpass公開APIはタイムアウト/502、Chubu広域extractは取得・処理が短時間で完了せず、新たなOSM地点を検証できなかった。未検証ノードや推測座標は登録しない。
+- このWork UnitはGitHub文書と初期データの更新のみ。デプロイ・Redis書込・課金追加なし。GitHub API操作のため全`npm run check`/E2EはNOT_RUN、JSONの静的検査のみ。
+
 ## 追加改善タスクの引継ぎ — 2026-11-14
 
 - タスク正本`TASKS.md`にI-14〜I-23の10件（P0=2 / P1=6 / P2=2）を追加。既存I-11実機QA、I-12ベンチ5地点の本番反映は引き続き未完了。I-13の45件Vitest・9件E2E成功は既存のローカル検証記録であり、新改善タスクの実装・テスト完了ではない。
